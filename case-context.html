@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- JuneAI — 문맥·변경·상태 관리 (2026-11-13) -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문맥, 변경, 상태를 관리 — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  /* 개념 카드 3장 */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0 22px}
+  .trio .t{border:1px solid var(--line);border-radius:12px;background:#fff;padding:18px 18px 16px}
+  .trio .t h4{margin:0 0 6px;font-size:16px;color:var(--blue-dark)}
+  .trio .t p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.65}
+  @media(max-width:700px){ .trio{grid-template-columns:1fr} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">비즈니스 관측가능성</span>
+    <h1>문맥, 변경, 상태를 관리</h1>
+    <p class="lead"><strong>문맥을 유지하고, 변경을 기록하고, 상태를 관리한다.</strong><br>
+      JuneAI는 문맥, 변경, 상태를 항상 추적한다. 다양한 객체 간의 <strong>이벤트와 관계를 모니터링</strong>하고,
+      <strong>영향과 변경을 시뮬레이션</strong>한다.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. 세 가지를 함께 관리한다</h2>
+  <p>운영은 결국 세 가지를 놓치지 않는 일이다. 지금 무슨 맥락인지(<strong>문맥</strong>), 무엇이 달라졌는지(<strong>변경</strong>),
+     지금 어떤 상태인지(<strong>상태</strong>). JuneAI는 이 셋을 따로 재지 않고 하나로 묶어 항상 추적한다.</p>
+  <div class="trio">
+    <div class="t"><h4>문맥</h4><p>객체와 객체가 어떤 맥락으로 이어지는지 유지한다.</p></div>
+    <div class="t"><h4>변경</h4><p>무엇이, 언제, 어떻게 달라졌는지 기록한다.</p></div>
+    <div class="t"><h4>상태</h4><p>지금 각 객체가 어떤 상태인지 관리한다.</p></div>
+  </div>
+  <p>그 위에서 다양한 객체 간의 <strong>이벤트와 관계를 모니터링</strong>하고, 손대기 전에 <strong>영향과 변경을 시뮬레이션</strong>한다.</p>
+
+  <h2>2. 스팬과 워크플로우로 관리한다</h2>
+  <p>데이터는 흘려보내지 않고 남긴다. <strong>스팬 속성에 중요 데이터를 별도로 관리</strong>하고,
+     예상치 못한 변경과 상태의 변경을 항상 모니터링한다.</p>
+  <ul>
+    <li><strong>스팬 속성</strong> — 중요한 값을 스팬에 붙여, 나중에 되짚을 근거로 남긴다.</li>
+    <li><strong>상시 모니터링</strong> — 예상치 못한 변경과 상태 변화를 놓치지 않는다.</li>
+    <li><strong>워크플로우</strong> — 상태 관리는 워크플로우가 더 유용하며, 워크플로우는 이벤트 드리븐에 더 적합하다.</li>
+  </ul>
+
+  <h2>3. 레거시를 변경없이 더한다</h2>
+  <p>레거시는 위의 기능을 제공하지 않는다. 하지만 JuneAI를 쓰면, <strong>레거시를 변경없이 위의 기능을 추가</strong>한다.</p>
+  <ul>
+    <li>기존 레거시를 변경없이 개선하면서 <strong>사용자 경험을 향상</strong>시킨다.</li>
+    <li>최신 기술인 <strong>AI 에이전트와 온톨로지를 레거시 기반</strong>으로 구성한다.</li>
+    <li><strong>시스템의 안정성을 높이고</strong>, 기존 핵심 자산을 안정적으로 보완한다.</li>
+  </ul>
+  <blockquote><p>레거시를 건드리지 않고도 문맥·변경·상태 관리를 더한다. <strong>핵심 자산은 그대로 두고, 그 위를 보강</strong>하는 방식이라 안전하다.</p></blockquote>
+
+  <h2>4. 팔란티어보다 정교하고 정확하다</h2>
+  <p>팔란티어 온톨로지는 <strong>문맥이 자주 끊기고, 변경을 놓치는 경우</strong>가 발생한다.
+     프로세스와 서비스 경계에서 전파가 중단되고 문맥이 끊기는 경우가 빈번한데, 팔란티어만으로는 해결이 어렵다.
+     특히 <strong>레거시가 많은 환경에서 팔란티어의 약점</strong>이 드러나고, 상태가 일치하지 않는 정합성 문제가 발생한다.</p>
+  <table class="cmp">
+    <thead><tr><th>구분</th><th>팔란티어 온톨로지</th><th>JuneAI</th></tr></thead>
+    <tbody>
+      <tr><td>문맥</td><td>경계에서 전파가 끊겨 자주 단절</td><td>프로세스·서비스 경계를 넘어 유지</td></tr>
+      <tr><td>변경</td><td>놓치는 경우 발생</td><td>항상 기록하고 모니터링</td></tr>
+      <tr><td>상태</td><td>불일치로 정합성 문제</td><td>일관되게 관리하고 추적</td></tr>
+      <tr><td>레거시</td><td>많을수록 약점이 커짐</td><td>변경없이 그 위를 보강</td></tr>
+    </tbody>
+  </table>
+  <p>JuneAI는 팔란티어보다 <strong>훨씬 정교하고 정확하게 문맥, 변경, 상태를 관리하고 추적</strong>한다.
+     이벤트와 관계를 정확하게 모니터링하고, <strong>영향 범위와 변경 정도를 정확하게 시뮬레이션</strong>한다.</p>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← 홈으로 돌아가기</a>
+    <span class="muted">JuneAI · 자율 운영 AIOps 플랫폼</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<!--
+  JuneAI 기업 홈페이지 — 메인 캐러셀 (2026-10-18, 한글화 2026-10-21, 카피 개정 2026-11-07)
+  · 구글 스타일: 흰 바탕 · Google Blue(#1a73e8) 액센트 · 넉넉한 여백 · 미세 그림자 · 둥근 모서리
+  · 이미지는 **공백 자리**로 둔다 — 나중에 각 슬라이드의 <div class="shot"> 안에 <img src="..."> 를 넣으면 된다.
+  · 빌드 불필요(단일 파일). 열기: 브라우저로 index.html
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI — 자율 운영 AIOps 플랫폼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8; --blue-dark:#1557b0; --blue-soft:#e8f0fe;
+    --ink:#202124; --ink-2:#5f6368; --line:#dadce0; --bg:#fff; --bg-2:#f8f9fa;
+    --radius:12px; --shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+    --shadow-2:0 1px 3px rgba(60,64,67,.12),0 4px 8px 3px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ── 헤더 ── */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:32px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav a{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500}
+  .nav a:hover{color:var(--ink)}
+  .nav .spacer{flex:1}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 24px;white-space:nowrap;flex-shrink:0;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:.15s}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-dark);box-shadow:var(--shadow)}
+  .btn-ghost{color:var(--blue);border-color:var(--line);background:#fff}
+  .btn-ghost:hover{background:var(--blue-soft);border-color:var(--blue-soft)}
+
+  /* ── 히어로 ── */
+  .hero{padding:60px 0 28px;text-align:center}
+  .hero h1{font-size:clamp(22px,3.3vw,44px);line-height:1.2;letter-spacing:-1px;font-weight:700;margin:0 0 12px}
+  .hero p{font-size:clamp(16px,2vw,20px);color:var(--ink-2);max-width:1100px;margin:0 auto}
+  .hero p strong,.slide p strong{color:var(--ink);font-weight:700}
+  .cases .cap strong,.logos .cap strong{color:var(--ink);font-weight:700}
+
+  /* ── 캐러셀 ── */
+  .carousel{padding:12px 0 24px}
+  .c-head{display:flex;align-items:baseline;gap:16px;margin-bottom:20px}
+  .c-head h2{font-size:14px;font-weight:500;color:var(--ink-2);margin:0;letter-spacing:.3px}
+  .c-head .count{font-size:13px;color:var(--ink-2);margin-left:auto;font-variant-numeric:tabular-nums}
+  .viewport{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+  .track{display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+  .slide{min-width:100%;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:32px;padding:36px 40px}
+  .slide .copy{display:flex;flex-direction:column;justify-content:center;min-width:0}
+  .chip{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:var(--blue-soft);color:var(--blue-dark);font-size:12px;font-weight:500;margin-bottom:16px}
+  .slide h3{font-size:clamp(20px,2.2vw,27px);line-height:1.25;letter-spacing:-.6px;font-weight:700;margin:0 0 12px}
+  .slide p{font-size:15px;line-height:1.65;color:var(--ink-2);margin:0}
+  .slide .more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:600;color:var(--blue);text-decoration:none;transition:gap .15s ease}
+  .slide .more:hover{gap:11px}
+  /* 화면 캡처 자리 — 잘라내지 않고(contain) 전체를 보여 준다 */
+  .shot{border-radius:12px;background:#fff;border:1px solid var(--line);aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+  .shot img{width:100%;height:100%;object-fit:contain;display:block}
+  .shot iframe{width:100%;height:100%;border:0;display:block}   /* 유튜브 임베드 — 칸을 꽉 채운다 */
+  .shot:empty::after{content:'';display:block}
+
+  .controls{display:flex;align-items:center;gap:12px;margin-top:20px}
+  .arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.15s}
+  .arrow:hover{background:var(--bg-2);color:var(--ink);box-shadow:var(--shadow)}
+  .dots{display:flex;gap:8px;flex:1;justify-content:center;flex-wrap:wrap}
+  .dot{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:.2s}
+  .dot[aria-current="true"]{background:var(--blue);width:24px;border-radius:100px}
+
+  /* ── 케이스 스터디 3패널 (구글 "고객 혁신" 스타일) ── */
+  .cases{padding:28px 0 56px}
+  .cases h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;font-weight:700;color:var(--ink);margin:0 0 12px}
+  .cases .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:none;white-space:nowrap;margin:0 auto 36px}
+  @media (max-width:980px){ .cases .cap{white-space:normal;max-width:760px} }
+  /* 카드 — 구글 클라우드 "Everything you need to build and scale" 스타일 */
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1120px;margin:0 auto}
+  .case-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
+  .case-card:hover{box-shadow:0 6px 20px rgba(60,64,67,.14);border-color:var(--blue);transform:translateY(-2px)}
+  .case-body{padding:30px 28px 26px;display:flex;flex-direction:column;flex:1}
+  .case-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue);margin:0 0 18px}
+  .case-icon svg{width:24px;height:24px;display:block;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .case-cat{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.6px;text-transform:uppercase;margin:0 0 8px}
+  .case-body h3{font-size:19px;line-height:1.3;letter-spacing:-.3px;font-weight:700;color:var(--ink);margin:0 0 10px}
+  .case-body p{font-size:14.5px;line-height:1.65;color:var(--ink-2);margin:0 0 18px;flex:1}
+  .case-body p strong{color:var(--ink);font-weight:700}
+  .case-more{font-size:14px;font-weight:600;color:var(--blue);display:inline-flex;align-items:center;gap:6px;margin-top:auto;transition:gap .15s ease}
+  .case-card:hover .case-more{gap:11px}
+  @media (max-width:980px){ .case-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .case-grid{grid-template-columns:1fr} }
+
+  /* ── 지원 레거시 로고 스트립 ── */
+  .logos{padding:28px 0 80px}
+  /* 히어로와 같은 틀 — 제목(큰 글씨) + 본문(작은 글씨), 가운데 정렬. 다만 히어로보다 한 단 작게 둔다 */
+  .logos h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;
+    font-weight:700;color:var(--ink);margin:0 0 12px}
+  .logos .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);
+    max-width:1180px;margin:0 auto 32px}
+  .logo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+  .logo-grid>.logo-item{flex:0 1 23%;min-width:0}   /* 4열 고정 + 마지막 줄 중앙 정렬 */
+  /* 회사 로고(위) + 제품 이름(아래) · 카드 전체가 공식 페이지로 가는 링크 */
+  .logo-item{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    height:116px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;padding:16px;transition:.15s;
+    text-decoration:none;color:inherit;
+  }
+  .logo-item:hover{box-shadow:var(--shadow);border-color:#c6cbd1}
+  /* 브랜드 색 그대로 — 회색 처리(grayscale) 하지 않는다 */
+  .logo-item img{max-width:130px;max-height:34px;object-fit:contain;transition:.15s}
+  /* 로고 안에 제품명이 있어 이름표를 안 쓰는 것들 — 카드 높이를 혼자 쓰므로 크게 */
+  .logo-item img[alt^="Apache"]{max-width:170px;max-height:56px}
+  .logo-item img[alt="Apache Flink"]{max-height:50px}   /* 다람쥐 아이콘형이라 조금 작게 */
+  .logo-item .prod{font-size:14px;font-weight:600;color:#5f6368;letter-spacing:-.1px;text-align:center;line-height:1.3}
+  .logo-item:hover .prod{color:var(--ink)}
+  @media (max-width:860px){ .logo-grid>.logo-item{flex:0 1 46%} }
+
+  /* ── 푸터 ── */
+  footer{border-top:1px solid var(--line);background:var(--bg-2);padding:40px 0;margin-top:40px}
+  footer .inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+
+  @media (max-width:860px){
+    .slide{grid-template-columns:1fr;gap:28px;padding:32px 24px}
+    .nav a:not(.btn){display:none}
+    .hero{padding:32px 0 16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">J</span>JuneAI</div>
+    <a href="#cases">기능</a>
+    <a href="#legacy">레거시</a>
+    <span class="spacer"></span>
+    <a class="btn btn-ghost" href="mailto:yohaim@gmail.com">문의</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1>JuneAI는 문제를 해결하고 의사결정을 돕는 AI 플랫폼이다.</h1>
+    <p>JuneAI(줄여서 JAI 자이)는 온톨로지로 업무 프로세스의 <strong>병목과 문제점을 식별</strong>하고,
+       <strong>에이전트와 시뮬레이터는 올바른 의사결정을 지원</strong>한다. JuneAI는 <strong>AIOps로부터 시작</strong>해서,
+       다양한 <strong>레거시·플랫폼·서비스</strong>를 계측한다. 이를 토대로 <strong>온톨로지와 에이전트를 구성</strong>한다.</p>
+  </section>
+
+  <section class="carousel wrap" id="features">
+    <div class="viewport">
+      <div class="track" id="track">
+
+        <!-- 0 온톨로지 오프닝 (2026-11-07 추가) -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">온톨로지</span>
+            <h3>JuneAI 온톨로지는 간단하고, 의사결정에만 집중한다</h3>
+            <p>JuneAI 온톨로지는 <strong>RAG·그래프·파이프라인·레이크·메타데이터·리니지·BI를 필요로 하지 않는다.</strong>
+               기존 시스템을 변경하거나 추가 개발이 필요 없고, <strong>재시작도 필요 없다</strong> — 심지어 <strong>직원 교육도 필요 없다.</strong></p>
+          </div>
+          <div class="shot"><!-- 이미지 --></div>
+        </article>
+
+        <!-- 1 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">자율 운영</span>
+            <h3>새벽 3시에도 진단과 조치가 준비돼 있다</h3>
+            <p>JuneAI는 <strong>자율 운영과 자가 치유</strong>를 지원하며 다양한 워크플로우를 구성할 수 있다.
+               문제가 발생하면 <strong>진단과 조치안이 이미 준비돼 있어</strong> — <strong>운영자는 승인 여부만 결정</strong>하면 된다.</p>
+          </div>
+          <div class="shot"><img src="img/slide1.png" alt="자가 치유 워크플로우 화면" loading="lazy"></div>
+        </article>
+
+        <!-- 2 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">이상 탐지</span>
+            <h3>발견하지 못하던 증상도 찾아내고 치유한다</h3>
+            <p>알람이 쏟아지든 하나도 없든, JuneAI는 <strong>이상 탐지에서 출발해 근본 원인을 분석</strong>하고 문제를 해결한다 —
+               <strong>무증상·무신호·무알람의 경우에도</strong> JuneAI 자율 운영은 작동한다.</p>
+          </div>
+          <div class="shot"><img src="img/slide2.png" alt="이상 탐지 화면" loading="lazy"></div>
+        </article>
+
+        <!-- 2b 정확하고 광범위한 이상탐지 (2026-10-23 추가) -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">이상 탐지</span>
+            <h3>정확하고 광범위한 이상탐지</h3>
+            <p>이상탐지를 사용하면, <strong>장애가 되기 이전에 사전 징후를 포착</strong>하고 사전에 대응할 수 있다.
+               근본 원인 분석 이전에 <strong>이상 탐지를 먼저 사용</strong>하라.</p>
+          </div>
+          <div class="shot"><img src="img/slide2.png" alt="정확하고 광범위한 이상탐지 화면" loading="lazy"></div>
+        </article>
+
+        <!-- 2c 점진적으로 개선되는 근본 원인 분석 (2026-10-24 추가) -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">근본 원인 분석</span>
+            <h3>점진적으로 개선되는 근본 원인 분석</h3>
+            <p>선도적인 <strong>JuneAI Observability</strong>를 사용해서 근본 원인 분석을 이해하고 개선할 수 있다.
+               우수한 <strong>JuneAI의 하네스 엔지니어링</strong>으로, <strong>AI와 LLM의 정확도를 향상</strong>할 수 있다.</p>
+          </div>
+          <div class="shot"><img src="img/slide2.png" alt="AI·LLM 근본 원인 분석 화면" loading="lazy"></div>
+        </article>
+
+        <!-- 3 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">레거시 통합</span>
+            <h3>마이크로서비스보다 레거시가 더 쉽고 잘한다</h3>
+            <p>JuneAI는 IBM CICS, SAP, SIEBEL, Oracle EBS, PeopleSoft, TUXEDO, SWIFT 등 레거시 시스템에
+               <strong>온톨로지와 에이전트를 손쉽게 구성</strong>할 수 있다. JuneAI로 마이크로서비스에서 시작해
+               <strong>레거시 시스템 안에서 끝나는 전 구간 거래를 모니터링</strong>할 수 있다.</p>
+          </div>
+          <div class="shot"><iframe src="https://www.youtube.com/embed/jmJYg4PNRlg?si=WCFK_Kx5iU7s2ITV"
+               title="JuneAI — 레거시에서 마이크로서비스까지 전 구간 추적" loading="lazy"
+               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        </article>
+
+        <!-- 4 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">추적 전파</span>
+            <h3>끊긴 문맥을 다시 잇고, 신호를 하나로 엮는다</h3>
+            <p>JuneAI는 <strong>문맥 전파가 보통 끊기는 구간에서도 추적을 전파하고, 다시 이어 주는</strong> 도구를 제공한다.
+               <strong>OpenTelemetry를 확장</strong>해 비동기 흐름, 커널 신호, 레거시 전파, 프로파일을 <strong>하나로 상관</strong>한다.</p>
+          </div>
+          <div class="shot"><img src="img/slide4.png" alt="추적 전파 화면" loading="lazy"></div>
+        </article>
+
+        <!-- 5 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">레거시 근본원인 분석</span>
+            <h3>수십 종의 레거시 시스템을 아우르는 근본원인 분석</h3>
+            <p><strong>분산 추적과 프로파일링</strong>으로 JuneAI는 webMethods Integration Server·TIBCO BusinessWorks·
+               IBM CICS·SAP·SIEBEL·Oracle EBS·PeopleSoft·TUXEDO를 비롯한 <strong>수십 종의 레거시 시스템
+               내부의 근본 원인을 분석</strong>한다. 이를 <strong>온톨로지로 쉽게 표현</strong>한다.</p>
+          </div>
+          <div class="shot"><!-- 이미지 --></div>
+        </article>
+
+        <!-- 6 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">온톨로지</span>
+            <h3>온톨로지로 서비스·리소스·이벤트를 한 화면에</h3>
+            <p>온톨로지는 <strong>지연·포화·병목·배포·변경·호출 순서 같은 이벤트를 실시간으로 드러낸다.</strong>
+               AI는 온톨로지와 상호작용하고, 이러한 방식으로 <strong>산업별 온톨로지를 구성</strong>한다.</p>
+          </div>
+          <div class="shot"><!-- 이미지 --></div>
+        </article>
+
+        <!-- 7 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">벤치마크</span>
+            <h3>온프레미스로 돌며 공개 벤치마크 최상위 점수</h3>
+            <p>JuneAI는 IBM ITBench·SREGym 같은 <strong>공개 벤치마크에서 최상위 점수</strong>를 달성했으며,
+               오픈소스 LLM과 함께 <strong>에이전트를 온프레미스로 구동</strong>한다 — <strong>비용이 낮고,
+               보안 정책과도 충돌하지 않는다.</strong></p>
+          </div>
+          <div class="shot"><!-- 이미지 --></div>
+        </article>
+
+        <!-- 8 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">정확도</span>
+            <h3>작은 모델로도 정확한 근본원인 분석</h3>
+            <p>JuneAI의 근본원인 정확도는 프런티어 모델뿐 아니라 <strong>가벼운 온프레미스 오픈소스 모델에서도
+               뛰어나게 유지</strong>된다. 그 정확도를 보장하는 것은 <strong>믿을 수 있는 하네스 기반의 근본원인 분석</strong> 방식이다.</p>
+          </div>
+          <div class="shot"><!-- 이미지 --></div>
+        </article>
+
+        <!-- 9 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">무중단 계측</span>
+            <h3>코드 변경도 재시작도 없이 계측</h3>
+            <p>JuneAI 에이전트는 돌고 있는 서비스를 즉시 계측한다 — <strong>코드 변경도, 재시작도 없이.</strong>
+               <strong>살아 있는 자바 서비스를 멈추지 않고</strong> 메서드 호출을 기록·확인하고,
+               <strong>운영에서만 재현되는 버그를 재시작·재배포 없이 그 자리에서 확인</strong>한다.</p>
+          </div>
+          <div class="shot"><!-- 이미지 --></div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="arrow" id="prev" aria-label="이전 슬라이드">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="dots" id="dots"></div>
+      <button class="arrow" id="next" aria-label="다음 슬라이드">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 히어로 소개(문단·아키텍처 이미지) — 커러셀 아래로 이동(2026-11-11) -->
+  <section class="hero wrap" style="padding-top:8px">
+    <p style="margin-top:0">JuneAI 에이전트는 기술과 업무의 근본 원인을 식별하고, 분석하고, 해결한다.
+       드러나지 않는 지연·부족·병목 등의 문제점을 식별하고, <strong>원인을 분석하고 조치</strong>한다.
+       에이전트와 온톨로지는 단순한 기술이다. 기술은 방법이지 목적이 아니다.
+       <strong>JuneAI는 고객의 문제를 정확하게 이해하고, 해결해서 최적의 의사결정을 돕는 것이 주요 목적이다.</strong></p>
+    <img src="img/hero-stack.png" alt="데이터·레거시·마이크로서비스·플랫폼 전 구간 아키텍처"
+         style="display:block;max-width:900px;width:100%;height:auto;margin:24px auto 24px" loading="lazy">
+    <p><strong>기존 시스템을 변경하지 않고, 단기간에 적은 비용으로</strong> 온톨로지·에이전트·시뮬레이터로 <strong>자율운영과 의사결정 환경을 구축</strong>할 수 있다.
+       <strong>기존 조직과 역할을 그대로 유지</strong>하고, <strong>레거시를 변경하지 않고 개선</strong>할 수 있다.
+       <strong>벤더에 종속적이지 않고</strong>, 모든 구축은 <strong>재시작과 코드 변경 없이도</strong> 잘 작동한다.</p>
+  </section>
+
+  <!-- 네 기둥 4패널 → 각 세부 페이지(2026-11-07 교체).
+       자율운영=case-autonomous.html, AIOps=case-aiops.html, 온톨로지=case-ontology.html, 레거시=case-legacy.html.
+       각 페이지는 20261106_*.md 를 HTML 로 편집한 것. 카테고리+제목+요약+링크 카드. -->
+  <section class="cases wrap" id="cases">
+    <h2>JuneAI 자율 운영 플랫폼의 기능</h2>
+    <p class="cap">관측가능성과 AIOps라는 토대 위에 온톨로지·에이전트, 레거시, 업무 시뮬레이션까지 — <strong>자율 운영</strong>과 <strong>자가 치유</strong>를 구현한다</p>
+    <div class="case-grid">
+
+      <!-- 1 — 자율운영 / 20261106_자율운영.md -->
+      <a class="case-card" href="case-autonomous.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="case-cat">자율 운영</span>
+          <h3>낮엔 사람, 밤엔 AI</h3>
+          <p><strong>자율 운영</strong>과 운영자가 직접 판단하는 <strong>직접 운영</strong>이 있다.
+             크루즈 컨트롤과 완전 자율 주행처럼 <strong>상황에 맞게 전환</strong>한다.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 2 — AIOps / 20261106_AIOps.md -->
+      <a class="case-card" href="case-aiops.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><path d="M3 13h3l2 5 4-12 2 7h4"/></svg></span>
+          <span class="case-cat">에이전트</span>
+          <h3>하네스로 완성하는 자율 에이전트</h3>
+          <p><strong>관측·계측</strong>이라는 하나의 기반 위에 AIOps와 온톨로지가 함께 선다.
+             <strong>재시작·코드 변경 없는 독자적 계측</strong>과, <strong>하네스로 튜닝한 에이전트</strong>가 핵심이다.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 3 — 온톨로지 / 20261106_온톨로지.md -->
+      <a class="case-card" href="case-ontology.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.6 7.6 10.6 16M16.4 7.6 13.4 16M8 6h8"/></svg></span>
+          <span class="case-cat">온톨로지</span>
+          <h3>변경없이, 저렴하고 신속하게</h3>
+          <p>데이터 파이프라인·레이크·리니지·BI 없이, <strong>운영 코드를 그대로 두고</strong> 온톨로지를 구성한다.
+             진짜 경쟁력은 <strong>하네스 엔지니어링</strong> — 저렴한 오픈소스 모델로도 <strong>프론티어급 정확도</strong>.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 4 — 레거시 / 20261106_레거시.md -->
+      <a class="case-card" href="case-legacy.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/></svg></span>
+          <span class="case-cat">레거시</span>
+          <h3>핵심은 여전히 레거시에 있다</h3>
+          <p><strong>레거시를 건드리지 않고 내부 메서드 수준까지 추적</strong>한다. SAP RFC·TUXEDO 메서드 등
+             전 구간을 추적해 <strong>근본 원인을 분석</strong>하고, <strong>산업별 온톨로지</strong>로 제공한다.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 5 — 시뮬레이션(업무 온톨로지) / 20261109_시뮬레이션.md -->
+      <a class="case-card" href="case-business.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg></span>
+          <span class="case-cat">시뮬레이션</span>
+          <h3>같은 문제, 더 넓은 세계</h3>
+          <p>병목·부족·지연·변경 — <strong>기술과 업무는 결국 같은 문제</strong>를 푼다. 다만 업무는 산업마다 달라
+             <strong>표준화가 어렵고</strong>, 의사결정 전에 결과를 미리 보는 <strong>시뮬레이션</strong>이 필요하다.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 6 — 관측가능성(데이터 플랫폼 없는 온톨로지) / 20261109_관측가능성.md -->
+      <a class="case-card" href="case-observability.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="case-cat">계측과 관측</span>
+          <h3>데이터 플랫폼 없이, 관측만으로</h3>
+          <p>온톨로지는 보통 무거운 데이터 플랫폼을 요구한다. JuneAI는 그 대신 <strong>관측가능성</strong>을 써
+             <strong>단위 부서가 바로 도입</strong>한다. 오픈텔레메트리의 <strong>레거시·비동기 한계까지 보강</strong>했다.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 7 — 문맥·변경·상태 관리 (2026-11-13) / case-context.html -->
+      <a class="case-card" href="case-context.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="case-cat">비즈니스 관측가능성</span>
+          <h3>문맥, 변경, 상태를 관리</h3>
+          <p><strong>문맥을 유지하고, 변경을 기록하고, 상태를 관리</strong>한다. 이벤트와 관계를 모니터링하고 영향과 변경을 시뮬레이션한다.
+             <strong>레거시를 변경없이</strong> 더하며, <strong>팔란티어보다 정교하고 정확하게</strong> 추적한다.</p>
+          <span class="case-more">자세히 보기 →</span>
+        </div>
+      </a>
+
+      <!-- 데모 카드 (2026-11-12) — "기능" 그리드에 통합. 상세는 demo-telecom.html / demo-aiops.html -->
+      <a class="case-card" href="demo-telecom.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 000 7M15.5 8.5a5 5 0 010 7M5.6 5.6a9 9 0 000 12.8M18.4 5.6a9 9 0 010 12.8"/></svg></span>
+          <span class="case-cat">통신 · 주문/고장관리</span>
+          <h3>통신사 주문·고장관리 데모</h3>
+          <p>TIBCO FOS·Oracle BRM·Siebel·ASAP·MetaSolv 위에서 <strong>유무선 결합상품 개통과 회선·네트워크 고장관리</strong>를 온톨로지로 구성한다.
+             처리 지연·네트워크 장애·주문 폴아웃의 <strong>원인을 분석</strong>하고, <strong>해결책을 시뮬레이션</strong>해 최적 조치를 고른다.</p>
+          <span class="case-more">데모 자세히 보기 →</span>
+        </div>
+      </a>
+
+      <a class="case-card" href="demo-aiops.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></span>
+          <span class="case-cat">금융 · AIOps</span>
+          <h3>금융사 AIOps 데모</h3>
+          <p>다양한 마이크로서비스와 <strong>IBM CICS·SAP·TUXEDO</strong>가 쿠버네티스에서 함께 돈다.
+             온톨로지가 서비스와 리소스를 묶어 <strong>지연·병목·부족·포화의 원인을 분석</strong>하고, <strong>자율 운영과 사람 운영</strong>을 함께 지원한다.</p>
+          <span class="case-more">데모 자세히 보기 →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- 지원 레거시 — 로고는 각 벤더 브랜드 가이드라인에서 받은 것만 쓰세요(상표권).
+       Spark·Flink 는 로고 안에 제품명이 들어 있어 밑의 이름표를 쓰지 않습니다.
+       링크는 각 제품 공식 페이지(응답 확인 완료) — 새 창으로 엽니다. -->
+  <section class="logos wrap" id="legacy">
+    <h2>JuneAI는 다양한 레거시에 에이전트와 온톨로지를 적용한다</h2>
+    <p class="cap">JuneAI는 다양한 레거시 시스템 내부의 근본 원인까지 분석한다.
+       레거시에 온톨로지와 에이전트를 구성하면, <strong>업무를 개선</strong>하고 <strong>효과적으로 운영</strong>할 수 있다.
+       <strong>JuneAI의 레거시 기술력과 노하우는 압도적이다.</strong> SAP와 CICS에도 AI 플랫폼을 적용할 수 있다.</p>
+    <div class="logo-grid">
+      <!-- IBM -->
+      <a class="logo-item" href="https://www.ibm.com/products/cics-transaction-server" target="_blank" rel="noopener"><img src="img/logo-ibm.svg" alt="IBM"><span class="prod">CICS</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/mq" target="_blank" rel="noopener"><img src="img/logo-ibm.svg" alt="IBM"><span class="prod">MQ</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/communications-server-for-data-center-deployment" target="_blank" rel="noopener"><img src="img/logo-ibm.svg" alt="IBM"><span class="prod">SNA Server</span></a>
+      <a class="logo-item" href="https://www.hcl-software.com/domino" target="_blank" rel="noopener"><img src="img/logo-ibm.svg" alt="IBM"><span class="prod">Lotus Notes</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/business-automation-workflow" target="_blank" rel="noopener"><img src="img/logo-ibm.svg" alt="IBM"><span class="prod">BPM</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/maximo" target="_blank" rel="noopener"><img src="img/logo-ibm.svg" alt="IBM"><span class="prod">Maximo</span></a>
+      <!-- Oracle -->
+      <a class="logo-item" href="https://www.oracle.com/database/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">Database</span></a>
+      <a class="logo-item" href="https://www.oracle.com/middleware/technologies/tuxedo.html" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">Tuxedo</span></a>
+      <a class="logo-item" href="https://www.oracle.com/applications/ebusiness/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">E-Business Suite</span></a>
+      <a class="logo-item" href="https://www.oracle.com/applications/peoplesoft/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">PeopleSoft</span></a>
+      <a class="logo-item" href="https://www.oracle.com/communications/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">OSM</span></a>
+      <a class="logo-item" href="https://www.oracle.com/communications/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">BRM</span></a>
+      <a class="logo-item" href="https://www.oracle.com/communications/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">MetaSolv</span></a>
+      <a class="logo-item" href="https://www.oracle.com/industries/utilities/" target="_blank" rel="noopener"><img src="img/logo-oracle.svg" alt="Oracle"><span class="prod">CCB</span></a>
+      <!-- SAP -->
+      <a class="logo-item" href="https://www.sap.com/products/erp.html" target="_blank" rel="noopener"><img src="img/logo-sap.svg" alt="SAP"><span class="prod">ERP · S/4HANA</span></a>
+      <!-- TIBCO -->
+      <a class="logo-item" href="https://www.tibco.com/products/tibco-businessworks" target="_blank" rel="noopener"><img src="img/logo-tibco.svg" alt="TIBCO"><span class="prod">BusinessWorks</span></a>
+      <a class="logo-item" href="https://www.tibco.com/" target="_blank" rel="noopener"><img src="img/logo-tibco.svg" alt="TIBCO"><span class="prod">Fulfillment<br>Order Suite</span></a>
+      <!-- Software AG -->
+      <a class="logo-item" href="https://www.softwareag.com/" target="_blank" rel="noopener"><img src="img/logo-webmethods.svg" alt="Software AG"><span class="prod">webMethods<br>Integration Server</span></a>
+      <a class="logo-item" href="https://www.softwareag.com/" target="_blank" rel="noopener"><img src="img/logo-webmethods.svg" alt="Software AG"><span class="prod">webMethods<br>API Gateway</span></a>
+      <!-- Amdocs -->
+      <a class="logo-item" href="https://www.amdocs.com/products-services/kenan" target="_blank" rel="noopener"><img src="img/logo-amdocs.svg" alt="Amdocs"><span class="prod">Kenan</span></a>
+      <!-- Teradata -->
+      <a class="logo-item" href="https://www.teradata.com/" target="_blank" rel="noopener"><img src="img/logo-teradata.svg" alt="Teradata"><span class="prod">Data Warehouse</span></a>
+      <!-- SWIFT -->
+      <a class="logo-item" href="https://www.swift.com/" target="_blank" rel="noopener"><img src="img/logo-swift.svg" alt="SWIFT"><span class="prod">Payments Network</span></a>
+      <!-- Apache -->
+      <a class="logo-item" href="https://spark.apache.org/" target="_blank" rel="noopener"><img src="img/logo-spark.svg" alt="Apache Spark"></a>
+      <a class="logo-item" href="https://flink.apache.org/" target="_blank" rel="noopener"><img src="img/logo-flink.svg" alt="Apache Flink"></a>
+    </div>
+  </section>
+
+  <!-- 데모 안내 CTA (2026-11-12) — 맨 아래, 홈페이지 섹션 형식(제목 + 캡션) -->
+  <section class="cases wrap" id="demo-cta">
+    <h2>JuneAI는 통신사 주문 및 고장 관리와 금융사 AIOps 데모를 제공한다.</h2>
+    <p class="cap" style="white-space:normal;max-width:1040px">SAP, CICS 등 다양한 레거시 기반으로 <strong>온톨로지·에이전트·시뮬레이터를 구성</strong>하고,
+       <strong>근본 원인 분석과 의사 결정</strong>을 처리하는 데모를 제공한다. 언제든 <strong>데모를 요청</strong>할 수 있다.
+       <strong>다른 경쟁사 제품과 무엇이 다른지</strong> 쉽게 이해할 수 있다.</p>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap inner">
+    <div><strong style="color:var(--ink)">JuneAI</strong> · 자율 운영 AIOps 플랫폼</div>
+    <div>© 2026 JuneAI. 모든 권리 보유.</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const track = document.getElementById('track');
+    const slides = track.children;
+    const total = slides.length;
+    const dots = document.getElementById('dots');
+    let i = 0, timer = null;
+
+    for (let n = 0; n < total; n++) {
+      const b = document.createElement('button');
+      b.className = 'dot';
+      b.setAttribute('aria-label', '슬라이드 ' + (n + 1));
+      b.addEventListener('click', () => go(n, true));
+      dots.appendChild(b);
+    }
+
+    function go(n, stop) {
+      i = (n + total) % total;
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      [...dots.children].forEach((d, k) => d.setAttribute('aria-current', k === i ? 'true' : 'false'));
+      if (stop) rest();
+    }
+    function rest() { clearInterval(timer); timer = setInterval(() => go(i + 1), 7000); }
+
+    document.getElementById('prev').addEventListener('click', () => go(i - 1, true));
+    document.getElementById('next').addEventListener('click', () => go(i + 1, true));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') go(i - 1, true);
+      if (e.key === 'ArrowRight') go(i + 1, true);
+    });
+    // 터치 스와이프
+    let x0 = null;
+    track.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1), true);
+      x0 = null;
+    }, { passive: true });
+
+    go(0);
+    rest();
+  })();
+</script>
+</body>
+</html>

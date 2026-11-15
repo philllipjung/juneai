@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- JuneAI — 금융사 AIOps 데모 (2026-11-12) -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>금융사 AIOps 데모 — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  /* 흐름 */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:16px 0 22px}
+  .flow .step{flex:1 1 140px;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;position:relative}
+  .flow .step .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+  .flow .step h4{margin:0 0 4px;font-size:15px;color:var(--ink)}
+  .flow .step p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .flow .arrow{display:grid;place-items:center;color:#9aa0a6;font-size:20px;padding:0 6px}
+  @media(max-width:700px){ .flow{flex-direction:column} .flow .arrow{transform:rotate(90deg);padding:2px 0} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">데모 · 금융사 AIOps</span>
+    <h1>금융사 AIOps 데모</h1>
+    <p class="lead"><strong>마이크로서비스와 레거시가 섞인 시스템을 하나의 온톨로지로 운영한다.</strong><br>
+      다양한 마이크로서비스와 <strong>IBM CICS·SAP·TUXEDO</strong> 기반 서비스가 쿠버네티스에서 함께 돈다.
+      온톨로지가 서비스와 리소스를 묶어 <strong>지연·병목·부족·포화</strong>의 원인을 분석하고,
+      <strong>자율 운영</strong>과 <strong>사람 운영</strong>을 함께 지원한다.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. 한눈에 보기</h2>
+  <p>이 데모는 금융사의 실제 운영 환경을 본떠, <strong>마이크로서비스와 레거시가 섞인 시스템</strong>을 AIOps로 운영한다.
+     최신 서비스와 오래된 기간계가 한데 돌아가는 현실을, 하나의 그림으로 관측하고 조치하는 모습을 보여준다.</p>
+  <ul>
+    <li><strong>섞인 구성</strong> — 다수의 마이크로서비스 + IBM CICS·SAP·TUXEDO 기반 서비스.</li>
+    <li><strong>하나의 온톨로지</strong> — 서비스와 리소스를 묶어 문제의 원인을 분석한다.</li>
+    <li><strong>두 가지 운영</strong> — AI가 맡는 자율 운영과, 사람이 보는 직접 운영을 모두 지원한다.</li>
+  </ul>
+
+  <h2>2. 구성 — 마이크로서비스와 레거시, 쿠버네티스 위에서</h2>
+  <p>서비스는 종류가 섞여 있지만, 모두 <strong>쿠버네티스(k8s)</strong> 위에서 작동한다.</p>
+  <table class="cmp">
+    <thead><tr><th>구성 요소</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td>마이크로서비스</td><td>쿠버네티스에서 도는 다수의 현대적 서비스</td></tr>
+      <tr><td>IBM CICS</td><td>기간계 트랜잭션을 처리하는 메인프레임 서비스</td></tr>
+      <tr><td>SAP</td><td>핵심 업무를 담당하는 ERP 계열 서비스</td></tr>
+      <tr><td>TUXEDO</td><td>분산 트랜잭션을 처리하는 미들웨어 서비스</td></tr>
+      <tr><td>쿠버네티스</td><td>이 모든 서비스가 올라가 작동하는 실행 기반</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. 온톨로지 — 서비스와 리소스를 결합한다</h2>
+  <p>온톨로지는 <strong>서비스</strong>(무엇을 하는가)와 <strong>리소스</strong>(어디서 도는가)를 한데 묶는다.
+     그 위에서 운영 중 드러나는 문제의 원인을 분석한다.</p>
+  <ul>
+    <li><strong>지연</strong> — 응답이 느려지는 구간을 찾는다.</li>
+    <li><strong>병목</strong> — 흐름이 막히는 지점을 짚는다.</li>
+    <li><strong>부족</strong> — 자원이 모자라는 곳을 드러낸다.</li>
+    <li><strong>포화</strong> — 한계에 다다른 리소스를 가려낸다.</li>
+  </ul>
+
+  <h2>4. 자율 운영 — 워크플로우와 추적</h2>
+  <p>근본 원인 분석은 <strong>자율 운영</strong>으로 처리된다. 사람이 일일이 쫓지 않아도,
+     정해진 절차가 스스로 돌며 원인을 찾고 조치까지 이어간다.</p>
+  <ul>
+    <li><strong>워크플로우</strong> — 진단과 조치 절차를 자동으로 밟는다.</li>
+    <li><strong>추적(Trace)</strong> — 서비스 사이를 오간 호출을 따라가 근거를 만든다.</li>
+  </ul>
+
+  <h2>5. 사람이 보는 운영 — 이상탐지와 채팅</h2>
+  <p>사람이 직접 운영할 때는, 먼저 <strong>이상탐지</strong>가 징후를 알리고 <strong>채팅</strong>으로 상황을 묻고 답한다.
+     자율 운영과 직접 운영은 서로 대체가 아니라, 상황에 맞게 함께 쓰인다.</p>
+  <table class="cmp">
+    <thead><tr><th>구분</th><th>자율 운영</th><th>사람 운영</th></tr></thead>
+    <tbody>
+      <tr><td>방식</td><td>워크플로우 + 추적</td><td>이상탐지 + 채팅</td></tr>
+      <tr><td>하는 일</td><td>근본 원인 분석과 조치를 자동으로</td><td>징후를 먼저 포착하고, 대화로 진단</td></tr>
+      <tr><td>사람의 역할</td><td>승인 여부만 결정</td><td>직접 묻고 판단</td></tr>
+    </tbody>
+  </table>
+  <blockquote><p>마이크로서비스와 레거시를 가리지 않고 <strong>하나의 온톨로지로 묶어</strong>, 지연·병목·부족·포화의 원인을 분석한다. <strong>자율 운영은 워크플로우와 추적으로, 직접 운영은 이상탐지와 채팅으로</strong> 함께 돕는다.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← 홈으로 돌아가기</a>
+    <span class="muted">JuneAI · 자율 운영 AIOps 플랫폼</span>
+  </div>
+</div>
+</body>
+</html>

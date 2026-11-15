@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- JuneAI — 관측가능성 (데이터 플랫폼 없는 온톨로지, 2026-11-11) -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI와 관측가능성 — 데이터 플랫폼 없이, 관측만으로</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 2열 비교 카드 */
+  .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
+  .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
+  .leg-card.heavy{border-top:3px solid #b0392f}
+  .leg-card.light{border-top:3px solid var(--blue)}
+  .leg-card .emoji{font-size:22px;line-height:1}
+  .leg-card h4{margin:10px 0 10px;color:var(--ink);font-size:17px}
+  .leg-card ul{margin:0}
+  .leg-card li{margin:0 0 8px;font-size:14.5px}
+  @media(max-width:700px){ .leg-grid{grid-template-columns:1fr} }
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  .cmp .th-heavy{color:#b0392f}
+  .cmp .th-light{color:var(--blue-dark)}
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">계측과 관측 · 오픈텔레메트리</span>
+    <h1>데이터 플랫폼 없이, 관측만으로</h1>
+    <p class="lead"><strong>온톨로지는 보통 무거운 데이터 플랫폼을 전제로 한다.</strong><br>
+      JuneAI는 그 전제를 치운다. 데이터 플랫폼 대신 <strong>관측가능성(Observability)</strong>을 토대로 삼아,
+      <strong>단위 부서가 다른 조직의 도움 없이</strong> 온톨로지를 올린다 — 더 빠르고, 더 저렴하게.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. 관측가능성과 오픈텔레메트리 — 그리고 그 한계</h2>
+  <p>JuneAI 온톨로지의 토대는 <strong>관측가능성(Observability)</strong>이다. 운영 중인 시스템이 남기는 <strong>추적(trace)·지표(metric)·로그(log)</strong>를 모아, 그 관계로 온톨로지를 세운다. 표준 수집 규격으로는 <strong>오픈텔레메트리(OpenTelemetry)</strong>가 널리 쓰인다.</p>
+  <p>그런데 <strong>오픈텔레메트리만으로는</strong> 레거시와 다양한 예외 상황을 다루는 데 분명한 한계가 있다.</p>
+  <ul>
+    <li><strong>추적 전파가 끊긴다</strong> — 호출이 일정 구간을 지나면 추적(trace) 연결이 중단되어, 전 구간을 하나로 잇지 못한다.</li>
+    <li><strong>비동기·이벤트 처리가 어렵다</strong> — 메시지 큐·이벤트 기반 흐름에서는 인과관계를 따라가기가 까다롭다.</li>
+    <li><strong>레거시 계측이 지원되지 않는다</strong> — 전통 시스템(메인프레임·TP 모니터 등)은 표준 계측이 닿지 않는다.</li>
+  </ul>
+  <blockquote><p>✅ <strong>JuneAI는 이 문제들을 해결했다.</strong> 끊긴 추적 전파를 잇고, 비동기·이벤트 흐름을 따라가며, 레거시 내부까지 계측한다. 그래서 관측가능성만으로도 <strong>전 구간이 이어진 온톨로지</strong>를 세울 수 있다.</p></blockquote>
+
+  <h2>2. 원래 온톨로지는 "데이터 플랫폼"을 전제한다</h2>
+  <p>온톨로지는 기본적으로 <strong>데이터 플랫폼을 기반</strong>으로 한다. 즉, 데이터 플랫폼 없이는 온톨로지 구성 자체가 어렵다. 데이터 플랫폼 기반의 온톨로지는 <strong>파이프라인 · 레이크 · 메타데이터 · 리니지</strong>를 두루 필요로 한다.</p>
+  <p>문제는 이것이 <strong>단순히 "기술적으로 가능한가"의 문제가 아니라는</strong> 점이다.</p>
+  <ul>
+    <li><strong>시스템 증설</strong> — 저장·연산 인프라를 새로 들여야 한다.</li>
+    <li><strong>인력 확보</strong> — 데이터 엔지니어·플랫폼 운영 인력이 필요하다.</li>
+    <li><strong>일정 조율 · 예산 산정</strong> — 여러 조직이 엮인 복잡한 의사결정이 뒤따른다.</li>
+  </ul>
+  <p>복잡한 의사결정과 조직 간 협업·역할 분담을 생각하면, <strong>부서 수준에서 온톨로지를 도입하는 것은 사실상 불가능에 가깝다.</strong></p>
+  <h3>이미 데이터 플랫폼이 있어도 더 어렵다</h3>
+  <p>기존에 데이터 플랫폼이 잘 운영되고 있다고 가정하면, <strong>팔란티어 같은 온톨로지 기반 플랫폼을 또 얹는 일은 오히려 더 어렵다.</strong></p>
+  <ul>
+    <li><strong>중복</strong> — 기존 데이터 플랫폼과 기능이 겹친다.</li>
+    <li><strong>접근법의 차이</strong> — 업무 중심의 온톨로지 접근은 기존 방식과 결이 다르다.</li>
+    <li><strong>조직의 반발</strong> — 기존 데이터 조직의 저항이 생길 수 있다.</li>
+  </ul>
+  <p>즉, 온톨로지 도입에는 <strong>기술적 문제뿐 아니라 조직을 포함한 다양한 고려사항</strong>이 존재한다.</p>
+
+  <h2>3. 온톨로지를 올렸다고 끝이 아니다</h2>
+  <p>온톨로지가 도입되었다고 해서 과제가 끝난 것은 아니다. 오히려 <strong>그 뒤의 일이 더 크다.</strong></p>
+  <p>사실 <strong>온톨로지는 일부분일 뿐</strong>이다. JuneAI가 원하는 방향은 문제를 분석하고, <strong>최적의 의사결정을 돕고</strong>, 이 모든 과정을 <strong>에이전트가 자율적으로 처리</strong>하는 것이다. 온톨로지는 전체 과정에서 아주 작은 일부분이며, 그 이상도 그 이하도 아니다.</p>
+  <ul>
+    <li><strong>적용 전</strong> — 문제를 분석하고, 우선순위를 정하고, 온톨로지에 반영하기 전 <strong>컨설팅</strong>이 필요하다.</li>
+    <li><strong>적용 후</strong> — 온톨로지로 문제를 <strong>식별</strong>하고, <strong>원인을 분석</strong>하고, <strong>해결책을 시뮬레이션</strong>하는 후속 업무가 이어진다.</li>
+  </ul>
+  <p>전체 문제 해결 과정에서 <strong>온톨로지 구축은 일부분일 뿐, 후속 업무가 훨씬 많다.</strong> 그래서 질문은 하나로 모인다 — <em>"이 복잡한 온톨로지 구성과 문제 해결을, 어떻게 하면 단순하게 만들 수 있을까?"</em></p>
+
+  <h2>4. JuneAI의 해결책은 꽤 단순하다 — 데이터 플랫폼을 쓰지 않는다</h2>
+  <p>JuneAI의 답은 의외로 간단하다. <strong>데이터 플랫폼을 사용하지 않는다.</strong> 대신 이미 시스템이 내보내고 있는 <strong>관측가능성(Observability)</strong>을 토대로 삼는다.</p>
+  <ul>
+    <li><strong>데이터 조직과의 협업이 필요 없다</strong> — 단위 부서가 <strong>주도적으로</strong> 적용할 수 있다.</li>
+    <li><strong>별도 예산·조직 간 협업이 필요 없다</strong> — <strong>투자 비용 · 개발 기간 · 커뮤니케이션 비용</strong>을 모두 줄인다.</li>
+    <li><strong>관측가능성을 토대로 쓴다</strong> — 무거운 파이프라인·레이크 없이, 운영이 남기는 신호만으로 온톨로지를 세운다.</li>
+    <li><strong>자율 운영은 덤</strong> — 필요하면 AIOps 기반 자율 운영까지 얹고, <strong>업무별 온톨로지와 하네스가 적용된 에이전트</strong>에만 집중할 수 있다.</li>
+  </ul>
+
+  <table class="cmp">
+    <thead><tr><th>구분</th><th class="th-heavy">🏗️ 데이터 플랫폼 기반</th><th class="th-light">👁️ JuneAI 관측 기반</th></tr></thead>
+    <tbody>
+      <tr><td>토대</td><td>파이프라인·레이크·메타·리니지</td><td>관측가능성(추적·지표·로그)</td></tr>
+      <tr><td>필요 조직</td><td>데이터 조직과의 협업 필수</td><td>단위 부서 단독 주도</td></tr>
+      <tr><td>도입</td><td>부서 단독으로는 사실상 불가능</td><td>단위 부서가 주도적으로 가능</td></tr>
+      <tr><td>예산·일정</td><td>증설·인력·예산 산정 필요</td><td>별도 예산 없이 빠르게</td></tr>
+      <tr><td>레거시·비동기</td><td>표준 OTel만으로는 한계</td><td>전파·비동기·레거시까지 보강</td></tr>
+      <tr><td>그 다음</td><td>후속 업무가 또 하나의 큰 숙제</td><td>업무별 온톨로지+하네스 에이전트에 집중</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. 정리 — 가볍게, 부서가, 바로</h2>
+  <ul>
+    <li><strong>관측가능성이 토대</strong> — 데이터 플랫폼 대신, 운영이 이미 남기는 신호로 온톨로지를 세운다.</li>
+    <li><strong>오픈텔레메트리의 한계를 넘는다</strong> — 끊긴 추적 전파·비동기·레거시 계측까지 JuneAI가 보강했다.</li>
+    <li><strong>조직의 벽을 넘는다</strong> — 데이터 조직 협업·별도 예산 없이, 단위 부서가 주도적으로 도입한다.</li>
+    <li><strong>비용과 시간을 줄인다</strong> — 투자 비용·개발 기간·커뮤니케이션 비용을 함께 낮춘다.</li>
+    <li><strong>본질에 집중한다</strong> — 자율 운영은 덤, 업무별 온톨로지와 하네스 에이전트에 역량을 모은다.</li>
+  </ul>
+  <blockquote><p>온톨로지를 올리는 일이 더 이상 <strong>전사 프로젝트</strong>일 필요는 없다. JuneAI는 관측가능성 위에서, <strong>부서가 바로 시작할 수 있을 만큼 가볍게</strong> 온톨로지와 에이전트를 올린다.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← 홈으로 돌아가기</a>
+    <span class="muted">JuneAI · 자율 운영 AIOps 플랫폼</span>
+  </div>
+</div>
+</body>
+</html>

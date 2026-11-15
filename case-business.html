@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- JuneAI — 업무 온톨로지·시뮬레이션 (20261109_시뮬레이션.md → HTML, 2026-11-09) -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI와 업무 온톨로지 — 같은 문제, 더 넓은 세계</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 비교 2열 카드 */
+  .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
+  .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
+  .leg-card.tech{border-top:3px solid #34a853}
+  .leg-card.biz{border-top:3px solid var(--blue)}
+  .leg-card .emoji{font-size:22px;line-height:1}
+  .leg-card h4{margin:10px 0 10px;color:var(--ink);font-size:17px}
+  .leg-card ul{margin:0}
+  .leg-card li{margin:0 0 8px;font-size:14.5px}
+  @media(max-width:700px){ .leg-grid{grid-template-columns:1fr} }
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  .cmp .th-tech{color:#1e7e34}
+  .cmp .th-biz{color:var(--blue-dark)}
+  /* 시뮬레이션 흐름 */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:16px 0 22px}
+  .flow .step{flex:1 1 150px;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;position:relative}
+  .flow .step .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+  .flow .step h4{margin:0 0 4px;font-size:15px;color:var(--ink)}
+  .flow .step p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .flow .arrow{display:grid;place-items:center;color:#9aa0a6;font-size:20px;padding:0 6px}
+  @media(max-width:700px){ .flow{flex-direction:column} .flow .arrow{transform:rotate(90deg);padding:2px 0} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">업무 온톨로지 · 시뮬레이션</span>
+    <h1>기술에서 업무로 — 같은 문제를, 더 넓은 세계에서</h1>
+    <p class="lead"><strong>AIOps와 기술 온톨로지가 먼저이다. 그 위에서 업무 온톨로지가 자란다.</strong><br>
+      둘은 결국 <strong>같은 병목·지연·부족·변경</strong>을 푸는 과정이지만, 업무는 더 다양하고 표준화가 어렵다.
+      그래서 업무에는 <strong>의사결정 전에 결과를 미리 보는 시뮬레이션</strong>이 꼭 필요하다.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. 왜 AIOps와 기술 온톨로지를 먼저 하는가</h2>
+  <p>업무 온톨로지는 기술 온톨로지보다 <strong>복잡하다.</strong> 원인도 더 다양하고, 필요한 조치의 폭도 넓다. 그래서 자연스럽게 이런 질문이 나온다 — <em>"그럼 업무용 온톨로지를 따로, 처음부터 다시 만들어야 하나?"</em></p>
+  <p>JuneAI의 대답은 <strong>"아니다"</strong> 이다. 기술 온톨로지와 업무 온톨로지를 <strong>따로 구축할 필요가 없다.</strong> 왜냐하면 둘은 결국 <strong>같은 종류의 문제 — 병목, 지연, 부족 — 을 풀어내는 같은 과정</strong>이기 때문이다.</p>
+  <ul>
+    <li><strong>복잡하고 비싼 데이터 플랫폼은 필요 없다.</strong> 매번 복잡한 의사결정과 수정이 뒤따르는 무거운 플랫폼을 새로 세울 이유가 없다.</li>
+    <li>필요한 것은 <strong>신속하고, 저렴하고, 안정적인 온톨로지와 에이전트</strong>이다. 운영 중인 시스템을 그대로 두고, 그 위에 얇게 얹는다.</li>
+  </ul>
+  <blockquote><p>💡 기술을 먼저 다지는 이유는 간단하다. <strong>기술 온톨로지에서 검증된 "문제 인식 → 원인 분석 → 해결책 제시"의 뼈대를, 업무에도 그대로 재사용</strong>하기 때문이다. 업무는 그 위에 "무엇을 선택할지"를 더한다.</p></blockquote>
+
+  <h2>2. 기술의 문제와 해법은 "제한적"이다 — 그래서 추론이 쉽다</h2>
+  <p>기술 온톨로지와 AIOps가 다루는 문제는 몇 가지로 <strong>요약이 된다.</strong> 종류가 정해져 있어, AI가 충분히 <strong>추론할 수 있는 수준</strong>이다.</p>
+  <h3>흔히 겪는 기술 문제</h3>
+  <ul>
+    <li><strong>성능 저하</strong> · <strong>트래픽 증가</strong> · <strong>처리시간 지연</strong></li>
+    <li><strong>서비스 에러</strong> · <strong>리소스 부족</strong> · <strong>구성 변경</strong></li>
+  </ul>
+  <h3>흔히 쓰는 조치</h3>
+  <ul>
+    <li><strong>스케일 아웃</strong> (서버 늘리기) · <strong>리소스 증설</strong> · <strong>재시작</strong></li>
+    <li><strong>롤백</strong> (이전 버전으로 되돌리기) · <strong>파라미터 변경</strong></li>
+  </ul>
+  <p>문제와 해결책이 모두 <strong>정해진 범위 안</strong>에 있다. "느려졌다 → 서버를 늘린다", "에러가 났다 → 롤백한다" 처럼, 원인과 처방을 비교적 명확하게 이어 붙일 수 있다. 이것이 기술 온톨로지가 빠르게 자율화될 수 있는 이유이다.</p>
+
+  <h2>3. 업무는 산업·업무마다 다르다</h2>
+  <p>업무의 세계는 사정이 다르다. 산업과 업무에 따라 <strong>겪는 문제도, 그것을 처리하는 방식도 크게 달라진다.</strong></p>
+  <p>예를 들어 <strong>납품 지연, 재고 부족, 가격 변동</strong>의 원인을 분석한다고 해보자. 기술의 원인 분석만큼 복잡하지는 않다. 하지만 결정적인 차이가 있다 —</p>
+  <blockquote><p>같은 "납품 지연"이라도, <strong>어떤 애플리케이션을 쓰느냐에 따라 호출하는 API와 들여다볼 DB 테이블이 전부 다르다.</strong> SAP를 쓰는 곳, TIBCO로 연계하는 곳, 자체 시스템을 쓰는 곳이 모두 제각각이다.</p></blockquote>
+  <p>즉, <strong>문제의 성격은 비슷해도, 그 문제를 읽어내는 데이터의 위치와 모양이 산업·업무마다 다르다.</strong></p>
+
+  <h2>4. 같은 주제, 다른 무대</h2>
+  <p>기술이든 업무든, 결국 마주하는 주제는 <strong>병목 · 부족 · 지연 · 변경</strong>으로 수렴한다. 그리고 그것을 <strong>온톨로지와 에이전트로 원인을 분석하고 해결책을 제시한다</strong>는 점도 똑같다.</p>
+  <p>다만 업무 온톨로지와 에이전트가 처리해야 하는 <strong>주제는 훨씬 다양하고, 폭넓고, 표준화가 어렵다.</strong> 기술 온톨로지만큼 전문적이고 복잡하지는 않을지언정, <strong>산업과 업무마다 매번 달라지는 동적인 온톨로지·에이전트 구성</strong>은 그 자체로 큰 부담이다.</p>
+  <table class="cmp">
+    <thead>
+      <tr><th>구분</th><th class="th-tech">🖥️ 기술 · AIOps</th><th class="th-biz">🏭 업무</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>문제의 종류</td><td>제한적 · 정형화 — 성능·트래픽·지연·에러·부족·구성</td><td>다양 · 산업별로 상이 — 납품 지연·재고 부족·가격 변동 …</td></tr>
+      <tr><td>데이터 위치</td><td>대체로 표준(지표·로그·추적)</td><td>앱마다 API·DB 테이블이 다름</td></tr>
+      <tr><td>조치</td><td>정해진 처방에 가까움 — 스케일 아웃·증설·재시작·롤백·파라미터</td><td>선택지가 많고, 그중 하나를 "골라야" 한다</td></tr>
+      <tr><td>특징</td><td>범위가 제한적 → 추론·자율화가 쉽다</td><td>폭넓고 표준화가 어렵다 → 시뮬레이션이 필요</td></tr>
+      <tr><td>필요한 것</td><td>자동 추론 → 자율 조치</td><td>추론 + <strong>시뮬레이션</strong> → 의사결정</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. 그래서 업무에는 "시뮬레이션"이 필요하다</h2>
+  <p>기술은 "느리면 늘린다" 처럼 처방이 거의 정해져 있다. 하지만 업무는 <strong>선택지가 여러 개</strong>이고, 그중 하나를 <strong>골라야</strong> 한다. 긴급 발주를 할지, 대체 공급사를 쓸지, 증산을 할지, 납기를 재협상할지 — 각각 비용도 결과도 다르다.</p>
+  <p>그래서 업무 에이전트와 온톨로지에서는 <strong>시뮬레이션이 핵심</strong>이다. 사용자의 의사결정이 <strong>온톨로지에 어떤 영향을 주는지, 그 변경의 결과가 무엇인지 미리 예측</strong>해야 한다. 다양한 옵션 가운데 하나를 고르려면, <strong>먼저 돌려보고(what-if) 결과를 본 다음</strong> 결정할 수 있어야 한다.</p>
+  <div class="flow">
+    <div class="step"><span class="n">1</span><h4>문제 인식</h4><p>납품 지연 등 업무 문제를 온톨로지에서 포착</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">2</span><h4>원인 분석</h4><p>어느 공급·생산 단계가 병목인지 근본 원인 추적</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">3</span><h4>옵션 시뮬레이션</h4><p>긴급 발주·증산·납기 재협상 등 선택지별 결과 예측</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">4</span><h4>의사결정</h4><p>결과(납기준수율·비용)를 비교해 가장 나은 안을 선택</p></div>
+  </div>
+  <blockquote><p>🔮 이것이 <strong>디지털 트윈</strong>의 아이디어이다. 실제 업무 시스템을 건드리지 않고, 온톨로지 위에 <strong>가상의 쌍둥이</strong>를 만들어 "이렇게 바꾸면 어떻게 될까?"를 안전하게 미리 돌려본다. JuneAI는 <strong>SAP 납품 지연 시뮬레이션</strong>처럼, 구매와 생산을 연계해 결정의 결과를 숫자로 보여준다.</p></blockquote>
+
+  <h2>6. 정리 — 하나의 뼈대로, 기술에서 업무까지</h2>
+  <ul>
+    <li><strong>기술을 먼저, 업무를 그 위에</strong> — AIOps·기술 온톨로지의 검증된 뼈대를 업무에 그대로 재사용한다.</li>
+    <li><strong>따로 만들 필요 없다</strong> — 기술도 업무도 결국 병목·지연·부족·변경을 푸는 같은 과정이다. 무겁고 비싼 데이터 플랫폼 대신, 신속·저렴·안정적인 온톨로지와 에이전트면 충분하다.</li>
+    <li><strong>업무는 더 다양하다</strong> — 문제의 성격은 비슷해도, 산업·앱마다 API와 DB 테이블이 달라 표준화가 어렵다.</li>
+    <li><strong>그래서 시뮬레이션이다</strong> — 선택지가 여럿인 업무에서는, 결정하기 전에 결과를 미리 돌려보고 가장 나은 안을 고른다.</li>
+  </ul>
+  <blockquote><p>JuneAI는 기술에서 업무까지 <strong>하나의 온톨로지·에이전트 뼈대</strong>로 잇고, 업무의 의사결정에는 <strong>시뮬레이션(디지털 트윈)</strong>을 더한다. 운영을 멈추지 않고, 바꾸기 전에 결과를 먼저 본다.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← 홈으로 돌아가기</a>
+    <span class="muted">JuneAI · 자율 운영 AIOps 플랫폼</span>
+  </div>
+</div>
+</body>
+</html>

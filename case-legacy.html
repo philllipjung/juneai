@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- JuneAI — 레거시 (20261106_레거시.md → HTML, 2026-11-07) -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI와 레거시 — 핵심은 여전히 레거시에 있다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 레거시 카드 */
+  .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
+  .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
+  .leg-card .emoji{font-size:22px;line-height:1}
+  .leg-card h4{margin:10px 0 10px;color:var(--ink);font-size:17px}
+  .leg-card ul{margin:0}
+  .leg-card li{margin:0 0 8px;font-size:14.5px}
+  @media(max-width:700px){ .leg-grid{grid-template-columns:1fr} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">레거시</span>
+    <h1>JuneAI와 레거시 — 핵심은 여전히 레거시에 있다</h1>
+    <p class="lead"><strong>레거시는 바꿔야 할 짐이 아니라, 지켜야 할 핵심 자산이다.</strong><br>
+      JuneAI는 레거시를 <strong>건드리지 않고</strong>, 그 <strong>내부 메서드 수준까지 추적</strong>해
+      문제를 식별하고 근본 원인을 분석하며, 산업별 온톨로지로 구성한다.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. 레거시는 왜 바꾸기 어려운가</h2>
+  <p>레거시(Legacy) 시스템은 수십 년간 기업의 핵심 업무를 떠받쳐 온 <strong>중요한 자산</strong>이다. 은행의 계정계, 통신사의 과금, 제조사의 생산관리 — 가장 중요한 일일수록 레거시 위에서 돌아간다.</p>
+  <p>그런데 <strong>큰 문제 없이 잘 돌아가는 레거시를 바꾸고 개선하는 일</strong>은 엄청난 부담이다.</p>
+  <ul>
+    <li><strong>장애가 나면 해결이 어렵다</strong> — 오래되고 복잡해, 무엇이 문제인지 찾기조차 힘들다.</li>
+    <li><strong>업무를 바꾸려면 비용이 크다</strong> — 작은 변경에도 막대한 시간과 돈, 그리고 위험이 따른다.</li>
+  </ul>
+  <p>그래서 많은 사람들이 이렇게 생각한다 — <em>"레거시는 빠르게 변하는 비즈니스 환경에 맞지 않는다."</em> 하지만 그렇다고 멀쩡히 돌아가는 핵심 시스템을 섣불리 들어내는 것은 더 큰 위험이다.</p>
+  <p><strong>진짜 필요한 것은 "레거시를 바꾸는 것"이 아니라, "레거시를 바꾸지 않고도 투명하게 들여다보고 운영하는 것"이다.</strong></p>
+
+  <h2>2. 기존 벤더들의 한계 — 레거시를 모른다</h2>
+  <p>Observability(관측), AIOps, 데이터 플랫폼을 제공하는 대부분의 벤더는 <strong>레거시에 대한 전문성이 부족</strong>하다. 이들의 도구는 현대적인 웹·클라우드 환경에 맞춰져 있어, 메인프레임이나 TP 모니터 같은 전통 시스템 앞에서는 멈춰 선다.</p>
+  <p>그 결과는 두 가지 위험으로 이어진다.</p>
+  <ol>
+    <li><strong>업무 프로세스의 단절</strong> — 흐름이 레거시로 들어가는 순간 추적이 끊겨, 전체 그림을 볼 수 없다.</li>
+    <li><strong>중요한 데이터의 누락</strong> — 가장 핵심적인 데이터가 레거시 안에 있는데, 그걸 놓친다.</li>
+  </ol>
+  <h3>레거시 없는 온톨로지는 반쪽짜리다</h3>
+  <p>올바른 온톨로지를 설계하려면 <strong>업무 프로세스와 데이터에 대한 깊은 이해</strong>가 필요하다. 그런데 레거시를 빼고 <strong>프론트엔드와 백엔드만으로는</strong> 제대로 된 온톨로지를 그릴 수 없다. 지도에서 가장 중요한 영역이 비어 있는 셈이기 때문이다.</p>
+  <h3>마이크로서비스는 통로일 뿐, 핵심은 레거시다</h3>
+  <p>금융·통신·제조 같은 <strong>전통 산업</strong>에서 마이크로서비스(MSA)는 종종 <strong>레거시에 도달하기 위한 통로</strong>에 지나지 않는다. 화면과 API는 현대화됐을지 몰라도, 돈과 계약과 생산을 실제로 처리하는 <strong>핵심 로직은 여전히 레거시 안</strong>에 있다. 레거시를 보지 못하는 온톨로지는 결국 본질을 비켜 간다.</p>
+
+  <h2>3. JuneAI의 차별점 — 레거시 "내부"까지 추적한다</h2>
+  <p>JuneAI는 <strong>레거시 애플리케이션 내부의 메서드 수준까지 추적</strong>할 수 있도록 구성한다. 바깥에서 "느리다"는 사실만 아는 것이 아니라, <strong>레거시 안의 어느 처리 단계에서 무슨 일이 벌어졌는지</strong>까지 들여다본다.</p>
+  <ul>
+    <li>예를 들어 <strong>SAP RFC 호출</strong>이나 <strong>TUXEDO 메서드</strong>를 포함한 <strong>전 구간(end-to-end)</strong>을 추적한다.</li>
+    <li>이를 통해 문제를 <strong>식별</strong>하고, 뿌리까지 내려가 <strong>근본 원인을 분석</strong>한다.</li>
+  </ul>
+  <blockquote><p>💡 <strong>RFC(Remote Function Call)</strong>는 SAP 시스템 안팎에서 기능을 호출하는 핵심 통로이고, <strong>TUXEDO 메서드</strong>는 통신·카드사의 거래를 처리하는 핵심 단위이다. 바로 이 지점들이 추적되지 않으면, 장애 분석은 "레거시 앞에서 멈춘" 반쪽짜리가 된다.</p></blockquote>
+  <h3>산업별 온톨로지로 제공</h3>
+  <p>JuneAI는 <strong>SAP, SIEBEL, PeopleSoft, EBS(Oracle E-Business Suite)</strong> 등의 <strong>복잡한 내부 처리와 데이터 모델을 온톨로지로 구성</strong>해, <strong>산업별 온톨로지</strong>로 제공한다. 고객이 레거시 내부를 일일이 해석하지 않아도, 이미 업무 구조가 반영된 온톨로지를 바로 활용할 수 있다.</p>
+
+  <h2>4. JuneAI가 다루는 대표 레거시</h2>
+  <p>IBM, ORACLE, SAP는 오늘날까지도 기업의 심장부에서 돌아가는 다양한 레거시 애플리케이션을 제공한다. JuneAI는 이들을 이해하고 추적한다.</p>
+  <div class="leg-grid">
+    <div class="leg-card">
+      <div class="emoji">🏛️</div>
+      <h4>IBM CICS (메인프레임)</h4>
+      <ul>
+        <li><strong>어디서 쓰나</strong> — 은행, 공공 기관 등 IBM 메인프레임을 사용하는 핵심 업무</li>
+        <li><strong>무엇인가</strong> — 메인프레임에서 거래를 처리하는 TP 모니터(트랜잭션 처리 미들웨어)</li>
+        <li><strong>데이터베이스</strong> — DB2</li>
+      </ul>
+    </div>
+    <div class="leg-card">
+      <div class="emoji">🖧</div>
+      <h4>BEA TUXEDO (유닉스)</h4>
+      <ul>
+        <li><strong>어디서 쓰나</strong> — 통신사, 카드사 등에서 오라클 데이터베이스와 함께</li>
+        <li><strong>무엇인가</strong> — 유닉스에서 실행되는 TP 모니터로, 대량 거래를 안정적으로 처리</li>
+      </ul>
+    </div>
+    <div class="leg-card">
+      <div class="emoji">📦</div>
+      <h4>SAP</h4>
+      <ul>
+        <li><strong>무엇인가</strong> — ERP·CRM·SCM 등 다양한 업무 프로세스를 지원</li>
+        <li><strong>어디서 쓰나</strong> — 중견기업부터 대기업까지, 기업의 핵심 업무 전반을 처리</li>
+      </ul>
+    </div>
+    <div class="leg-card">
+      <div class="emoji">🗂️</div>
+      <h4>그 외</h4>
+      <ul>
+        <li><strong>SIEBEL</strong> (CRM), <strong>PeopleSoft</strong> (HR·재무) 등 주요 전통 애플리케이션도 지원한다.</li>
+      </ul>
+    </div>
+  </div>
+  <blockquote><p>📖 <strong>TP 모니터란?</strong> 수많은 거래(Transaction)가 동시에 몰려도 <strong>정확하고 안정적으로</strong> 처리되도록 관리하는 미들웨어이다. 은행 송금, 통신 과금, 카드 승인처럼 "절대 틀리면 안 되는" 업무의 중심에 있다. CICS와 TUXEDO가 대표적이며, 그만큼 <strong>장애 추적과 근본 원인 분석이 가장 중요한</strong> 영역이기도 하다.</p></blockquote>
+
+  <h2>5. 정리 — 레거시를 바꾸지 않고, 보이게 만든다</h2>
+  <ul>
+    <li><strong>레거시는 핵심 자산</strong> — 전통 산업의 돈·계약·생산은 여전히 레거시가 처리한다.</li>
+    <li><strong>바꾸는 것은 큰 부담</strong> — 장애 해결이 어렵고 변경 비용이 크다. 그래서 <strong>바꾸지 않고 다루는 것</strong>이 답이다.</li>
+    <li><strong>기존 벤더는 레거시를 모른다</strong> — 추적이 끊기고, 핵심 데이터를 놓치고, 온톨로지가 반쪽이 된다.</li>
+    <li><strong>JuneAI는 레거시 내부까지 본다</strong> — SAP RFC·TUXEDO 메서드 등 메서드 수준 전 구간 추적으로 문제를 식별하고 근본 원인을 분석한다.</li>
+    <li><strong>산업별 온톨로지로 제공</strong> — SAP·SIEBEL·PeopleSoft·EBS, 그리고 IBM CICS·BEA TUXEDO까지, 복잡한 내부 처리와 데이터 모델을 온톨로지로 구성한다.</li>
+  </ul>
+  <blockquote><p>JuneAI는 멀쩡히 돌아가는 레거시를 <strong>건드리지 않는다.</strong> 대신 그 안을 <strong>투명하게 보이게</strong> 만들어, 레거시를 <strong>미래의 자율 운영 위에 그대로 올려 놓는다.</strong></p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← 홈으로 돌아가기</a>
+    <span class="muted">JuneAI · 자율 운영 AIOps 플랫폼</span>
+  </div>
+</div>
+</body>
+</html>
