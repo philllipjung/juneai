@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!-- JuneAI — 업무 온톨로지·시뮬레이션 (20261109_시뮬레이션.md → HTML, 2026-11-09) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI and Business Ontology — Same Problem, Wider World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  /* 비교 2열 카드 */
+  .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
+  .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
+  .leg-card.tech{border-top:3px solid #34a853}
+  .leg-card.biz{border-top:3px solid var(--blue)}
+  .leg-card .emoji{font-size:22px;line-height:1}
+  .leg-card h4{margin:10px 0 10px;color:var(--ink);font-size:17px}
+  .leg-card ul{margin:0}
+  .leg-card li{margin:0 0 8px;font-size:14.5px}
+  @media(max-width:700px){ .leg-grid{grid-template-columns:1fr} }
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  .cmp .th-tech{color:#1e7e34}
+  .cmp .th-biz{color:var(--blue-dark)}
+  /* 시뮬레이션 흐름 */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:16px 0 22px}
+  .flow .step{flex:1 1 150px;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;position:relative}
+  .flow .step .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+  .flow .step h4{margin:0 0 4px;font-size:15px;color:var(--ink)}
+  .flow .step p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .flow .arrow{display:grid;place-items:center;color:#9aa0a6;font-size:20px;padding:0 6px}
+  @media(max-width:700px){ .flow{flex-direction:column} .flow .arrow{transform:rotate(90deg);padding:2px 0} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-business.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Business Ontology · Simulation</span>
+    <h1>From Technology to Business — The Same Problem, in a Wider World</h1>
+    <p class="lead"><strong>AIOps and the technical ontology come first. The business ontology grows on top of them.</strong><br>
+      Both are ultimately the process of solving the <strong>same bottlenecks, delays, shortages, and changes</strong>, but business is more varied and harder to standardize.
+      That is why business needs <strong>simulation — seeing the outcome before the decision.</strong></p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. Why Do AIOps and the Technical Ontology First</h2>
+  <p>A business ontology is <strong>more complex</strong> than a technical ontology. The causes are more varied, and the range of required actions is wider. So a natural question arises — <em>"Then do we have to build a separate business ontology, from scratch?"</em></p>
+  <p>JuneAI's answer is <strong>"no."</strong> There is <strong>no need to build the technical ontology and the business ontology separately.</strong> Because the two are ultimately <strong>the same process, solving the same kind of problem — bottlenecks, delays, shortages.</strong></p>
+  <ul>
+    <li><strong>No complex, expensive data platform is needed.</strong> There is no reason to stand up a new heavy platform that brings complex decisions and modifications every time.</li>
+    <li>What you need is a <strong>fast, affordable, reliable ontology and agents</strong>. Leave the running systems as they are, and layer thinly on top.</li>
+  </ul>
+  <blockquote><p>💡 The reason to shore up the technology first is simple. <strong>The "problem recognition → cause analysis → solution proposal" backbone that has been proven in the technical ontology is reused as is for business.</strong> Business adds "what to choose" on top.</p></blockquote>
+
+  <h2>2. Technical Problems and Solutions Are "Bounded" — So Reasoning Is Easy</h2>
+  <p>The problems that technical ontologies and AIOps address <strong>boil down</strong> to a handful of kinds. The types are fixed, so they are at a level that AI can readily <strong>reason about</strong>.</p>
+  <h3>Common Technical Problems</h3>
+  <ul>
+    <li><strong>Performance degradation</strong> · <strong>traffic increase</strong> · <strong>processing-time delay</strong></li>
+    <li><strong>Service errors</strong> · <strong>resource shortage</strong> · <strong>configuration changes</strong></li>
+  </ul>
+  <h3>Common Actions</h3>
+  <ul>
+    <li><strong>Scale-out</strong> (adding servers) · <strong>resource expansion</strong> · <strong>restart</strong></li>
+    <li><strong>Rollback</strong> (reverting to a previous version) · <strong>parameter changes</strong></li>
+  </ul>
+  <p>Both the problems and the solutions sit <strong>within a fixed scope</strong>. Like "got slower → add servers" or "an error occurred → roll back," cause and remedy can be joined up relatively clearly. This is why a technical ontology can become autonomous quickly.</p>
+
+  <h2>3. Business Differs by Industry and by Task</h2>
+  <p>The world of business is a different matter. Depending on the industry and the task, <strong>both the problems faced and the ways of handling them vary widely.</strong></p>
+  <p>For example, suppose you analyze the causes of <strong>delivery delays, stock shortages, and price fluctuations</strong>. It is not as complex as technical cause analysis. But there is a decisive difference —</p>
+  <blockquote><p>Even for the same "delivery delay," <strong>the APIs to call and the DB tables to look into are entirely different depending on which application is used.</strong> A place running SAP, a place integrated via TIBCO, and a place using an in-house system are all different.</p></blockquote>
+  <p>In other words, <strong>even when the nature of the problem is similar, the location and shape of the data that reveals it differ by industry and by task.</strong></p>
+
+  <h2>4. Same Theme, Different Stage</h2>
+  <p>Whether technical or business, the themes you ultimately face converge on <strong>bottlenecks, shortages, delays, and changes</strong>. And the fact that you <strong>analyze the cause and propose a solution with an ontology and agents</strong> is identical too.</p>
+  <p>The difference is that the <strong>themes a business ontology and agents must handle are far more varied, broader, and harder to standardize.</strong> Even if they are not as specialized and complex as a technical ontology, <strong>the dynamic ontology-and-agent composition that changes every time, by industry and by task,</strong> is itself a heavy burden.</p>
+  <table class="cmp">
+    <thead>
+      <tr><th>Category</th><th class="th-tech">🖥️ Technology · AIOps</th><th class="th-biz">🏭 Business</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Kinds of problem</td><td>Bounded, well-formed — performance, traffic, delay, errors, shortage, configuration</td><td>Varied, differs by industry — delivery delays, stock shortages, price fluctuations …</td></tr>
+      <tr><td>Data location</td><td>Mostly standard (metrics, logs, traces)</td><td>APIs and DB tables differ by application</td></tr>
+      <tr><td>Actions</td><td>Close to a fixed remedy — scale-out, expansion, restart, rollback, parameters</td><td>Many options, and you must "choose" one of them</td></tr>
+      <tr><td>Characteristics</td><td>Bounded scope → reasoning and autonomy are easy</td><td>Broad and hard to standardize → simulation is needed</td></tr>
+      <tr><td>What's needed</td><td>Automated reasoning → autonomous action</td><td>Reasoning + <strong>simulation</strong> → decision-making</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. That's Why Business Needs "Simulation"</h2>
+  <p>In technology the remedy is nearly fixed, as in "if it's slow, add more." But business has <strong>several options</strong>, and you must <strong>choose</strong> one. Whether to place an urgent order, use an alternate supplier, ramp up production, or renegotiate the delivery date — each carries a different cost and a different outcome.</p>
+  <p>So for business agents and ontologies, <strong>simulation is the key</strong>. You must <strong>predict in advance how a user's decision affects the ontology, and what the result of that change will be</strong>. To pick one among many options, you have to be able to <strong>run it first (what-if), see the result, and then decide.</strong></p>
+  <div class="flow">
+    <div class="step"><span class="n">1</span><h4>Problem Recognition</h4><p>Capture a business problem such as a delivery delay in the ontology</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">2</span><h4>Cause Analysis</h4><p>Trace the root cause to find which supply or production stage is the bottleneck</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">3</span><h4>Option Simulation</h4><p>Predict the outcome of each option — urgent order, production ramp-up, delivery renegotiation</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">4</span><h4>Decision-Making</h4><p>Compare outcomes (on-time delivery rate, cost) and choose the best option</p></div>
+  </div>
+  <blockquote><p>🔮 This is the idea of the <strong>digital twin</strong>. Without touching the real business systems, it creates a <strong>virtual twin</strong> on top of the ontology and safely runs "what happens if we change it this way?" in advance. JuneAI, as in its <strong>SAP delivery-delay simulation</strong>, links purchasing and production to show the results of a decision in numbers.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>In the business ontology, it identifies the cause and analyzes it. There is no major difference between the technical ontology and the business ontology. The detailed implementation differs, but the flow is similar.</figcaption>
+    <img src="../img/biz-rca.png" alt="Business ontology cause analysis" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Before executing an action, the simulator is run as shown below.</figcaption>
+    <img src="../img/biz-sim-run.png" alt="Running the simulator" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Below is the simulator's detail view. After the simulation, the action is executed.</figcaption>
+    <img src="../img/biz-sim-detail.png" alt="Simulator detail view" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>In the JuneAI digital twin, ERP, CRM, SCM, and more are linked together. With JuneAI, every processing flow — including business modules and their integrations — is instrumented and traceable.</figcaption>
+    <img src="../img/biz-webmethods.png" alt="ERP, CRM, SCM integration instrumentation" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The JuneAI digital twin is instrumented using eBPF.</figcaption>
+    <img src="../img/biz-ebpf.png" alt="eBPF instrumentation" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Through instrumentation, you can understand the system's internal processing. No code changes and no restarts are required.</figcaption>
+    <img src="../img/biz-internal.png" alt="System internal processing" loading="lazy">
+  </figure>
+
+  <h2>6. In Summary — From Technology to Business, on One Backbone</h2>
+  <ul>
+    <li><strong>Technology first, business on top</strong> — the proven backbone of AIOps and the technical ontology is reused as is for business.</li>
+    <li><strong>No need to build them separately</strong> — technology and business are ultimately the same process of solving bottlenecks, delays, shortages, and changes. Instead of a heavy, expensive data platform, a fast, affordable, reliable ontology and agents are enough.</li>
+    <li><strong>Business is more varied</strong> — even when the nature of the problem is similar, the APIs and DB tables differ by industry and app, making it hard to standardize.</li>
+    <li><strong>That's why simulation</strong> — in business, where there are several options, you run the outcome in advance before deciding and choose the best option.</li>
+  </ul>
+  <blockquote><p>JuneAI connects technology to business with <strong>one ontology-and-agent backbone</strong>, and adds <strong>simulation (a digital twin)</strong> to business decision-making. Without stopping operations, it sees the outcome before making a change.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

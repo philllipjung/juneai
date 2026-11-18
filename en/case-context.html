@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- JuneAI — 문맥·변경·상태 관리 (2026-11-13) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managing Context, Change, and State — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  /* 개념 카드 3장 */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0 22px}
+  .trio .t{border:1px solid var(--line);border-radius:12px;background:#fff;padding:18px 18px 16px}
+  .trio .t h4{margin:0 0 6px;font-size:16px;color:var(--blue-dark)}
+  .trio .t p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.65}
+  @media(max-width:700px){ .trio{grid-template-columns:1fr} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-context.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Business Observability</span>
+    <h1>Managing Context, Change, and State</h1>
+    <p class="lead"><strong>Hold the context, record the change, manage the state.</strong><br>
+      JuneAI continuously tracks context, change, and state. It <strong>monitors the events and relationships</strong> among diverse objects, and
+      <strong>simulates impact and change</strong>.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. Managing All Three Together</h2>
+  <p>Operations ultimately comes down to never losing sight of three things: what the current situation is (<strong>context</strong>), what has changed (<strong>change</strong>),
+     and what the state is right now (<strong>state</strong>). Rather than measuring them separately, JuneAI binds the three into one and tracks them continuously.</p>
+  <div class="trio">
+    <div class="t"><h4>Context</h4><p>Maintains the context in which objects connect to one another.</p></div>
+    <div class="t"><h4>Change</h4><p>Records what changed, when, and how.</p></div>
+    <div class="t"><h4>State</h4><p>Manages the current state of each object.</p></div>
+  </div>
+  <p>On that foundation, it <strong>monitors the events and relationships</strong> among diverse objects, and <strong>simulates impact and change</strong> before anything is touched.</p>
+
+  <h2>2. Managed Through Spans and Workflows</h2>
+  <p>Data is retained, not let slip away. JuneAI <strong>stores key data separately as span attributes</strong>
+     and continuously monitors unexpected changes and state changes.</p>
+  <ul>
+    <li><strong>Span attributes</strong> — Attaching important values to spans leaves evidence that can be traced back later.</li>
+    <li><strong>Always-on monitoring</strong> — Unexpected changes and state changes are never missed.</li>
+    <li><strong>Workflows</strong> — Workflows are more useful for state management, and workflows are better suited to an event-driven model.</li>
+  </ul>
+
+  <h2>3. Adding to Legacy Without Changing It</h2>
+  <p>Legacy systems do not provide the capabilities above. But with JuneAI, you <strong>add those capabilities to legacy without changing it</strong>.</p>
+  <ul>
+    <li><strong>Improves the user experience</strong> while enhancing existing legacy without changing it.</li>
+    <li>Builds the latest technology — <strong>AI agents and ontology — on a legacy foundation</strong>.</li>
+    <li><strong>Increases system stability</strong> and reliably reinforces existing core assets.</li>
+  </ul>
+  <blockquote><p>It adds context, change, and state management without touching the legacy. Because it <strong>leaves core assets intact and reinforces on top of them</strong>, it is safe.</p></blockquote>
+
+  <h2>4. More Precise and Accurate Than Palantir</h2>
+  <p>The Palantir ontology <strong>often loses context and misses changes</strong>.
+     Propagation frequently breaks at process and service boundaries and context is severed, and Palantir alone struggles to solve this.
+     In particular, <strong>Palantir's weaknesses</strong> show in environments with heavy legacy, where state mismatches create consistency problems.</p>
+  <table class="cmp">
+    <thead><tr><th>Dimension</th><th>Palantir Ontology</th><th>JuneAI</th></tr></thead>
+    <tbody>
+      <tr><td>Context</td><td>Frequently severed as propagation breaks at boundaries</td><td>Maintained across process and service boundaries</td></tr>
+      <tr><td>Change</td><td>Can be missed</td><td>Always recorded and monitored</td></tr>
+      <tr><td>State</td><td>Consistency problems from mismatch</td><td>Managed and tracked consistently</td></tr>
+      <tr><td>Legacy</td><td>The more legacy, the greater the weakness</td><td>Reinforces on top without changing it</td></tr>
+    </tbody>
+  </table>
+  <p>JuneAI <strong>manages and tracks context, change, and state far more precisely and accurately</strong> than Palantir.
+     It monitors events and relationships accurately, and <strong>simulates the scope of impact and the degree of change accurately</strong>.</p>
+
+  <p>It manages the processing flow and the context, change, and state of calls <strong>per request ID</strong>.</p>
+
+  <figure class="shot">
+    <figcaption>It propagates the context of downstream and upstream.</figcaption>
+    <img src="../img/ctx-updown.png" alt="Downstream and upstream context propagation" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It understands the end-to-end processing flow and impact, including legacy.</figcaption>
+    <img src="../img/ctx-flow.png" alt="End-to-end processing flow and impact" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It understands processing time in the chronological order of a business application. It propagates context across calls, and lets you inspect detailed attributes that include change and state.</figcaption>
+    <img src="../img/ctx-timeline.png" alt="Chronological processing and detailed attributes" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It understands the sequence of processing before and after, and prints the stack.</figcaption>
+    <img src="../img/ctx-stack.png" alt="Processing sequence and stack" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It traces the AI processing used during autonomous operations.</figcaption>
+    <img src="../img/ctx-ai-trace.png" alt="Tracing AI processing" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Order and fault are not kept apart; the ontology carries context across them.</figcaption>
+    <img src="../img/ctx-order-fault.png" alt="Order and fault context carried" loading="lazy">
+  </figure>
+
+  <p>JuneAI <strong>always manages and propagates</strong> context, change, and state. Nothing is severed or lost along the way. This enables more accurate root cause analysis and action, and lets users make the <strong>optimal decisions</strong>.</p>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

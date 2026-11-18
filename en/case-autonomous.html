@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!-- JuneAI — 자율 운영 (20261106_자율운영.md → HTML, 2026-11-07) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomous Operations and Direct Operations — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  /* hero */
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  /* article */
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:16px;font-weight:700;margin:20px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article strong{color:var(--ink);font-weight:700}
+  .article hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+  table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:14.5px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+  @media(max-width:700px){ td:first-child{white-space:normal} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-autonomous.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Autonomous Operations</span>
+    <h1>Autonomous Operations and Direct Operations</h1>
+    <p class="lead"><strong>JuneAI supports both modes of operation.</strong><br>
+      <strong>Autonomous Operations</strong>, where the AI finds and fixes failures on its own, and <strong>Direct Operations</strong>, where an operator makes the decisions directly with the AI's help.
+      People by day, AI by night — one platform switches to fit the situation.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. Why "Autonomous Operations"</h2>
+  <p>Operations tools to date have mostly stopped at <strong>assisting people</strong>. A dashboard shows graphs, an alert rings, a chatbot answers questions. But <strong>noticing what the problem is, analyzing why, and deciding how to fix it</strong> was still a human's job.</p>
+  <p>True autonomous operations is different. Even without the user explaining the situation in detail, the AI must be able to <strong>detect, identify, diagnose the cause, and remediate</strong> problems on its own.</p>
+  <ul>
+    <li>When an operator <strong>asks</strong> "Service A is slow, can you find the cause?" it is convenient, but this is not autonomous operations. The person has already recognized the problem and is providing the context.</li>
+    <li>Autonomous operations is when, <strong>without anyone asking</strong>, the AI detects an anomaly first and carries it all the way through to action on its own.</li>
+  </ul>
+
+  <h2>2. Understanding It Through Cars — Cruise Control vs. Full Self-Driving</h2>
+  <p>The difference between the operating modes is easy to grasp with a car analogy.</p>
+  <table>
+    <thead><tr><th>Driving mode</th><th>Description</th><th>Operations equivalent</th></tr></thead>
+    <tbody>
+      <tr><td>Cruise control</td><td>The driver keeps their hands on the wheel while the car helps with part of the task, like holding speed. Convenient, but the human is the one driving.</td><td><strong>Direct Operations</strong> — the operator decides, and the AI assists</td></tr>
+      <tr><td>Full self-driving</td><td>The car finds its own way and drives without the driver's intervention.</td><td><strong>Autonomous Operations</strong> — the AI finds and fixes problems on its own</td></tr>
+    </tbody>
+  </table>
+  <p>The key point is that <strong>it is not about choosing just one of the two</strong>. You must be able to move between the two modes as the situation demands. Just as a person takes complex city driving while self-driving takes the quiet highway — operations, too, must be able to switch to fit the situation.</p>
+  <figure class="shot">
+    <figcaption>This is the Direct Operations screen using anomaly detection.</figcaption>
+    <img src="../img/ca-direct-ops.png" alt="Direct Operations screen using anomaly detection" loading="lazy">
+  </figure>
+  <figure class="shot">
+    <figcaption>It summarizes the anomaly detection results.</figcaption>
+    <img src="../img/ca-anomaly-summary.png" alt="Anomaly detection result summary" loading="lazy">
+  </figure>
+  <figure class="shot">
+    <figcaption>This is the Autonomous Operations screen using the ontology.</figcaption>
+    <img src="../img/ca-auto-ops.png" alt="Autonomous Operations screen using the ontology" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>During autonomous operations it performs root cause analysis and writes the results in detail.</figcaption>
+    <img src="../img/ca-rca-detail.png" alt="Autonomous operations root cause analysis detail" loading="lazy">
+  </figure>
+
+  <h2>3. Direct Operations When You Arrive, Autonomous Operations When You Leave</h2>
+  <p>JuneAI's two modes <strong>switch according to time and situation</strong>.</p>
+  <ul>
+    <li><strong>When the operator is at work → Direct Operations</strong><br>A person watches the dashboard and makes decisions, with the AI chatbot and anomaly detection helping. Important decisions are made by the human.</li>
+    <li><strong>After the operator leaves (nights and holidays) → Autonomous Operations</strong><br>During the hours when no one is present, the AI detects failures, analyzes causes, and executes actions on its own through the ontology and agents.</li>
+  </ul>
+  <p>Having one platform that <strong>embraces both a "people-centered mode" and an "AI-centered mode"</strong> like this is what JuneAI aims for.</p>
+
+  <h2>4. A Comparison of the Two Operating Modes</h2>
+  <table>
+    <thead><tr><th>Category</th><th>🤖 Autonomous</th><th>👤 Assisted</th></tr></thead>
+    <tbody>
+      <tr><td>Agency</td><td>The AI decides and acts on its own</td><td>People decide, the AI assists</td></tr>
+      <tr><td>Human involvement</td><td>Minimal (unattended operation possible)</td><td>Required</td></tr>
+      <tr><td>Core technology</td><td><strong>Ontology + agents</strong></td><td><strong>Anomaly detection + chatbot</strong></td></tr>
+      <tr><td>Cost structure</td><td>AI token usage fees</td><td>Staff training and operations labor</td></tr>
+      <tr><td>Strengths</td><td>24-hour unattended response, consistency, scalability</td><td>Human intuition and contextual judgment, exception handling</td></tr>
+      <tr><td>Challenges</td><td>Needs stabilization and optimization</td><td>Hard to automate and dependent on people</td></tr>
+    </tbody>
+  </table>
+  <p>The two modes are <strong>complementary, not competing</strong>. Direct operations draws on human experience and intuition, while autonomous operations fills in the hours without people and the repetitive work.</p>
+
+  <h2>5. Why Autonomous Operations Uses "Ontology and Agents"</h2>
+  <p>The core technologies of autonomous operations are <strong>Ontology</strong> and <strong>agents</strong>.</p>
+  <h3>Ontology — the "Map of Operations" That the AI Understands</h3>
+  <p>An ontology is a knowledge system that organizes a system's components (services, equipment, circuits, customers, orders, and so on) and the relationships among them into <strong>a structure the AI can read and reason over</strong>.</p>
+  <ul>
+    <li>Without a person explaining each time "this service is connected to that equipment," the AI can follow the relationships and <strong>trace the root of the cause on its own</strong>.</li>
+    <li>It becomes possible to ride the connecting lines down from "the point where the symptom appeared" to "the actual point of cause."</li>
+  </ul>
+  <figure class="shot">
+    <img src="../img/ca-ontology-link.png" alt="Ontology screen following the connecting lines down from the symptom point to the cause point" loading="lazy">
+  </figure>
+  <h3>Agents — the "AI in the Operator's Role" That Moves on Its Own</h3>
+  <p>An agent is the acting entity that, looking at the map that is the ontology, carries out the process of <strong>explore → analyze → act</strong> without a person.</p>
+  <blockquote><p><strong>Cost and challenges:</strong> autonomous operations <strong>uses tokens as the AI (LLM) reasons, so it incurs AI usage cost</strong> accordingly. It also needs <strong>continuous stabilization and optimization</strong> to settle into a real production environment.</p></blockquote>
+  <figure class="shot">
+    <img src="../img/ca-cost.png" alt="Autonomous operations cost and challenges screen" loading="lazy">
+  </figure>
+
+  <h2>6. Why Direct Operations Uses "Anomaly Detection and a Chatbot"</h2>
+  <p>In direct operations the person is the one in charge, and the AI helps with their decisions.</p>
+  <ul>
+    <li><strong>Anomaly Detection</strong> — it automatically finds patterns that differ from the norm and tells the person, "take a look here."</li>
+    <li><strong>Chatbot</strong> — when an operator asks what they are wondering about, it answers based on the accumulated data and knowledge.</li>
+  </ul>
+  <figure class="shot">
+    <figcaption>The chatbot agent screen looks like the one below.</figcaption>
+    <img src="../img/ca-chatbot.png" alt="Chatbot agent screen" loading="lazy">
+  </figure>
+  <p>This mode makes the most of <strong>human contextual understanding and intuition</strong>. It does, however, have the following limits.</p>
+  <blockquote><p><strong>Cost and challenges:</strong> direct operations presumes human involvement, so it incurs <strong>the cost of training operations staff</strong>, and because of the dependence on people, <strong>full automation is difficult.</strong></p></blockquote>
+
+  <h2>7. The Obstacle That Blocks Autonomous Operations — "Unorganized Knowledge"</h2>
+  <p>Providing the AI with past know-how as documents (for example, <code>.md</code> files) is useful. Storing a person's lived experience in memory and pulling it back out when needed is especially powerful in <strong>Direct Operations</strong>.</p>
+  <p>But there is a point here that deserves deep thought.</p>
+  <h3>(1) Unorganized material lowers accuracy</h3>
+  <p><strong>Incomplete and unorganized internal material and documents are, on the contrary, a major cause of lowering the AI's accuracy.</strong> Knowledge that is stale, contradictory, or half-formed leads to wrong judgments. With knowledge, <strong>"being organized and kept trustworthy"</strong> matters more than "piling up a lot."</p>
+  <h3>(2) Does past know-how limit creative thinking?</h3>
+  <p>Fixing past experience into documents and injecting it may inadvertently confine the AI's <strong>autonomous and creative problem-solving</strong> to a particular mold. A record of "this is how we did it before" can block a better, new solution. That is why autonomous operations must <strong>leave room for the AI to explore and reason on its own</strong> while still referring to knowledge.</p>
+  <h3>(3) MCP is useful, but it is not autonomous operations in itself</h3>
+  <p>Connecting tools in a way such as <strong>MCP (Model Context Protocol)</strong> to call APIs or SQL is very useful. But MCP is only <strong>"a channel that connects the AI so it can use tools"</strong>; it does not in itself <strong>guarantee autonomous operations and self-healing.</strong> Handing over the tools and judging on one's own to use those tools in the right place at the right time are problems of a different order.</p>
+
+  <h2>8. In Summary — The Future of Operations JuneAI Envisions</h2>
+  <ul>
+    <li><strong>Two modes, one platform</strong> — human-led direct operations and AI-led autonomous operations, switched freely to fit the situation.</li>
+    <li><strong>People by day, AI by night</strong> — the one in charge of operations changes with the operator's working hours.</li>
+    <li><strong>The engine of autonomous operations is ontology and agents</strong> — the AI reads the map of operations and moves on its own.</li>
+    <li><strong>The aides of direct operations are anomaly detection and a chatbot</strong> — they back up human judgment with data.</li>
+    <li><strong>Trustworthy knowledge is key</strong> — clear away unorganized material, and leave room for the AI to think on its own.</li>
+  </ul>
+  <blockquote><p>JuneAI is <strong>the cruise control that eases the human hand</strong>, and, when needed, <strong>the full self-driving that takes over the wheel</strong>.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

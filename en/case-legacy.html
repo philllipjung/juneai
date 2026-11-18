@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!-- JuneAI — 레거시 (20261106_레거시.md → HTML, 2026-11-07) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI and Legacy — The Core Still Lives in Legacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  /* 레거시 카드 */
+  .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
+  .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
+  .leg-card .emoji{font-size:22px;line-height:1}
+  .leg-card h4{margin:10px 0 10px;color:var(--ink);font-size:17px}
+  .leg-card ul{margin:0}
+  .leg-card li{margin:0 0 8px;font-size:14.5px}
+  @media(max-width:700px){ .leg-grid{grid-template-columns:1fr} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-legacy.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Legacy</span>
+    <h1>JuneAI and Legacy — The Core Still Lives in Legacy</h1>
+    <p class="lead"><strong>Legacy is not a burden to be replaced, but a core asset to be protected.</strong><br>
+      JuneAI <strong>never touches</strong> the legacy itself. Instead it traces it <strong>down to the internal method level</strong>
+      to identify problems and analyze their root cause, and organizes it into industry-specific ontologies.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. Why Legacy Is So Hard to Replace</h2>
+  <p>Legacy systems are <strong>critical assets</strong> that have carried the core operations of enterprises for decades. A bank's account system, a telecom carrier's billing, a manufacturer's production management — the more important the work, the more likely it runs on legacy.</p>
+  <p>Yet <strong>replacing or improving legacy that already runs without major problems</strong> is an enormous undertaking.</p>
+  <ul>
+    <li><strong>Failures are hard to resolve</strong> — it is old and complex, so even identifying what went wrong is difficult.</li>
+    <li><strong>Changing operations is costly</strong> — even a small change carries enormous time, money, and risk.</li>
+  </ul>
+  <p>So many people think: <em>"Legacy doesn't fit a fast-changing business environment."</em> But rashly ripping out a healthy, mission-critical system is an even greater risk.</p>
+  <p><strong>What is truly needed is not "replacing legacy," but "running it transparently and seeing inside it without changing it at all."</strong></p>
+
+  <h2>2. The Limits of Existing Vendors — They Don't Understand Legacy</h2>
+  <p>Most vendors offering Observability, AIOps, and data platforms <strong>lack expertise in legacy</strong>. Their tools are built for modern web and cloud environments, so they come to a halt in front of traditional systems like mainframes and TP monitors.</p>
+  <p>The result leads to two risks.</p>
+  <ol>
+    <li><strong>Broken business processes</strong> — the moment a flow enters legacy, the trace is cut off and you cannot see the whole picture.</li>
+    <li><strong>Missing critical data</strong> — the most essential data sits inside legacy, and they miss it.</li>
+  </ol>
+  <h3>An Ontology Without Legacy Is Only Half an Ontology</h3>
+  <p>Designing a correct ontology requires a <strong>deep understanding of business processes and data</strong>. But <strong>with only the frontend and backend</strong>, leaving out legacy, you cannot draw a proper ontology. It is as if the most important region of the map were left blank.</p>
+  <h3>Microservices Are Just a Passage — the Core Is Legacy</h3>
+  <p>In <strong>traditional industries</strong> like finance, telecom, and manufacturing, microservices (MSA) are often merely a <strong>passage to reach the legacy</strong>. The screens and APIs may have been modernized, but the <strong>core logic that actually handles money, contracts, and production still lives inside legacy</strong>. An ontology that cannot see legacy ultimately misses the essence.</p>
+
+  <h2>3. What Sets JuneAI Apart — It Traces "Inside" the Legacy</h2>
+  <p>JuneAI is built to <strong>trace legacy applications down to the internal method level</strong>. It doesn't just know from the outside that something is "slow" — it looks into <strong>what happened at which processing step inside the legacy</strong>.</p>
+  <ul>
+    <li>For example, it traces the <strong>entire end-to-end path</strong>, including <strong>SAP RFC calls</strong> and <strong>TUXEDO methods</strong>.</li>
+    <li>Through this it <strong>identifies</strong> problems and drives down to the root to <strong>analyze the root cause</strong>.</li>
+  </ul>
+  <blockquote><p>💡 <strong>RFC (Remote Function Call)</strong> is the core channel for invoking functions inside and outside an SAP system, and <strong>TUXEDO methods</strong> are the core unit that handles transactions at telecoms and card companies. If exactly these points are not traced, failure analysis becomes a half-measure that "stops in front of the legacy."</p></blockquote>
+  <h3>Delivered as Industry-Specific Ontologies</h3>
+  <p>JuneAI <strong>organizes the complex internal processing and data models</strong> of <strong>SAP, SIEBEL, PeopleSoft, EBS (Oracle E-Business Suite)</strong>, and more <strong>into ontologies</strong>, delivered as <strong>industry-specific ontologies</strong>. Customers can put an ontology that already reflects their business structure to use right away, without having to interpret the legacy internals one by one.</p>
+
+  <h2>4. The Major Legacy Systems JuneAI Covers</h2>
+  <p>IBM, ORACLE, and SAP still provide, to this day, a range of legacy applications running at the heart of the enterprise. JuneAI understands and traces them.</p>
+  <div class="leg-grid">
+    <div class="leg-card">
+      <div class="emoji">🏛️</div>
+      <h4>IBM CICS (Mainframe)</h4>
+      <ul>
+        <li><strong>Where it's used</strong> — core operations at banks, public institutions, and others running IBM mainframes</li>
+        <li><strong>What it is</strong> — a TP monitor (transaction-processing middleware) that handles transactions on the mainframe</li>
+        <li><strong>Database</strong> — DB2</li>
+      </ul>
+    </div>
+    <div class="leg-card">
+      <div class="emoji">🖧</div>
+      <h4>BEA TUXEDO (Unix)</h4>
+      <ul>
+        <li><strong>Where it's used</strong> — at telecoms, card companies, and others, together with Oracle databases</li>
+        <li><strong>What it is</strong> — a TP monitor running on Unix that handles high-volume transactions reliably</li>
+      </ul>
+    </div>
+    <div class="leg-card">
+      <div class="emoji">📦</div>
+      <h4>SAP</h4>
+      <ul>
+        <li><strong>What it is</strong> — supports a wide range of business processes such as ERP, CRM, and SCM</li>
+        <li><strong>Where it's used</strong> — handles core enterprise operations across the board, from mid-sized firms to large enterprises</li>
+      </ul>
+    </div>
+    <div class="leg-card">
+      <div class="emoji">🗂️</div>
+      <h4>And More</h4>
+      <ul>
+        <li>Major traditional applications such as <strong>SIEBEL</strong> (CRM) and <strong>PeopleSoft</strong> (HR, finance) are also supported.</li>
+      </ul>
+    </div>
+  </div>
+  <blockquote><p>📖 <strong>What is a TP monitor?</strong> It is middleware that manages countless transactions so they are processed <strong>accurately and reliably</strong> even when they arrive all at once. It sits at the center of operations that "must never go wrong" — bank transfers, telecom billing, card approvals. CICS and TUXEDO are the prime examples, which is also exactly why <strong>failure tracing and root cause analysis matter most</strong> in this domain.</p></blockquote>
+
+  <p>JuneAI supports a <strong>wide range of legacy systems</strong>, as shown below.</p>
+
+  <figure class="shot">
+    <figcaption>IBM CICS can be accessed using 3270 terminals and CTG.</figcaption>
+    <img src="../img/lg-cics.png" alt="IBM CICS 3270 terminal" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>To support the SWIFT network, it supports a range of MT messages and CASmf.</figcaption>
+    <img src="../img/lg-swift.png" alt="SWIFT MT messages and CASmf" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It supports PeopleSoft HR and a variety of modules.</figcaption>
+    <img src="../img/lg-peoplesoft.png" alt="PeopleSoft HR" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It provides various versions of SAP IDES.</figcaption>
+    <img src="../img/lg-sap.png" alt="SAP IDES" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It supports IBM MQ.</figcaption>
+    <img src="../img/lg-mq.png" alt="IBM MQ" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It supports webMethods.</figcaption>
+    <img src="../img/lg-webmethods.png" alt="webMethods" loading="lazy">
+  </figure>
+
+  <p>Beyond these, JuneAI supports dozens of legacy systems such as <strong>Oracle EBS and SIEBEL CRM</strong>, and through them a <strong>digital twin</strong> can be built.</p>
+
+  <h2>5. In Summary — Don't Replace Legacy, Make It Visible</h2>
+  <ul>
+    <li><strong>Legacy is a core asset</strong> — in traditional industries, money, contracts, and production are still handled by legacy.</li>
+    <li><strong>Replacing it is a heavy burden</strong> — failures are hard to resolve and changes are costly. So <strong>working with it without replacing it</strong> is the answer.</li>
+    <li><strong>Existing vendors don't understand legacy</strong> — the trace breaks, critical data is missed, and the ontology ends up half-complete.</li>
+    <li><strong>JuneAI sees inside the legacy</strong> — with method-level, end-to-end tracing of SAP RFC calls, TUXEDO methods, and more, it identifies problems and analyzes their root cause.</li>
+    <li><strong>Delivered as industry-specific ontologies</strong> — from SAP, SIEBEL, PeopleSoft, and EBS to IBM CICS and BEA TUXEDO, it organizes complex internal processing and data models into ontologies.</li>
+  </ul>
+  <blockquote><p>JuneAI <strong>never touches</strong> legacy that is running just fine. Instead it makes the inside <strong>transparently visible</strong>, placing legacy <strong>as it is, right on top of the Autonomous Operations of the future.</strong></p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

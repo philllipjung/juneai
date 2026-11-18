@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- JuneAI — 통신사 주문·고장관리 데모 (2026-11-12) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telecom Order & Fault Management Demo — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  /* 흐름 */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:16px 0 22px}
+  .flow .step{flex:1 1 140px;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;position:relative}
+  .flow .step .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+  .flow .step h4{margin:0 0 4px;font-size:15px;color:var(--ink)}
+  .flow .step p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .flow .arrow{display:grid;place-items:center;color:#9aa0a6;font-size:20px;padding:0 6px}
+  @media(max-width:700px){ .flow{flex-direction:column} .flow .arrow{transform:rotate(90deg);padding:2px 0} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../demo-telecom.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Demo · Telecom Carrier</span>
+    <h1>Telecom Order & Fault Management Demo</h1>
+    <p class="lead"><strong>Leave the telecom legacy as it is, and layer an ontology and agents on top of it.</strong><br>
+      It binds together <strong>order management</strong>, which activates bundled (converged) fixed-mobile products, and <strong>fault management</strong>, which handles line and network faults, through an ontology.
+      It analyzes the causes of problems and <strong>simulates</strong> solutions to help the agent choose the optimal action.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. At a Glance</h2>
+  <p>This demo covers a telecom carrier's two core business functions — <strong>ordering (new activation)</strong> and <strong>fault management</strong>.
+     It shows a <strong>method of layering an ontology and agents thinly on top</strong> of the legacy systems a real telecom carrier uses, leaving them as they are.</p>
+  <ul>
+    <li><strong>Order management</strong> — Handles the new activation of bundled (converged) fixed-mobile products from start to finish.</li>
+    <li><strong>Fault management</strong> — Diagnoses and resolves line configuration and network faults.</li>
+    <li><strong>Ontology + simulation</strong> — Analyzes the causes of problems arising in both functions, runs solutions in advance, and chooses the action.</li>
+  </ul>
+
+  <h2>2. Legacy Systems Used</h2>
+  <p>Telecom ordering, activation, billing, and line management have long been handled by the specialized systems below. This demo <strong>does not replace them</strong>; it uses them as they are.</p>
+  <table class="cmp">
+    <thead><tr><th>System</th><th>Role in This Demo</th></tr></thead>
+    <tbody>
+      <tr><td>TIBCO FOS</td><td><strong>Order orchestration</strong> (Fulfillment Order Suite) that breaks an order into pieces and coordinates them in sequence</td></tr>
+      <tr><td>Oracle Siebel</td><td><strong>Order capture</strong> for customers and products (CRM / order capture)</td></tr>
+      <tr><td>Oracle BRM</td><td><strong>Billing</strong> (Billing and Revenue Management) that handles rating and charging</td></tr>
+      <tr><td>Oracle ASAP</td><td><strong>Activation</strong> that actually turns services on at the equipment</td></tr>
+      <tr><td>Oracle MetaSolv</td><td><strong>Configuration and inventory</strong> of line and network resources</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Order Management — New Activation of a Bundled Fixed-Mobile Product</h2>
+  <p>Because a bundled fixed-mobile product ties several services into a single order, multiple legacy systems <strong>mesh together in sequence</strong>.
+     It shows, as one flow, how a captured order is decomposed, how the line is configured, and how it is actually activated and carried through to billing.</p>
+  <div class="flow">
+    <div class="step"><span class="n">1</span><h4>Order Capture</h4><p>Siebel receives the bundled-product order.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">2</span><h4>Order Decomposition & Coordination</h4><p>FOS breaks the order into detailed tasks and sequences them.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">3</span><h4>Line Configuration</h4><p>MetaSolv assigns line and network resources.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">4</span><h4>Activation</h4><p>ASAP actually turns the service on at the equipment.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="n">5</span><h4>Billing Registration</h4><p>BRM applies the rate plan and starts billing.</p></div>
+  </div>
+
+  <h2>4. Fault Management — Resolving Line and Network Faults</h2>
+  <p>Activation is not the end. During operations, line problems and network faults arise.
+     This demo also sets up <strong>fault management that resolves line configuration and network faults</strong>.</p>
+  <ul>
+    <li><strong>Incident intake</strong> — Receives a network fault or line problem as a fault incident.</li>
+    <li><strong>Cause tracing</strong> — Follows which lines, resources, and services are entangled to narrow down the cause.</li>
+    <li><strong>Remediation</strong> — Resolves the problem and traces back to the affected orders and services.</li>
+  </ul>
+
+  <h2>5. Binding It Together with an Ontology</h2>
+  <p>Order management and fault management are each <strong>expressed as an ontology</strong>.
+     Because how orders, services, line resources, and incidents connect to one another is revealed on a single screen,
+     both people and agents see "which orders and customers this fault spreads to" as the same picture.</p>
+
+  <figure class="shot">
+    <figcaption>In the past, network configuration was checked as shown below.</figcaption>
+    <img src="../img/tel-metasolv-network.png" alt="MetaSolv network configuration" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Ordering and provisioning are processed as shown below.</figcaption>
+    <img src="../img/tel-metasolv-order.png" alt="MetaSolv ordering and provisioning" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Ontology-based order and fault management looks like this.</figcaption>
+    <img src="../img/tel-ont-manage.png" alt="Ontology-based order and fault management" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Clicking a specific fault on the map prints its detailed processing.</figcaption>
+    <img src="../img/tel-fault-detail.png" alt="Fault detailed processing" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Network configuration is checked on the map and mapped to a specific call on the right.</figcaption>
+    <img src="../img/tel-map-mapping.png" alt="Map and call mapping" loading="lazy">
+  </figure>
+
+  <h2>6. Problem → Root Cause Analysis → Simulation → Decision-Making</h2>
+  <p>A variety of problems arise in order and fault management. For example, these:</p>
+  <ul>
+    <li><strong>Delayed fault incident handling</strong> — Fault response is slow.</li>
+    <li><strong>Network fault</strong> — A line or resource problem cuts off service.</li>
+    <li><strong>Order fallout</strong> — Orders fail midway through activation and pile up.</li>
+  </ul>
+  <p>JuneAI <strong>analyzes the causes</strong> of these problems with the ontology and runs possible <strong>solutions in advance through simulation</strong>.
+     The agent then, based on those results, <strong>chooses the optimal action</strong> and supports decision-making.</p>
+  <blockquote><p>Legacy left as it is, the ontology layered thinly on top. <strong>It analyzes problems in order and fault management down to their root cause, simulates solutions in advance, and chooses the best action.</strong></p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

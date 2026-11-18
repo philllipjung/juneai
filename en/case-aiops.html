@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- JuneAI — AIOps (20261106_AIOps.md → HTML, 2026-11-07) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomous Operations Agents Completed with Harness Engineering — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:16px;font-weight:700;margin:20px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article ol li{padding-left:30px}
+  .article strong{color:var(--ink);font-weight:700}
+  table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:14.5px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  td:first-child{font-weight:600;color:var(--ink)}
+  tr:last-child td{border-bottom:0}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-aiops.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">AIOps · Harness Agents</span>
+    <h1>Autonomous Operations Agents Completed with Harness Engineering</h1>
+    <p class="lead"><strong>The foundation technology is Observability (observation and instrumentation).</strong><br>
+      On this single foundation we build <strong>AIOps</strong>, and on the <strong>same foundation</strong> we compose <strong>ontologies</strong> tailored to each business and industry.
+      And every one of those decisions and actions is carried out by <strong>agents tuned through Harness Engineering</strong>.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. One Foundation — Observability</h2>
+  <p>The bigger picture of Autonomous Operations cannot be built without a <strong>solid technical foundation</strong>. At JuneAI, that foundation is <strong>Observability (observation and instrumentation)</strong>. The <strong>metrics, traces, and profiles</strong> that a running system emits are gathered in full with our own instrumentation, <strong>reaching all the way inside the legacy</strong>.</p>
+  <p>And on <strong>this single foundation</strong>, two branches rise together.</p>
+  <ul>
+    <li><strong>Technical ontology</strong> — instead of relying on people, AIOps <strong>detects, analyzes, and remediates</strong> the latency, bottlenecks, and failures of IT systems.</li>
+    <li><strong>Business- and industry-specific ontology</strong> — on the <strong>same observability foundation</strong>, we compose ontologies tailored to each business and industry.</li>
+  </ul>
+  <p>The two are not layers stacked one above the other; they are <strong>two branches that share the same Observability foundation</strong>. Because the foundation is one, whether it is IT operations or business operations, problems are seen and solved <strong>in the same way</strong>.</p>
+  <blockquote>
+    <p><strong>The structure of JuneAI</strong></p>
+    <p><strong>Foundation</strong> — Observability (observation and instrumentation)</p>
+    <p>On top of it → <strong>AIOps</strong> (autonomous IT operations) · <strong>business- and industry-specific ontology</strong> (autonomous business operations)</p>
+    <p>And every decision and action is carried out by <strong>agents tuned with the Harness</strong>.</p>
+  </blockquote>
+
+  <h3>Trustworthy AIOps — Technical Ontology Is AIOps</h3>
+  <p>That one branch, AIOps, is built on three qualities. <strong>Technical ontology is AIOps itself.</strong></p>
+  <ul>
+    <li><strong>Reliable</strong> — you can trust the results.</li>
+    <li><strong>Stable</strong> — it does not waver in production environments.</li>
+    <li><strong>Root Cause Analysis</strong> — it finds the <strong>real cause</strong>, not the symptom.</li>
+  </ul>
+  <p>Only when these three are in place can <strong>IT operations truly be automated</strong>. It is not "we don't know the cause, but let's restart anyway"; it is <strong>automation that can explain why</strong>.</p>
+
+  <h2>2. Processes and Context Never Break</h2>
+  <p>In complex IT environments, the most common failure is <strong>the flow breaking midway</strong>. When a trace stops short of the legacy, or data vanishes at a system boundary — you lose the whole picture and miss the cause.</p>
+  <p>To understand a problem, you must <strong>carry the flow forward and pass along the surrounding context</strong>. Yet when that flow suddenly breaks in the middle, it is hard to understand what happened and why. <strong>Connecting the before-and-after context, reconnecting the broken points, and filling in the missing context</strong> — doing exactly this is what <strong>instrumentation</strong> is.</p>
+  <blockquote><p>🔗 <strong>JuneAI is strong at instrumentation.</strong> It joins broken traces, connects the context before and after, and fills the empty gaps — so the flow never disappears midway.</p></blockquote>
+  <p><strong>At JuneAI, processes are not interrupted or broken.</strong></p>
+  <ul>
+    <li>It understands the internal processing of systems, <strong>including the legacy</strong>.</li>
+    <li>With <strong>our own Observability technology</strong>, it traces complex IT problems all the way to resolution.</li>
+  </ul>
+  <p>From a single request that starts at the screen (frontend), through the backend, all the way to a <strong>deep processing stage inside the legacy</strong>, it draws <strong>a single unbroken map in one continuous line</strong>. That is how it pinpoints exactly "where it slowed down, where it went wrong."</p>
+
+  <figure class="shot">
+    <figcaption>You can understand context, state, and changes in many ways. The overall processing flow can be understood as shown below.</figcaption>
+    <img src="../img/ai-flow.png" alt="Overall processing flow" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>You can understand downstream and upstream.</figcaption>
+    <img src="../img/ai-updown.png" alt="Downstream and upstream" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Context is carried forward, and the detailed call sequence can be understood in chronological order.</figcaption>
+    <img src="../img/ai-timeline.png" alt="Call sequence in chronological order" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>At the bottom, you can review the changes.</figcaption>
+    <img src="../img/ai-edit.png" alt="Applying changes directly" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The ontology highlights and surfaces problems such as latency, shortfalls, and bottlenecks.</figcaption>
+    <img src="../img/ai-highlight.png" alt="Problem highlighting" loading="lazy">
+  </figure>
+
+  <h2>3. The Core Is "Proprietary Instrumentation" — No Restart, No Code Change</h2>
+  <p>The most essential technology holding up JuneAI is our <strong>proprietary instrumentation</strong>. <strong>Without stopping operations</strong>, <strong>without changing application code</strong>, and <strong>without a restart</strong> — it applies observation and tracing points to any point, at any time. It normally runs light, and the moment a problem is suspected, it instantly trains a "lens" on that very spot.</p>
+  <ul>
+    <li>✅ <strong>No code change needed</strong> — the application code is not modified.</li>
+    <li>✅ <strong>No restart needed</strong> — there is no need to bring the system back up.</li>
+    <li>✅ <strong>No downtime needed</strong> — it looks inside the service without stopping it.</li>
+    <li>✅ <strong>Anytime, anywhere</strong> — even during operation, it adds or removes observation at any point you want.</li>
+  </ul>
+  <h3>What Instrumentation Produces — Live Debugging</h3>
+  <p>Because of this proprietary instrumentation, <strong>Live Debugging</strong> is possible. It means debugging a running application <strong>in real time</strong>. Normally you would have to stop the system, build a separate test environment, or embed special logging and redeploy — and all of that brings time and risk.</p>
+  <p>JuneAI is different. <strong>Instrumentation and debugging alike require no restart and no code change at all.</strong> It identifies and resolves production problems <strong>right there, on the spot</strong>.</p>
+  <blockquote><p>💡 <strong>Why it matters</strong> — problems that only reproduce in production, or that erupt once in a blue moon, are very hard to catch with traditional methods. Proprietary instrumentation and live debugging capture the cause <strong>at the very moment and place the problem actually occurs</strong> — without stopping operations for a single instant.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>This is the live debugging screen.</figcaption>
+    <img src="../img/ai-livedebug.png" alt="Live debugging screen" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>This is the screen for defining instrumentation.</figcaption>
+    <img src="../img/ai-instrument.png" alt="Instrumentation definition screen" loading="lazy">
+  </figure>
+
+  <blockquote><p>✅ <strong>Anytime, anywhere</strong> — even during operation, it adds or removes observation at any point you want.</p></blockquote>
+
+  <h2>4. High Accuracy Even with Open-Source Models — "Harness Engineering"</h2>
+  <p>Outstanding AIOps stands on two pillars. One is the <strong>proprietary Observability and instrumentation</strong> seen above — the "eyes" that look unbroken all the way inside the legacy. The other is the <strong>agent that turns those gathered signals into accurate decisions and actions</strong>, and what holds up this agent is precisely <strong>Harness Engineering</strong>.</p>
+  <p>No matter how well you observe, if the AI that receives those signals and judges them wavers, the automation cannot be trusted. Rather than leaning on expensive frontier models, JuneAI <strong>tunes its agents with Harness Engineering</strong> — delivering high accuracy even on lightweight open-source models.</p>
+  <h3>What Is a Harness?</h3>
+  <p>A <strong>Harness</strong> is the <strong>"operating frame"</strong> that wraps an AI model. It refers to the <strong>entire engineering</strong> of what context is given to the model in what order, what tools it is made to use, and how its output is verified and corrected. With the same model, a superior harness completely changes the <strong>accuracy, reliability, and speed</strong> of the results.</p>
+  <h3>Not Expensive Frontier Models, but Affordable Open-Source Models</h3>
+  <p>JuneAI builds its agents with <strong>affordable open-source models instead of costly frontier models</strong>. Even so, it delivers <strong>accuracy and reliability that in no way falls behind frontier models</strong>. It can run on-premises, which is advantageous for both cost and security. The secret is precisely Harness Engineering.</p>
+  <ul>
+    <li>💰 <strong>Low cost</strong> — it operates AIOps agents without expensive model usage fees.</li>
+    <li>⚡ <strong>Fast response</strong> — it raises response speed, shortening the time to action.</li>
+    <li>🔒 <strong>Stable accuracy</strong> — even when the model changes, the harness holds up the quality.</li>
+  </ul>
+  <h3>The Fundamental Difference from Competitors</h3>
+  <p>Most competing products <strong>depend on frontier models</strong>. Their way to improve results amounts to "waiting for a better model to come out," so quality improvement is tied to <strong>the pace of model advancement</strong>.</p>
+  <p>JuneAI, <strong>from the very first design stage</strong>, focused its capabilities on <strong>improving the harness</strong> rather than depending on the model. The philosophy is that the model is a swappable part, and the real competitive edge lies in the harness that handles that part.</p>
+  <blockquote>
+    <p><strong>Looking into the harness through tracing</strong></p>
+    <p>AIOps Observability is directed not only at the system but <strong>at the agent itself</strong>. JuneAI uses distributed tracing to <strong>analyze every step of how the harness operates</strong>. It transparently looks into what context the AI received, what judgments it went through, and what action it arrived at — and keeps improving the harness. This is not "black-box AI" but <strong>AI that can be observed and verified</strong>.</p>
+  </blockquote>
+
+  <figure class="shot">
+    <figcaption>With Harness Engineering, every step of the AI's processing can be debugged.</figcaption>
+    <img src="../img/ai-harness-debug.png" alt="Debugging the harness processing" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Every step of processing, including MCP tool calls, is traced.</figcaption>
+    <img src="../img/ai-mcp-trace.png" alt="Tracing MCP tool calls" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It writes a verdict as shown below.</figcaption>
+    <img src="../img/ai-verdict.png" alt="Writing a verdict" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It analyzes the cause and executes actions based on the runbook.</figcaption>
+    <img src="../img/ai-runbook.png" alt="Executing runbook-based actions" loading="lazy">
+  </figure>
+
+  <h2>5. In Summary — On One Foundation, with Harness Agents</h2>
+  <ul>
+    <li><strong>The foundation is Observability</strong> — observation and instrumentation are the base. On top of it, <strong>AIOps</strong> and <strong>business- and industry-specific ontology</strong> rise in the same way.</li>
+    <li><strong>Proprietary instrumentation is the core</strong> — it applies observation anywhere during operation, with no restart and no code change. <strong>Live Debugging</strong> is the result that instrumentation produces — instrumentation and debugging alike, without a pause.</li>
+    <li><strong>Unbroken processes</strong> — it traces in a single line all the way into internal processing, including the legacy, with proprietary Observability.</li>
+    <li><strong>Agents completed with Harness Engineering</strong> — even with affordable open-source models they deliver frontier-grade accuracy, and they carry out autonomous operations beyond IT, up to the business level.</li>
+    <li><strong>Trustworthy AIOps</strong> — with reliability, stability, and root cause analysis, it performs explainable automation, not a "restart with an unknown cause."</li>
+  </ul>
+  <blockquote><p>JuneAI's cornerstone is <strong>Observability</strong>. Because the foundation is one, the AIOps on top of it and the business- and industry-specific ontology both rise without wavering — and every one of those decisions and actions is completed by <strong>agents tuned with the Harness</strong>.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

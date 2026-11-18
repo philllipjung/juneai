@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!-- JuneAI — 관측가능성 (데이터 플랫폼 없는 온톨로지, 2026-11-11) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI and Observability — No Data Platform, Just Observability</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  /* 2열 비교 카드 */
+  .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
+  .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
+  .leg-card.heavy{border-top:3px solid #b0392f}
+  .leg-card.light{border-top:3px solid var(--blue)}
+  .leg-card .emoji{font-size:22px;line-height:1}
+  .leg-card h4{margin:10px 0 10px;color:var(--ink);font-size:17px}
+  .leg-card ul{margin:0}
+  .leg-card li{margin:0 0 8px;font-size:14.5px}
+  @media(max-width:700px){ .leg-grid{grid-template-columns:1fr} }
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  .cmp .th-heavy{color:#b0392f}
+  .cmp .th-light{color:var(--blue-dark)}
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-observability.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Instrumentation & Observability · OpenTelemetry</span>
+    <h1>No Data Platform, Just Observability</h1>
+    <p class="lead"><strong>Ontologies usually presuppose a heavy data platform.</strong><br>
+      JuneAI removes that premise. Instead of a data platform, it builds on <strong>Observability</strong>,
+      standing up an ontology <strong>at the level of a single department, without the help of another organization</strong> — faster, and cheaper.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. Observability and OpenTelemetry — and Their Limits</h2>
+  <p>The foundation of the JuneAI ontology is <strong>Observability</strong>. It gathers the <strong>traces, metrics, and logs</strong> that running systems emit, and builds the ontology from their relationships. For standardized collection, <strong>OpenTelemetry</strong> is widely used.</p>
+  <p>But <strong>OpenTelemetry alone</strong> has clear limits in handling legacy and the many exceptional cases.</p>
+  <ul>
+    <li><strong>Trace propagation breaks</strong> — once a call passes through certain stretches, the trace connection is severed, so the full path cannot be stitched into one.</li>
+    <li><strong>Asynchronous and event processing is hard</strong> — in message-queue and event-driven flows, following the causal relationships is tricky.</li>
+    <li><strong>Legacy instrumentation isn't supported</strong> — standard instrumentation doesn't reach traditional systems (mainframes, TP monitors, and the like).</li>
+  </ul>
+  <blockquote><p>✅ <strong>JuneAI has solved these problems.</strong> It reconnects broken trace propagation, follows asynchronous and event flows, and instruments down into the legacy internals. As a result, it can stand up an <strong>end-to-end connected ontology</strong> using Observability alone.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>It builds correlations across metrics, traces, and profiles. Metrics are shown on the right. Click an exemplar.</figcaption>
+    <img src="../img/obs-metric.png" alt="Metrics" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Trace spans are automatically routed to the profile's flame graph.</figcaption>
+    <img src="../img/obs-trace.png" alt="Trace" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The flame graph is automatically routed to the flame scope.</figcaption>
+    <img src="../img/obs-flamegraph.png" alt="Flame graph" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The profile flame scope is displayed.</figcaption>
+    <img src="../img/obs-flamescope.png" alt="Flame scope" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It supports over 300 anomaly detections.</figcaption>
+    <img src="../img/obs-anomaly.png" alt="Anomaly detection" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It understands and groups the context of many alerts to support incident management. This is automated within AIOps.</figcaption>
+    <img src="../img/obs-alert.png" alt="Alert and incident management" loading="lazy">
+  </figure>
+
+  <h2>2. Ontologies Originally Presuppose a "Data Platform"</h2>
+  <p>An ontology is fundamentally <strong>built on a data platform</strong>. In other words, without a data platform, building the ontology itself is difficult. A data-platform-based ontology requires <strong>pipelines, lakes, metadata, and lineage</strong> all at once.</p>
+  <p>The problem is that this is <strong>not simply a question of "is it technically possible."</strong></p>
+  <ul>
+    <li><strong>System expansion</strong> — new storage and compute infrastructure must be brought in.</li>
+    <li><strong>Securing people</strong> — data engineers and platform operators are needed.</li>
+    <li><strong>Schedule coordination and budgeting</strong> — complex decision-making involving multiple organizations follows.</li>
+  </ul>
+  <p>Given the complex decisions and the cross-organizational collaboration and division of roles, <strong>introducing an ontology at the department level is all but impossible.</strong></p>
+  <h3>Even If You Already Have a Data Platform, It's Harder Still</h3>
+  <p>Assuming a data platform is already running well, <strong>layering yet another ontology-based platform like Palantir on top is, if anything, even harder.</strong></p>
+  <ul>
+    <li><strong>Redundancy</strong> — functions overlap with the existing data platform.</li>
+    <li><strong>A different approach</strong> — a business-centric ontology approach has a different grain from the existing one.</li>
+    <li><strong>Organizational pushback</strong> — resistance from the existing data organization can arise.</li>
+  </ul>
+  <p>In short, introducing an ontology involves <strong>not only technical issues but a range of considerations, including the organization.</strong></p>
+
+  <h2>3. Standing Up the Ontology Is Not the End</h2>
+  <p>Introducing an ontology does not mean the task is done. If anything, <strong>what comes afterward is bigger.</strong></p>
+  <p>In fact, <strong>the ontology is only one part</strong>. The direction JuneAI aims for is to analyze problems, <strong>support optimal decision-making</strong>, and have <strong>agents handle this whole process autonomously</strong>. The ontology is a very small part of the overall process — no more, no less.</p>
+  <ul>
+    <li><strong>Before applying</strong> — <strong>consulting</strong> is needed to analyze problems, set priorities, and reflect them in the ontology.</li>
+    <li><strong>After applying</strong> — the follow-up work continues: using the ontology to <strong>identify</strong> problems, <strong>analyze causes</strong>, and <strong>simulate solutions</strong>.</li>
+  </ul>
+  <p>Across the whole problem-solving process, <strong>building the ontology is only one part, while the follow-up work is far greater.</strong> So the question converges to one — <em>"How can we make this complex ontology construction and problem-solving simple?"</em></p>
+
+  <h2>4. JuneAI's Solution Is Quite Simple — Don't Use a Data Platform</h2>
+  <p>JuneAI's answer is surprisingly simple. <strong>It doesn't use a data platform.</strong> Instead, it builds on the <strong>Observability</strong> that systems already emit.</p>
+  <ul>
+    <li><strong>No collaboration with the data organization is needed</strong> — a single department can <strong>take the lead</strong> in applying it.</li>
+    <li><strong>No separate budget or cross-organizational collaboration is needed</strong> — it reduces <strong>investment cost, development time, and communication overhead</strong> all at once.</li>
+    <li><strong>It builds on Observability</strong> — without heavy pipelines or lakes, it stands up the ontology from the signals that operations already leave behind.</li>
+    <li><strong>Autonomous Operations is a bonus</strong> — if needed, you can layer on AIOps-based Autonomous Operations too, and focus solely on <strong>agents equipped with per-task ontologies and harnesses.</strong></li>
+  </ul>
+
+  <table class="cmp">
+    <thead><tr><th>Category</th><th class="th-heavy">🏗️ Data-Platform-Based</th><th class="th-light">👁️ JuneAI Observability-Based</th></tr></thead>
+    <tbody>
+      <tr><td>Foundation</td><td>Pipelines, lakes, metadata, lineage</td><td>Observability (traces, metrics, logs)</td></tr>
+      <tr><td>Organizations needed</td><td>Collaboration with the data organization is essential</td><td>A single department can lead on its own</td></tr>
+      <tr><td>Adoption</td><td>Practically impossible for a department alone</td><td>A single department can lead and make it happen</td></tr>
+      <tr><td>Budget and schedule</td><td>Expansion, staffing, and budgeting required</td><td>Fast, with no separate budget</td></tr>
+      <tr><td>Legacy and async</td><td>Standard OTel alone has limits</td><td>Reinforced down to propagation, async, and legacy</td></tr>
+      <tr><td>What comes next</td><td>Follow-up work is yet another big challenge</td><td>Focus on per-task ontology + harness agents</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. In Summary — Lightweight, Department-Led, Right Away</h2>
+  <ul>
+    <li><strong>Observability is the foundation</strong> — instead of a data platform, it stands up the ontology from the signals operations already leave behind.</li>
+    <li><strong>It goes beyond OpenTelemetry's limits</strong> — JuneAI has reinforced broken trace propagation, async, and legacy instrumentation.</li>
+    <li><strong>It crosses organizational walls</strong> — a single department leads adoption, with no data-organization collaboration or separate budget.</li>
+    <li><strong>It cuts cost and time</strong> — it lowers investment cost, development time, and communication overhead together.</li>
+    <li><strong>It focuses on the essence</strong> — Autonomous Operations is a bonus; capability is concentrated on per-task ontologies and harness agents.</li>
+  </ul>
+  <blockquote><p>Standing up an ontology no longer has to be a <strong>company-wide project</strong>. On top of Observability, JuneAI stands up ontologies and agents <strong>lightly enough for a department to start right away.</strong></p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

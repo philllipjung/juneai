@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!-- JuneAI — 온톨로지 (20261106_온톨로지.md → HTML, 2026-11-07) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI Ontology — No Changes, Fast and Affordable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:16px;font-weight:700;margin:22px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  table{border-collapse:collapse;width:100%;margin:8px 0 20px;font-size:14.5px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+  th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  td:first-child{font-weight:600;color:var(--ink)}
+  tr:last-child td{border-bottom:0}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../case-ontology.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Ontology</span>
+    <h1>JuneAI Ontology — No Changes, Fast and Affordable</h1>
+    <p class="lead"><strong>Building an ontology should not require countless code changes and a long project.</strong><br>
+      The JuneAI ontology <strong>needs no restart and no code change.</strong>
+      With no data pipeline, data lake, metadata, lineage, or BI, it composes the ontology <strong>on your system exactly as it runs today</strong>.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. What Is an Ontology</h2>
+  <p>An ontology is, in a word, <strong>a "map of the business" that the AI can read and reason over</strong>.</p>
+  <p>Inside a system there are countless components — customers, orders, circuits, ports, equipment, work orders, facilities, parts…. And these are <strong>connected</strong> to one another in complex ways. As in, "this customer's order uses that circuit, and that circuit is wired to a port on this equipment."</p>
+  <p>An ontology organizes these <strong>components (concepts) and the relationships between them</strong> into a <strong>structure that the AI, not a person, can follow</strong>. With an ontology, the AI can ride the relationships down from the point where a symptom appeared to find the <strong>real cause</strong> on its own, and instantly trace back "which customers this failure affects."</p>
+  <blockquote><p>As Palantir has proven, <strong>operations and decision-making centered on an ontology</strong> are the most powerful way for a company to turn data into real "decisions." JuneAI realizes this ontology-centered approach <strong>more lightly, more quickly, and more affordably</strong>.</p></blockquote>
+
+  <h2>2. An Ontology Is for the AI, Not for People</h2>
+  <p>An ontology can also be viewed and understood by people. Following the relationship diagram drawn on the screen, one can read off "this customer uses that circuit, and that circuit is wired to that equipment." But <strong>the ontology's true value does not lie there.</strong></p>
+  <p>The real value of an ontology is revealed only <strong>when the AI can look at the ontology and make decisions on its own</strong>. A person can follow only a few relationships at once, but an AI agent points through thousands and tens of thousands of relationships simultaneously, finding the path from "symptom → cause → action" on its own.</p>
+  <p>Conversely, <strong>without an ontology</strong>, the agent has to call APIs and SQL directly every time and explore the problems one by one <strong>while consuming tokens</strong>. It is extremely <strong>inefficient, time-consuming, and costly.</strong> An ontology lays this map of exploration down in advance, so the agent heads straight to the answer without wandering.</p>
+  <p>That is why the <strong>JuneAI ontology is an ontology designed for the AI agent rather than for people</strong>. It does not stop at drawing a picture that looks good to people; it expresses the business in <strong>the structure best suited for the AI to read and reason over</strong>.</p>
+  <h3>The Ontology Holds Up the AI's Judgment</h3>
+  <p>A well-built ontology directly influences the AI's decision-making.</p>
+  <ul>
+    <li>🎯 <strong>Higher accuracy</strong> — instead of guessing at scattered data, the AI reasons along clear relationships, so it reaches more accurate conclusions.</li>
+    <li>🔒 <strong>Higher reliability</strong> — because the basis of a judgment is explained by the ontology's relationships, "why it judged that way" can be traced and verified.</li>
+    <li>🧭 <strong>Consistent decisions</strong> — for the same situation it reaches a judgment along the same path, so it does not waver from person to person or moment to moment.</li>
+  </ul>
+  <blockquote><p>An ontology is a <strong>"foundation for judgment"</strong> for the AI. The sturdier the foundation, the more accurate, more trustworthy, and more explainable the decisions the AI makes upon it.</p></blockquote>
+
+  <h2>3. The Problem with Traditional Ontology Building — Heavy, Expensive, and Slow</h2>
+  <p>The traditional ontology and data-platform approach demands enormous up-front work just to stand up a single ontology.</p>
+  <ul>
+    <li>Building a <strong>data pipeline</strong> — the plumbing work of pulling together data scattered all over</li>
+    <li>Loading a <strong>data lake</strong> — a large repository that stacks source data in one place</li>
+    <li>Managing <strong>metadata and lineage</strong> — tracing the origin and flow of data one by one</li>
+    <li>Integrating <strong>BI tools</strong> — a separate analytics layer to show the results</li>
+  </ul>
+  <p>Assembling all of this takes <strong>massive cost and a long time</strong>, and above all it carries <strong>the risk of having to touch the legacy systems currently in operation</strong>. Before you even get to use the ontology, the project to build the ontology itself becomes a massive undertaking of months to years.</p>
+
+  <h2>4. JuneAI's New Approach — The Operating Code Is Not Changed</h2>
+  <p>The JuneAI ontology composes its ontology in a <strong>wholly new way, entirely different from competitors</strong>.</p>
+  <ul>
+    <li>✅ <strong>No restart needed</strong> — the system in operation is not stopped.</li>
+    <li>✅ <strong>No code change needed</strong> — the code running now is left as it is.</li>
+    <li>✅ <strong>No data pipeline, lake, metadata, lineage, or BI needed</strong> — no heavy up-front data work is required.</li>
+    <li>✅ <strong>Built in a short time with no extra development</strong> — not a large project, but stood up right away in a short span.</li>
+  </ul>
+  <p>In other words, it composes the ontology <strong>on the code exactly as it runs today</strong>. By clearing away the risk and high cost of having to change the legacy, and building it in a short time with no extra development, it creates <strong>a groundbreaking ontology that cuts cost and reaches decisions quickly</strong>.</p>
+  <h3>Traditional Approach vs. JuneAI</h3>
+  <table>
+    <thead><tr><th>Category</th><th>Traditional ontology / data platform</th><th>JuneAI ontology</th></tr></thead>
+    <tbody>
+      <tr><td>Data pipeline</td><td>Required (large-scale build)</td><td><strong>Not needed</strong></td></tr>
+      <tr><td>Data lake</td><td>Required</td><td><strong>Not needed</strong></td></tr>
+      <tr><td>Metadata / lineage</td><td>Managed separately</td><td><strong>Not needed</strong></td></tr>
+      <tr><td>BI integration</td><td>Separate layer</td><td><strong>Not needed</strong></td></tr>
+      <tr><td>Operating code</td><td>Change and redeploy required</td><td><strong>Kept as is</strong></td></tr>
+      <tr><td>System restart</td><td>Often required</td><td><strong>Not needed</strong></td></tr>
+      <tr><td>Build time</td><td>Months to years</td><td><strong>Short</strong></td></tr>
+      <tr><td>Legacy risk</td><td>High</td><td><strong>Low</strong></td></tr>
+    </tbody>
+  </table>
+
+  <figure class="shot">
+    <figcaption>The technical ontology implements AIOps.</figcaption>
+    <img src="../img/ont-tech.png" alt="Technical ontology" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Services form the roots and trunk, and resources form the branches and leaves.</figcaption>
+    <img src="../img/ont-tree.png" alt="Service and resource ontology structure" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The ontology identifies problems precisely and surfaces them clearly.</figcaption>
+    <img src="../img/ont-identify.png" alt="Problem identification" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>It composes complex causal relationships.</figcaption>
+    <img src="../img/ont-causal.png" alt="Composing causal relationships" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>You can understand the causal relationships with a single click.</figcaption>
+    <img src="../img/ont-click.png" alt="Exploring causal relationships by click" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The business ontology supports optimal decision-making. JuneAI starts from the technical ontology and completes the business ontology.</figcaption>
+    <img src="../img/ont-business.png" alt="Business ontology" loading="lazy">
+  </figure>
+
+  <h2>5. What the Ontology Opens Up — Autonomous Operations and Self-Healing</h2>
+  <p>With an ontology in place, you can introduce <strong>Autonomous Operations</strong> and <strong>Self-Healing</strong> to both <strong>business processes</strong> and <strong>internal operations</strong>.</p>
+  <h3>5-1. Business Processes — Industry-Specific Ontologies</h3>
+  <p>JuneAI provides ontologies tailored to the characteristics of each industry.</p>
+  <h4>🏭 Facilities & Manufacturing — Intelligent Maintenance</h4>
+  <ul>
+    <li><strong>Equipment failure root cause analysis and intelligent diagnosis</strong> — the AI traces the root cause of a failure</li>
+    <li><strong>Predictive maintenance and failure-risk forecasting</strong> — detects and prepares for failures before they occur</li>
+    <li><strong>Automatic generation and optimization of maintenance work orders</strong> — the AI drafts and optimizes who does what, and when</li>
+    <li><strong>Intelligent spare parts and supply chain</strong> — making parts supply and the supply chain intelligent with data</li>
+  </ul>
+  <h4>📡 Telecom — From Order to Activation to Fault</h4>
+  <ul>
+    <li><strong>From customer order to activation</strong> — connecting the full process from order intake to service activation</li>
+    <li><strong>Field work and worker assignment</strong> — automatically assigning field work to the right worker</li>
+    <li><strong>Circuit, port, and equipment management</strong> — grasping intricately entangled network resources through relationships</li>
+    <li><strong>Fault intake and recovery</strong> — receiving a fault, finding the cause, and recovering</li>
+    <li><strong>Identifying customers affected by a fault</strong> — instantly tracing back which customers a single fault affects</li>
+  </ul>
+  <h3>5-2. Internal Operations — Applying the Ontology to AIOps</h3>
+  <p>JuneAI also applies the ontology to system operations (AIOps).</p>
+  <ol>
+    <li>An <strong>anomaly such as latency or a bottleneck</strong> occurs in a service.</li>
+    <li>AIOps <strong>identifies it on its own</strong> and <strong>automatically analyzes the root cause</strong>.</li>
+    <li>The <strong>agent acts directly</strong> to resolve the problem.</li>
+  </ol>
+  <p>Without a person combing through logs one at a time, <strong>"symptom → cause → action"</strong> follows automatically along the map that is the ontology.</p>
+
+  <h2>6. We Use Neither RAG Nor a Graph DB</h2>
+  <p>When building ontologies and agents, many people use <strong>RAG (Retrieval-Augmented Generation)</strong> or a <strong>graph database (Graph DB)</strong>. Both are widely used approaches. But <strong>JuneAI uses neither.</strong></p>
+  <p>The reason is clear. RAG and graph DBs are <strong>heavy, low in accuracy, and not AI-friendly.</strong></p>
+
+  <h3>RAG — the Limits of "Searching" Documents</h3>
+  <p>RAG retrieves documents and builds an answer based on their content. It is useful, but its limits are clear when used at the heart of operations.</p>
+  <ul>
+    <li><strong>Accuracy limits</strong> — "finding and reading" documents and <strong>reasoning by following the relationships</strong> of components are different orders of thing. It may find similar sentences, but it cannot do the cause reasoning that climbs back through many stages.</li>
+    <li><strong>Massive up-front cost</strong> — the <strong>collection and preprocessing</strong> work of gathering usable documents, chopping them into pieces, and refining them becomes a large project in itself.</li>
+    <li><strong>It loses the relationships</strong> — the moment documents are chopped into pieces and stored as vectors, the <strong>connective structure of "A calls B, and B depends on C" scatters.</strong></li>
+  </ul>
+
+  <h3>Graph DB — It Holds Relationships, but It Is Still Heavy</h3>
+  <p>A graph DB holds relationships as nodes and edges and is thought to be better than RAG. But as a foundation for operations, it comes with another burden.</p>
+  <ul>
+    <li><strong>Heavy infrastructure</strong> — you have to stand up and operate a separate graph engine. In effect, it means bringing in <strong>yet another data platform</strong>.</li>
+    <li><strong>Modeling burden</strong> — people have to design and maintain the schema and loading pipeline, and every time the business changes, it has to be reworked.</li>
+    <li><strong>AI-unfriendly</strong> — the AI cannot read the graph directly and has to <strong>translate into a graph query language</strong> every time. When that translation goes astray, accuracy drops with it.</li>
+  </ul>
+
+  <h3>JuneAI — It Analyzes the Business and Composes Its Own</h3>
+  <p>The JuneAI ontology uses neither RAG's pile of documents nor a graph DB's separate engine. Instead it <strong>analyzes the business itself</strong> and composes the ontology <strong>in its own way</strong>. It builds the ontology directly from the signals operations already emit (observability) and from the business structure, and leaves it <strong>in a form the AI can read and reason over as-is</strong>.</p>
+  <ul>
+    <li><strong>Light</strong> — no separate vector store or graph engine is needed.</li>
+    <li><strong>Accurate</strong> — it reflects the business and operational structure as-is, so it reasons by actual relationships rather than guesswork.</li>
+    <li><strong>AI-friendly</strong> — it is composed so the model <strong>understands it directly</strong> without intermediate translation.</li>
+  </ul>
+
+  <table>
+    <thead><tr><th>Category</th><th>RAG (vector search)</th><th>Graph DB</th><th>JuneAI proprietary ontology</th></tr></thead>
+    <tbody>
+      <tr><td>Composition</td><td>Finely chopped document fragments (vectors)</td><td>Nodes and edges in a separate engine</td><td>Business and operational structure as-is, in a proprietary format</td></tr>
+      <tr><td>Weight</td><td>Needs collection, preprocessing, vector DB</td><td>Needs graph infrastructure and modeling</td><td>Light, with no separate infrastructure</td></tr>
+      <tr><td>Accuracy</td><td>Weak at reasoning, being sentence similarity</td><td>Dependent on query translation</td><td>Reasons by actual relationships (high)</td></tr>
+      <tr><td>AI-friendliness</td><td>Search results must be reinterpreted</td><td>Needs translation into a graph query language</td><td>The AI reads it directly</td></tr>
+    </tbody>
+  </table>
+
+  <p>Many projects lean on RAG and graph DBs, but <strong>JuneAI, without those two</strong> — instead stands up the ontology in a way that is <strong>lighter, more accurate, and more AI-friendly</strong>.</p>
+
+  <h2>7. JuneAI by the Numbers</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Scale</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>Anomaly detection</td><td><strong>320+</strong></td><td>Broadly and automatically detects a wide range of failure and anomaly patterns</td></tr>
+      <tr><td>Chat prompts</td><td><strong>100+</strong></td><td>Query and analysis templates an operator can use right away</td></tr>
+      <tr><td>Ontology build</td><td><strong>Short</strong></td><td>Set up quickly with no extra development or code change</td></tr>
+      <tr><td>Relationship-based reasoning</td><td><strong>Always on</strong></td><td>Transparently analyzes cause and impact along the operational structure and relationships</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>320+ anomaly detectors</strong> — a broad set of anomaly patterns out of the box, covering a wide range from the moment it is introduced.</li>
+    <li><strong>100+ chat prompts</strong> — query and analysis prompts an operator can put to use right away during direct operations.</li>
+  </ul>
+
+  <h2>8. The Right Expectations for an Ontology</h2>
+  <p>An ontology is <strong>something composed as a system</strong>, and it must be <strong>interpretable by both people and agents</strong>.
+     It is neither a picture only people can read nor material only machines can read. It earns its keep only when both sides can see the same structure and head toward the same conclusion.</p>
+  <p>That said, an ontology is no magic that solves everything. <strong>For a complex business problem, it is normal that people find it hard and agents, too, cannot easily produce an answer.</strong>
+     Making it into an ontology does not mean every business problem is solved. <strong>If you imagine a system that suddenly boosts revenue by 100%, you are in trouble.</strong></p>
+  <p>What an ontology does is clear. <strong>Hidden problems must be expressed so they stand out</strong>, and <strong>the problem must be expressed as to what the root cause is</strong>.
+     Problems are not quickly visible to the eye like errors, do not occur often like latency, and <strong>it is normal for them to be hidden</strong>. An ontology surfaces those hidden problems and points out where they originated.</p>
+  <blockquote><p>An ontology is <strong>not a tool that solves problems for you, but a tool that surfaces hidden problems and expresses their root cause</strong>. Reaching the answer is the job of the people and agents who make judgments on top of it.</p></blockquote>
+
+  <h2>9. In Summary</h2>
+  <ul>
+    <li><strong>Ontology = the map of the business the AI reads</strong> — the key to turning data into real decisions.</li>
+    <li><strong>The traditional approach is heavy</strong> — massive cost and time on pipelines, lakes, metadata, lineage, and BI, plus legacy risk.</li>
+    <li><strong>JuneAI is light</strong> — on the code in operation as-is, with no restart, code change, or up-front data work, built in a short time.</li>
+    <li><strong>The ontology opens up autonomous operations and self-healing</strong> — for both business processes (facilities, telecom) and internal operations (AIOps).</li>
+    <li><strong>It uses neither RAG nor a graph DB</strong> — instead of two heavy, inaccurate approaches, it analyzes the business and composes its own. Lighter, more accurate, more AI-friendly.</li>
+    <li><strong>Verifiable AI</strong> — 320+ anomaly detectors, 100+ prompts, and transparency seen through tracing.</li>
+  </ul>
+  <blockquote><p>The <strong>value of ontology-centered operations</strong> that Palantir demonstrated, JuneAI makes real without touching the legacy and in a short time — <strong>at lower cost, more quickly, and verifiably</strong>.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

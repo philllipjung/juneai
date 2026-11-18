@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- JuneAI — 금융사 AIOps 데모 (2026-11-12) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Financial Services AIOps Demo — JuneAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8;--blue-dark:#1557b0;--blue-soft:#e8f0fe;
+    --ink:#202124;--ink-2:#5f6368;--line:#dadce0;--bg:#fff;--bg-2:#f8f9fa;
+    --radius:12px;--shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:20px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav .spacer{flex:1}
+  .back{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  .back:hover{color:var(--blue)}
+  .a-hero{background:linear-gradient(180deg,var(--blue-soft),#fff);border-bottom:1px solid var(--line);padding:56px 0 44px}
+  .a-hero .wrap{max-width:880px}
+  .kicker{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:#fff;border:1px solid var(--line);color:var(--blue-dark);font-size:12px;font-weight:600;margin-bottom:18px}
+  .a-hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.22;letter-spacing:-1px;font-weight:700;margin:0 0 20px}
+  .lead{font-size:clamp(15px,1.7vw,17px);color:var(--ink);background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:18px 20px;margin:0}
+  .lead strong{color:var(--blue-dark)}
+  .article{max-width:880px;margin:0 auto;padding:44px 24px 72px}
+  .article h2{font-size:clamp(20px,2.4vw,27px);line-height:1.3;letter-spacing:-.5px;font-weight:700;margin:48px 0 14px;padding-top:8px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:clamp(17px,2vw,20px);font-weight:700;letter-spacing:-.3px;margin:28px 0 10px;color:var(--ink)}
+  .article h4{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--blue-dark)}
+  .article p{font-size:16px;color:#3c4043;margin:0 0 14px}
+  .article ul{margin:0 0 16px;padding-left:4px;list-style:none}
+  .article li{position:relative;padding-left:26px;margin:0 0 10px;font-size:16px;color:#3c4043}
+  .article li::before{content:'';position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .article ol{counter-reset:n;list-style:none;padding-left:4px;margin:0 0 16px}
+  .article ol li{counter-increment:n;padding-left:30px}
+  .article ol li::before{content:counter(n);top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+  .article strong{color:var(--ink);font-weight:700}
+  blockquote{margin:20px 0;padding:18px 20px;background:var(--blue-soft);border-radius:10px;border:1px solid #d2e3fc}
+  blockquote p{margin:0 0 8px;color:#1b3a63}
+  blockquote p:last-child{margin:0}
+  blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+  /* 비교 표 */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+  .cmp th{background:var(--bg-2);font-weight:700;color:var(--ink)}
+  .cmp td:first-child{background:#fafbfc;font-weight:600;color:var(--ink);white-space:nowrap}
+  /* 흐름 */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:16px 0 22px}
+  .flow .step{flex:1 1 140px;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;position:relative}
+  .flow .step .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+  .flow .step h4{margin:0 0 4px;font-size:15px;color:var(--ink)}
+  .flow .step p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .flow .arrow{display:grid;place-items:center;color:#9aa0a6;font-size:20px;padding:0 6px}
+  @media(max-width:700px){ .flow{flex-direction:column} .flow .arrow{transform:rotate(90deg);padding:2px 0} }
+  .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
+  .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
+  .pillfoot .muted{color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">J</span>JuneAI</a>
+    <span class="spacer"></span>
+    <span style="font-size:13px;font-weight:600;color:var(--ink-2);margin-right:4px"><a href="../demo-aiops.html" style="color:var(--blue);text-decoration:none">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="back" href="index.html">← Home</a>
+  </div>
+</header>
+
+<section class="a-hero">
+  <div class="wrap">
+    <span class="kicker">Demo · Financial Services AIOps</span>
+    <h1>Financial Services AIOps Demo</h1>
+    <p class="lead"><strong>Operate a system that mixes microservices and legacy through a single ontology.</strong><br>
+      A variety of microservices run alongside <strong>IBM CICS, SAP, and TUXEDO</strong>-based services on Kubernetes.
+      The ontology binds services and resources together to analyze the causes of <strong>latency, bottlenecks, shortfalls, and saturation</strong>,
+      supporting both <strong>autonomous operations</strong> and <strong>human operations</strong>.</p>
+  </div>
+</section>
+
+<article class="article">
+
+  <h2>1. At a Glance</h2>
+  <p>This demo mirrors a financial institution's real operating environment, running a <strong>system that mixes microservices and legacy</strong> with AIOps.
+     It shows how the reality of modern services and aging back-end systems running together is observed and acted on as a single picture.</p>
+  <ul>
+    <li><strong>Mixed makeup</strong> — Many microservices + IBM CICS, SAP, and TUXEDO-based services.</li>
+    <li><strong>A single ontology</strong> — Binds services and resources together to analyze the root cause of problems.</li>
+    <li><strong>Two modes of operation</strong> — Supports both autonomous operations handled by AI and direct operations watched by people.</li>
+  </ul>
+
+  <h2>2. Makeup — Microservices and Legacy, on Kubernetes</h2>
+  <p>The services are of mixed kinds, but they all run on <strong>Kubernetes (k8s)</strong>.</p>
+  <table class="cmp">
+    <thead><tr><th>Component</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Microservices</td><td>Many modern services running on Kubernetes</td></tr>
+      <tr><td>IBM CICS</td><td>Mainframe service handling back-end transactions</td></tr>
+      <tr><td>SAP</td><td>ERP-class service handling core business</td></tr>
+      <tr><td>TUXEDO</td><td>Middleware service handling distributed transactions</td></tr>
+      <tr><td>Kubernetes</td><td>The execution foundation on which all these services run</td></tr>
+    </tbody>
+  </table>
+
+  <figure class="shot">
+    <figcaption>A variety of legacy is used; the legacy used in this financial AIOps demo is CICS and TUXEDO running on an IBM mainframe.</figcaption>
+    <img src="../img/da-cics.png" alt="IBM mainframe CICS and TUXEDO" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>SAP is the core banking system.</figcaption>
+    <img src="../img/da-sap.png" alt="SAP core banking" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>TIBCO EAI is used to integrate SAP and CICS.</figcaption>
+    <img src="../img/da-tibco.png" alt="Integrating SAP and CICS with TIBCO EAI" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>The internal processing of various legacy systems is instrumented.</figcaption>
+    <img src="../img/da-instrument.png" alt="Instrumenting legacy internal processing" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>After instrumentation, the ontology and AIOps are generated automatically.</figcaption>
+    <img src="../img/da-ont-auto.png" alt="Ontology and AIOps generated automatically" loading="lazy">
+  </figure>
+
+  <h2>3. Ontology — Combining Services and Resources</h2>
+  <p>The ontology binds together <strong>services</strong> (what they do) and <strong>resources</strong> (where they run).
+     On that foundation, it analyzes the causes of problems that surface during operations.</p>
+  <ul>
+    <li><strong>Latency</strong> — Finds the segments where responses slow down.</li>
+    <li><strong>Bottlenecks</strong> — Pinpoints where the flow gets blocked.</li>
+    <li><strong>Shortfalls</strong> — Reveals where resources fall short.</li>
+    <li><strong>Saturation</strong> — Isolates resources that have reached their limit.</li>
+  </ul>
+
+  <h2>4. Autonomous Operations — Workflows and Tracing</h2>
+  <p>Root cause analysis is handled by <strong>autonomous operations</strong>. Without people chasing every detail,
+     a defined procedure runs on its own to find the cause and carry it through to action.</p>
+  <ul>
+    <li><strong>Workflows</strong> — Automatically step through the diagnosis and remediation procedure.</li>
+    <li><strong>Trace</strong> — Follows calls that cross between services to build evidence.</li>
+  </ul>
+
+  <h2>5. Human-Watched Operations — Anomaly Detection and Chat</h2>
+  <p>When people operate directly, <strong>anomaly detection</strong> first signals the symptoms and <strong>chat</strong> is used to ask about and answer on the situation.
+     Autonomous and direct operations are not replacements for each other; they are used together as the situation calls for.</p>
+  <table class="cmp">
+    <thead><tr><th>Dimension</th><th>Autonomous Operations</th><th>Human Operations</th></tr></thead>
+    <tbody>
+      <tr><td>Method</td><td>Workflow + trace</td><td>Anomaly detection + chat</td></tr>
+      <tr><td>What it does</td><td>Root cause analysis and remediation, automatically</td><td>Catches symptoms first, then diagnoses through dialogue</td></tr>
+      <tr><td>The human role</td><td>Only decides whether to approve</td><td>Asks and judges directly</td></tr>
+    </tbody>
+  </table>
+  <blockquote><p>Regardless of microservices or legacy, it <strong>binds them into a single ontology</strong> and analyzes the causes of latency, bottlenecks, shortfalls, and saturation. <strong>Autonomous operations help through workflows and tracing, direct operations through anomaly detection and chat</strong> — together.</p></blockquote>
+
+</article>
+
+<div class="pillfoot">
+  <div class="wrap">
+    <a href="index.html">← Back to home</a>
+    <span class="muted">JuneAI · Autonomous Operations AIOps Platform</span>
+  </div>
+</div>
+</body>
+</html>

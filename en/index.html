@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<!--
+  JuneAI corporate homepage — main carousel (English edition)
+  · Google-style: white background · Google Blue (#1a73e8) accent · generous spacing · subtle shadow · rounded corners
+  · Single file, no build. Open: index.html in a browser.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuneAI — Autonomous Operations AIOps Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1a73e8; --blue-dark:#1557b0; --blue-soft:#e8f0fe;
+    --ink:#202124; --ink-2:#5f6368; --line:#dadce0; --bg:#fff; --bg-2:#f8f9fa;
+    --radius:12px; --shadow:0 1px 2px rgba(60,64,67,.1),0 1px 3px 1px rgba(60,64,67,.08);
+    --shadow-2:0 1px 3px rgba(60,64,67,.12),0 4px 8px 3px rgba(60,64,67,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Roboto','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ── Header ── */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:32px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.3px}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700}
+  .nav a{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500}
+  .nav a:hover{color:var(--ink)}
+  .nav .spacer{flex:1}
+  .lang{font-size:13px;font-weight:600;color:var(--ink-2)}
+  .lang a{color:var(--blue)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 24px;white-space:nowrap;flex-shrink:0;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:.15s}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-dark);box-shadow:var(--shadow)}
+  .btn-ghost{color:var(--blue);border-color:var(--line);background:#fff}
+  .btn-ghost:hover{background:var(--blue-soft);border-color:var(--blue-soft)}
+
+  /* ── Hero ── */
+  .hero{padding:60px 0 28px;text-align:center}
+  .hero h1{font-size:clamp(22px,3.3vw,44px);line-height:1.2;letter-spacing:-1px;font-weight:700;margin:0 0 12px}
+  .hero p{font-size:clamp(16px,2vw,20px);color:var(--ink-2);max-width:1100px;margin:0 auto}
+  .hero p strong,.slide p strong{color:var(--ink);font-weight:700}
+  .cases .cap strong,.logos .cap strong{color:var(--ink);font-weight:700}
+
+  /* ── Carousel ── */
+  .carousel{padding:12px 0 24px}
+  .c-head{display:flex;align-items:baseline;gap:16px;margin-bottom:20px}
+  .c-head h2{font-size:14px;font-weight:500;color:var(--ink-2);margin:0;letter-spacing:.3px}
+  .c-head .count{font-size:13px;color:var(--ink-2);margin-left:auto;font-variant-numeric:tabular-nums}
+  .viewport{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+  .track{display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+  .slide{min-width:100%;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:32px;padding:36px 40px}
+  .slide .copy{display:flex;flex-direction:column;justify-content:center;min-width:0}
+  .chip{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;height:26px;padding:0 12px;border-radius:100px;background:var(--blue-soft);color:var(--blue-dark);font-size:12px;font-weight:500;margin-bottom:16px}
+  .slide h3{font-size:clamp(20px,2.2vw,27px);line-height:1.25;letter-spacing:-.6px;font-weight:700;margin:0 0 12px}
+  .slide p{font-size:15px;line-height:1.65;color:var(--ink-2);margin:0}
+  .slide .more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:600;color:var(--blue);text-decoration:none;transition:gap .15s ease}
+  .slide .more:hover{gap:11px}
+  /* Screen-capture frame — browser chrome removed, filled to cover */
+  .shot{border-radius:12px;background:#fff;border:1px solid var(--line);aspect-ratio:2/1;display:grid;place-items:center;overflow:hidden}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .shot iframe{width:100%;height:100%;border:0;display:block}
+  .shot:empty::after{content:'';display:block}
+
+  .controls{display:flex;align-items:center;gap:12px;margin-top:20px}
+  .arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.15s}
+  .arrow:hover{background:var(--bg-2);color:var(--ink);box-shadow:var(--shadow)}
+  .dots{display:flex;gap:8px;flex:1;justify-content:center;flex-wrap:wrap}
+  .dot{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:.2s}
+  .dot[aria-current="true"]{background:var(--blue);width:24px;border-radius:100px}
+
+  /* ── Case studies (3-panel) ── */
+  .cases{padding:28px 0 56px}
+  .cases h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;font-weight:700;color:var(--ink);margin:0 0 12px}
+  .cases .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:none;white-space:nowrap;margin:0 auto 36px}
+  @media (max-width:980px){ .cases .cap{white-space:normal;max-width:760px} }
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1120px;margin:0 auto}
+  .case-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
+  .case-card:hover{box-shadow:0 6px 20px rgba(60,64,67,.14);border-color:var(--blue);transform:translateY(-2px)}
+  .case-body{padding:30px 28px 26px;display:flex;flex-direction:column;flex:1}
+  .case-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue);margin:0 0 18px}
+  .case-icon svg{width:24px;height:24px;display:block;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .case-cat{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.6px;text-transform:uppercase;margin:0 0 8px}
+  .case-body h3{font-size:19px;line-height:1.3;letter-spacing:-.3px;font-weight:700;color:var(--ink);margin:0 0 10px}
+  .case-body p{font-size:14.5px;line-height:1.65;color:var(--ink-2);margin:0 0 18px;flex:1}
+  .case-body p strong{color:var(--ink);font-weight:700}
+  .case-more{font-size:14px;font-weight:600;color:var(--blue);display:inline-flex;align-items:center;gap:6px;margin-top:auto;transition:gap .15s ease}
+  .case-card:hover .case-more{gap:11px}
+  @media (max-width:980px){ .case-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .case-grid{grid-template-columns:1fr} }
+
+  /* ── Supported legacy logo strip ── */
+  .logos{padding:28px 0 80px}
+  .logos h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;
+    font-weight:700;color:var(--ink);margin:0 0 12px}
+  .logos .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);
+    max-width:1180px;margin:0 auto 32px}
+  .logo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+  .logo-grid>.logo-item{flex:0 1 23%;min-width:0}
+  .logo-item{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    height:116px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;padding:16px;transition:.15s;
+    text-decoration:none;color:inherit;
+  }
+  .logo-item:hover{box-shadow:var(--shadow);border-color:#c6cbd1}
+  .logo-item img{max-width:130px;max-height:34px;object-fit:contain;transition:.15s}
+  .logo-item img[alt^="Apache"]{max-width:170px;max-height:56px}
+  .logo-item img[alt="Apache Flink"]{max-height:50px}
+  .logo-item .prod{font-size:14px;font-weight:600;color:#5f6368;letter-spacing:-.1px;text-align:center;line-height:1.3}
+  .logo-item:hover .prod{color:var(--ink)}
+  @media (max-width:860px){ .logo-grid>.logo-item{flex:0 1 46%} }
+
+  /* ── Footer ── */
+  footer{border-top:1px solid var(--line);background:var(--bg-2);padding:40px 0;margin-top:40px}
+  footer .inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+
+  @media (max-width:860px){
+    .slide{grid-template-columns:1fr;gap:28px;padding:32px 24px}
+    .nav a:not(.btn):not(.lang-link){display:none}
+    .hero{padding:32px 0 16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">J</span>JuneAI</div>
+    <a href="#cases">Features</a>
+    <a href="#legacy">Legacy</a>
+    <span class="spacer"></span>
+    <span class="lang"><a class="lang-link" href="../index.html">KO</a> · <strong style="color:var(--ink)">EN</strong></span>
+    <a class="btn btn-ghost" href="mailto:yohaim@gmail.com">Contact</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1>JuneAI is the AI platform that solves problems and drives decisions.</h1>
+    <p>JuneAI (JAI for short) uses ontologies to <strong>identify bottlenecks and problems</strong> in business processes, while its
+       <strong>agents and simulators support the right decisions</strong>. JuneAI
+       instruments a wide range of <strong>legacy systems, platforms, and services</strong>, and builds <strong>ontologies and agents</strong> on top of them.</p>
+  </section>
+
+  <section class="carousel wrap" id="features">
+    <div class="viewport">
+      <div class="track" id="track">
+
+        <!-- 0 Ontology opening -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Ontology</span>
+            <h3>JuneAI's ontology is simple and focused on decisions</h3>
+            <p>The JuneAI ontology <strong>needs no RAG, graph database, pipeline, data lake, metadata, lineage, or BI.</strong>
+               It requires no change to existing systems and no extra development — and <strong>no restart</strong>, not even <strong>staff retraining.</strong></p>
+          </div>
+          <div class="shot"><img src="../img/cs-ontology-open.png" alt="JuneAI ontology decision screen" loading="lazy"></div>
+        </article>
+
+        <!-- 1 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Autonomous Operations</span>
+            <h3>Diagnosis and remediation are ready even at 3 a.m.</h3>
+            <p>JuneAI supports <strong>autonomous operations and self-healing</strong>, and lets you compose many workflows.
+               When a problem occurs, the <strong>diagnosis and remediation are already prepared</strong> — the <strong>operator only has to approve</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-self-healing.png" alt="Self-healing workflow screen" loading="lazy"></div>
+        </article>
+
+        <!-- 2 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Anomaly Detection</span>
+            <h3>It finds and heals symptoms that used to go unnoticed</h3>
+            <p>Whether alerts are flooding in or none fire at all, JuneAI <strong>starts from anomaly detection, analyzes the root cause</strong>, and resolves the problem —
+               JuneAI autonomous operations works <strong>even with no symptom, no signal, and no alert</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-anomaly-heal.png" alt="Anomaly detection and healing screen" loading="lazy"></div>
+        </article>
+
+        <!-- 2b Accurate, broad anomaly detection -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Anomaly Detection</span>
+            <h3>Accurate, broad anomaly detection</h3>
+            <p>With anomaly detection you can <strong>catch early warning signs before they become incidents</strong> and respond ahead of time.
+               Reach for <strong>anomaly detection first</strong>, before root cause analysis.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-anomaly-wide.png" alt="Accurate, broad anomaly detection screen" loading="lazy"></div>
+        </article>
+
+        <!-- 2c Progressively improving RCA -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Root Cause Analysis</span>
+            <h3>Root cause analysis that keeps improving</h3>
+            <p>With leading <strong>JuneAI Observability</strong> you can understand and refine root cause analysis.
+               JuneAI's superior <strong>harness engineering</strong> raises the <strong>accuracy of AI and LLMs</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-rca-progress.png" alt="Progressive root cause analysis screen" loading="lazy"></div>
+        </article>
+
+        <!-- 3 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Legacy Integration</span>
+            <h3>Legacy is easier — and done better — than microservices</h3>
+            <p>JuneAI <strong>easily builds ontologies and agents</strong> on legacy systems such as IBM CICS, SAP, SIEBEL, Oracle EBS, PeopleSoft, TUXEDO, and SWIFT.
+               With JuneAI you can <strong>monitor end-to-end transactions that begin in microservices and finish deep inside a legacy system</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-legacy-easy.png" alt="End-to-end legacy tracing screen" loading="lazy"></div>
+        </article>
+
+        <!-- 4 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Trace Propagation</span>
+            <h3>It reconnects broken context and weaves signals into one</h3>
+            <p>JuneAI provides tools that <strong>propagate and reconnect traces even where context propagation normally breaks</strong>.
+               It <strong>extends OpenTelemetry</strong> to <strong>correlate</strong> async flows, kernel signals, legacy propagation, and profiles <strong>into a single thread</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/slide4.png" alt="Trace propagation screen" loading="lazy"></div>
+        </article>
+
+        <!-- 5 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Legacy Root Cause Analysis</span>
+            <h3>Root cause analysis across dozens of legacy systems</h3>
+            <p>With <strong>distributed tracing and profiling</strong>, JuneAI <strong>analyzes root causes inside dozens of legacy systems</strong> —
+               webMethods Integration Server, TIBCO BusinessWorks, IBM CICS, SAP, SIEBEL, Oracle EBS, PeopleSoft, TUXEDO, and more. It then <strong>expresses them easily as an ontology</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-legacy-rca.png" alt="Legacy system root cause analysis screen" loading="lazy"></div>
+        </article>
+
+        <!-- 6 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Ontology</span>
+            <h3>Services, resources, and events on one screen with ontology</h3>
+            <p>The ontology <strong>surfaces events such as latency, saturation, bottlenecks, deployments, changes, and call order in real time.</strong>
+               The AI interacts with the ontology, and this is how <strong>industry-specific ontologies</strong> are built.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-ontology-view.png" alt="Services, resources, and events ontology screen" loading="lazy"></div>
+        </article>
+
+        <!-- 7 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Benchmark</span>
+            <h3>Top scores on public benchmarks, running on-premises</h3>
+            <p>JuneAI achieved <strong>top scores on public benchmarks</strong> such as IBM ITBench and SREGym, and <strong>runs its agents on-premises</strong> with open-source LLMs —
+               <strong>low cost, and no conflict with security policies.</strong></p>
+          </div>
+          <div class="shot"><img src="../img/cs-benchmark.png" alt="Top public benchmark score screen" loading="lazy"></div>
+        </article>
+
+        <!-- 8 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Accuracy</span>
+            <h3>Accurate root cause analysis even with small models</h3>
+            <p>JuneAI's root cause accuracy stays <strong>excellent not only on frontier models but also on lightweight on-premises open-source models</strong>.
+               What guarantees that accuracy is a <strong>trustworthy, harness-based approach to root cause analysis</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-small-model.png" alt="Small-model root cause accuracy screen" loading="lazy"></div>
+        </article>
+
+        <!-- 9 -->
+        <article class="slide">
+          <div class="copy">
+            <span class="chip">Non-intrusive Instrumentation</span>
+            <h3>Instrumentation with no code change and no restart</h3>
+            <p>JuneAI agents instrument a running service instantly — <strong>no code change, no restart.</strong>
+               They <strong>record and inspect method calls on a live Java service without stopping it</strong>, and <strong>reproduce bugs that only appear in production, right where they happen, without a restart or redeploy</strong>.</p>
+          </div>
+          <div class="shot"><img src="../img/cs-zero-code.png" alt="Non-intrusive instrumentation screen" loading="lazy"></div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="arrow" id="prev" aria-label="Previous slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="dots" id="dots"></div>
+      <button class="arrow" id="next" aria-label="Next slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Hero intro (paragraphs + architecture image) -->
+  <section class="hero wrap" style="padding-top:8px">
+    <p style="margin-top:0">JuneAI agents identify, analyze, and resolve root causes across both technology and business.
+       They identify hidden problems — latency, shortages, bottlenecks — and <strong>analyze the cause and act</strong>.
+       Agents and ontologies are simply means. Technology is a method, not an end.
+       <strong>JuneAI's primary purpose is to understand the customer's problem precisely, solve it, and help them make the best decision.</strong></p>
+    <img src="../img/hero-stack.png" alt="End-to-end architecture across data, legacy, microservices, and platforms"
+         style="display:block;max-width:900px;width:100%;height:auto;margin:24px auto 24px" loading="lazy">
+    <p><strong>Without changing existing systems, in a short time and at low cost</strong>, you can <strong>build an autonomous-operations and decision-making environment</strong> with ontologies, agents, and simulators.
+       You <strong>keep your existing organization and roles</strong>, and <strong>improve legacy without changing it</strong>.
+       It is <strong>not vendor-locked</strong>, and every deployment works well <strong>with no restart and no code change</strong>.</p>
+  </section>
+
+  <section class="cases wrap" id="cases">
+    <h2>What the JuneAI autonomous operations platform does</h2>
+    <p class="cap">On the foundation of Observability and AIOps — ontologies and agents, legacy, and business simulation — it delivers <strong>autonomous operations</strong> and <strong>self-healing</strong></p>
+    <div class="case-grid">
+
+      <!-- 1 — Autonomous Operations -->
+      <a class="case-card" href="case-autonomous.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="case-cat">Autonomous Operations</span>
+          <h3>People by day, AI by night</h3>
+          <p>There is <strong>autonomous operations</strong> and there is <strong>direct operations</strong>, where the operator decides directly.
+             Like cruise control and full self-driving, JuneAI <strong>switches to fit the situation</strong>.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- 2 — AIOps -->
+      <a class="case-card" href="case-aiops.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><path d="M3 13h3l2 5 4-12 2 7h4"/></svg></span>
+          <span class="case-cat">Agents</span>
+          <h3>Autonomous agents completed by a harness</h3>
+          <p>On the single foundation of <strong>observability and instrumentation</strong>, AIOps and ontology stand together.
+             The keys are <strong>proprietary instrumentation with no restart or code change</strong> and <strong>agents tuned by a harness</strong>.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- 3 — Ontology -->
+      <a class="case-card" href="case-ontology.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.6 7.6 10.6 16M16.4 7.6 13.4 16M8 6h8"/></svg></span>
+          <span class="case-cat">Ontology</span>
+          <h3>No change — cheap and fast</h3>
+          <p>With no data pipeline, lake, lineage, or BI, JuneAI builds an ontology <strong>while leaving operational code untouched</strong>.
+             The real edge is <strong>harness engineering</strong> — <strong>frontier-grade accuracy</strong> even with cheap open-source models.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- 4 — Legacy -->
+      <a class="case-card" href="case-legacy.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/></svg></span>
+          <span class="case-cat">Legacy</span>
+          <h3>The core still lives in legacy</h3>
+          <p>JuneAI <strong>traces down to the internal method level without touching legacy</strong>. It traces the full path — SAP RFC, TUXEDO methods, and more —
+             to <strong>analyze root causes</strong> and deliver them as an <strong>industry-specific ontology</strong>.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- 5 — Simulation (business ontology) -->
+      <a class="case-card" href="case-business.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg></span>
+          <span class="case-cat">Simulation</span>
+          <h3>Same problem, a wider world</h3>
+          <p>Bottlenecks, shortages, latency, change — <strong>technology and business solve the same problem in the end</strong>. But business differs by industry,
+             so it is <strong>hard to standardize</strong> and needs <strong>simulation</strong> to preview outcomes before deciding.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- 6 — Observability (ontology without a data platform) -->
+      <a class="case-card" href="case-observability.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="case-cat">Instrumentation & Observability</span>
+          <h3>No data platform — observability alone</h3>
+          <p>An ontology usually demands a heavy data platform. Instead, JuneAI uses <strong>observability</strong>
+             so a <strong>single team can adopt it right away</strong>. It even <strong>fills OpenTelemetry's legacy and async gaps</strong>.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- 7 — Context, change, state -->
+      <a class="case-card" href="case-context.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="case-cat">Business Observability</span>
+          <h3>Manage context, change, and state</h3>
+          <p>JuneAI <strong>keeps context, records changes, and manages state</strong>. It monitors events and relationships and simulates impact and change.
+             It adds to <strong>legacy without changing it</strong>, and tracks <strong>more precisely and accurately than Palantir</strong>.</p>
+          <span class="case-more">Learn more →</span>
+        </div>
+      </a>
+
+      <!-- Demo card — telecom -->
+      <a class="case-card" href="demo-telecom.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 000 7M15.5 8.5a5 5 0 010 7M5.6 5.6a9 9 0 000 12.8M18.4 5.6a9 9 0 010 12.8"/></svg></span>
+          <span class="case-cat">Telecom · Order/Fault Management</span>
+          <h3>Telecom order & fault management demo</h3>
+          <p>On top of TIBCO FOS, Oracle BRM, Siebel, ASAP, and MetaSolv, JuneAI builds an ontology for <strong>converged fixed-mobile bundle activation and circuit/network fault management</strong>.
+             It <strong>analyzes the cause</strong> of processing delays, network failures, and order fallout, and <strong>simulates solutions</strong> to pick the best action.</p>
+          <span class="case-more">See the demo →</span>
+        </div>
+      </a>
+
+      <!-- Demo card — finance AIOps -->
+      <a class="case-card" href="demo-aiops.html">
+        <div class="case-body">
+          <span class="case-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></span>
+          <span class="case-cat">Finance · AIOps</span>
+          <h3>Financial AIOps demo</h3>
+          <p>A range of microservices run alongside <strong>IBM CICS, SAP, and TUXEDO</strong> on Kubernetes.
+             The ontology ties services and resources together to <strong>analyze the cause of latency, bottlenecks, shortages, and saturation</strong>, and supports <strong>both autonomous and human operations</strong>.</p>
+          <span class="case-more">See the demo →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="logos wrap" id="legacy">
+    <h2>JuneAI applies agents and ontologies to a wide range of legacy</h2>
+    <p class="cap">JuneAI analyzes root causes deep inside many legacy systems.
+       Building ontologies and agents on legacy lets you <strong>improve the business</strong> and <strong>operate effectively</strong>.
+       <strong>JuneAI's legacy expertise and know-how are unmatched.</strong> The AI platform applies even to SAP and CICS.</p>
+    <div class="logo-grid">
+      <!-- IBM -->
+      <a class="logo-item" href="https://www.ibm.com/products/cics-transaction-server" target="_blank" rel="noopener"><img src="../img/logo-ibm.svg" alt="IBM"><span class="prod">CICS</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/mq" target="_blank" rel="noopener"><img src="../img/logo-ibm.svg" alt="IBM"><span class="prod">MQ</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/communications-server-for-data-center-deployment" target="_blank" rel="noopener"><img src="../img/logo-ibm.svg" alt="IBM"><span class="prod">SNA Server</span></a>
+      <a class="logo-item" href="https://www.hcl-software.com/domino" target="_blank" rel="noopener"><img src="../img/logo-ibm.svg" alt="IBM"><span class="prod">Lotus Notes</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/business-automation-workflow" target="_blank" rel="noopener"><img src="../img/logo-ibm.svg" alt="IBM"><span class="prod">BPM</span></a>
+      <a class="logo-item" href="https://www.ibm.com/products/maximo" target="_blank" rel="noopener"><img src="../img/logo-ibm.svg" alt="IBM"><span class="prod">Maximo</span></a>
+      <!-- Oracle -->
+      <a class="logo-item" href="https://www.oracle.com/database/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">Database</span></a>
+      <a class="logo-item" href="https://www.oracle.com/middleware/technologies/tuxedo.html" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">Tuxedo</span></a>
+      <a class="logo-item" href="https://www.oracle.com/applications/ebusiness/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">E-Business Suite</span></a>
+      <a class="logo-item" href="https://www.oracle.com/applications/peoplesoft/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">PeopleSoft</span></a>
+      <a class="logo-item" href="https://www.oracle.com/communications/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">OSM</span></a>
+      <a class="logo-item" href="https://www.oracle.com/communications/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">BRM</span></a>
+      <a class="logo-item" href="https://www.oracle.com/communications/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">MetaSolv</span></a>
+      <a class="logo-item" href="https://www.oracle.com/industries/utilities/" target="_blank" rel="noopener"><img src="../img/logo-oracle.svg" alt="Oracle"><span class="prod">CCB</span></a>
+      <!-- SAP -->
+      <a class="logo-item" href="https://www.sap.com/products/erp.html" target="_blank" rel="noopener"><img src="../img/logo-sap.svg" alt="SAP"><span class="prod">ERP · S/4HANA</span></a>
+      <!-- TIBCO -->
+      <a class="logo-item" href="https://www.tibco.com/products/tibco-businessworks" target="_blank" rel="noopener"><img src="../img/logo-tibco.svg" alt="TIBCO"><span class="prod">BusinessWorks</span></a>
+      <a class="logo-item" href="https://www.tibco.com/" target="_blank" rel="noopener"><img src="../img/logo-tibco.svg" alt="TIBCO"><span class="prod">Fulfillment<br>Order Suite</span></a>
+      <!-- Software AG -->
+      <a class="logo-item" href="https://www.softwareag.com/" target="_blank" rel="noopener"><img src="../img/logo-webmethods.svg" alt="Software AG"><span class="prod">webMethods<br>Integration Server</span></a>
+      <a class="logo-item" href="https://www.softwareag.com/" target="_blank" rel="noopener"><img src="../img/logo-webmethods.svg" alt="Software AG"><span class="prod">webMethods<br>API Gateway</span></a>
+      <!-- Amdocs -->
+      <a class="logo-item" href="https://www.amdocs.com/products-services/kenan" target="_blank" rel="noopener"><img src="../img/logo-amdocs.svg" alt="Amdocs"><span class="prod">Kenan</span></a>
+      <!-- Teradata -->
+      <a class="logo-item" href="https://www.teradata.com/" target="_blank" rel="noopener"><img src="../img/logo-teradata.svg" alt="Teradata"><span class="prod">Data Warehouse</span></a>
+      <!-- SWIFT -->
+      <a class="logo-item" href="https://www.swift.com/" target="_blank" rel="noopener"><img src="../img/logo-swift.svg" alt="SWIFT"><span class="prod">Payments Network</span></a>
+      <!-- Apache -->
+      <a class="logo-item" href="https://spark.apache.org/" target="_blank" rel="noopener"><img src="../img/logo-spark.svg" alt="Apache Spark"></a>
+      <a class="logo-item" href="https://flink.apache.org/" target="_blank" rel="noopener"><img src="../img/logo-flink.svg" alt="Apache Flink"></a>
+    </div>
+  </section>
+
+  <!-- Demo CTA -->
+  <section class="cases wrap" id="demo-cta">
+    <h2>JuneAI offers a telecom order & fault management demo and a financial AIOps demo.</h2>
+    <p class="cap" style="white-space:normal;max-width:1040px">On diverse legacy such as SAP and CICS, JuneAI <strong>builds ontologies, agents, and simulators</strong>
+       and runs demos that handle <strong>root cause analysis and decision-making</strong>. You can <strong>request a demo</strong> anytime.
+       It makes it easy to see <strong>what sets JuneAI apart from competing products</strong>.</p>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap inner">
+    <div><strong style="color:var(--ink)">JuneAI</strong> · Autonomous Operations AIOps Platform</div>
+    <div>© 2026 JuneAI. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const track = document.getElementById('track');
+    const slides = track.children;
+    const total = slides.length;
+    const dots = document.getElementById('dots');
+    let i = 0, timer = null;
+
+    for (let n = 0; n < total; n++) {
+      const b = document.createElement('button');
+      b.className = 'dot';
+      b.setAttribute('aria-label', 'Slide ' + (n + 1));
+      b.addEventListener('click', () => go(n, true));
+      dots.appendChild(b);
+    }
+
+    function go(n, stop) {
+      i = (n + total) % total;
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      [...dots.children].forEach((d, k) => d.setAttribute('aria-current', k === i ? 'true' : 'false'));
+      if (stop) rest();
+    }
+    function rest() { clearInterval(timer); timer = setInterval(() => go(i + 1), 7000); }
+
+    document.getElementById('prev').addEventListener('click', () => go(i - 1, true));
+    document.getElementById('next').addEventListener('click', () => go(i + 1, true));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') go(i - 1, true);
+      if (e.key === 'ArrowRight') go(i + 1, true);
+    });
+    let x0 = null;
+    track.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1), true);
+      x0 = null;
+    }, { passive: true });
+
+    go(0);
+    rest();
+  })();
+</script>
+</body>
+</html>
