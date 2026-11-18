@@ -54,6 +54,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
   .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
   .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
@@ -116,6 +120,31 @@
   </ul>
   <p>화면(프론트엔드)에서 출발한 하나의 요청이 백엔드를 지나 <strong>레거시 깊숙한 처리 단계</strong>에 이르기까지, 끊김 없이 <strong>한 줄기로 이어진 지도</strong>를 그린다. 그래서 "어디서 느려졌는지, 어디서 틀어졌는지"를 정확히 짚어 낸다.</p>
 
+  <figure class="shot">
+    <figcaption>다양한 방법으로 문맥, 상태, 변경을 이해할 수 있다. 전체적인 처리 흐름을 아래처럼 이해할 수 있다.</figcaption>
+    <img src="img/ai-flow.png" alt="전체 처리 흐름" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>다운스트림, 업스트림을 이해할 수 있다.</figcaption>
+    <img src="img/ai-updown.png" alt="다운스트림·업스트림" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>문맥을 전달하고, 상세한 호출 과정을 시간 순서로 이해할 수 있다.</figcaption>
+    <img src="img/ai-timeline.png" alt="시간 순서 호출 과정" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>하단에는 변경을 확인할 수 있다.</figcaption>
+    <img src="img/ai-edit.png" alt="변경 직접 적용" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>온톨로지는 지연, 부족, 병목 등 문제를 하이라이트해서 출력한다.</figcaption>
+    <img src="img/ai-highlight.png" alt="문제 하이라이트" loading="lazy">
+  </figure>
+
   <h2>3. 핵심은 "독자적 계측" — 재시작도, 코드 변경도 없이</h2>
   <p>JuneAI를 떠받치는 가장 핵심적인 기술은 <strong>독자적인 계측(Instrumentation)</strong>이다. 운영을 <strong>멈추지 않고도</strong>, 애플리케이션 <strong>코드를 고치지 않고도</strong>, <strong>재시작 없이</strong> — 필요한 지점에 언제든 관측·추적 지점을 적용한다. 평소에는 가볍게 돌다가, 문제가 의심되는 바로 그 지점에 즉시 "렌즈"를 들이대는 방식이다.</p>
   <ul>
@@ -128,6 +157,18 @@
   <p>이 독자적 계측이 있기에 <strong>라이브 디버깅(Live Debugging)</strong>이 가능하다. 운영 중인 애플리케이션을 <strong>실시간으로</strong> 디버깅하는 것이다. 보통은 시스템을 멈추거나, 테스트 환경을 따로 만들거나, 특별한 로그를 심어 재배포해야 하지만 — 그 모두가 시간과 위험을 부른다.</p>
   <p>JuneAI는 다르다. <strong>계측도, 디버깅도 — 재시작과 코드 변경이 전혀 필요 없다.</strong> 운영 환경의 문제를 <strong>그 자리에서 곧바로</strong> 식별하고 해결한다.</p>
   <blockquote><p>💡 <strong>왜 중요한가</strong> — 운영 환경에서만 재현되는 문제, 어쩌다 한 번 터지는 문제는 전통적인 방법으로는 잡기 매우 어렵다. 독자적 계측과 라이브 디버깅은 <strong>문제가 실제로 일어나는 바로 그 순간, 그 자리</strong>에서 원인을 포착한다 — 운영을 단 한 순간도 멈추지 않고.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>라이브 디버깅 화면이다.</figcaption>
+    <img src="img/ai-livedebug.png" alt="라이브 디버깅 화면" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>계측을 정의하는 화면이다.</figcaption>
+    <img src="img/ai-instrument.png" alt="계측 정의 화면" loading="lazy">
+  </figure>
+
+  <blockquote><p>✅ <strong>언제든, 어디든</strong> — 운영 중에도 원하는 지점에 관측을 더하거나 거둔다.</p></blockquote>
 
   <h2>4. 오픈소스 모델로도 높은 정확도를 — "하네스 엔지니어링"</h2>
   <p>뛰어난 AIOps는 두 기둥 위에 선다. 하나는 앞서 본 <strong>독자적인 Observability와 계측</strong> — 레거시 내부까지 끊김 없이 들여다보는 "눈"이다. 다른 하나는 그렇게 모은 신호를 <strong>정확한 판단과 조치로 바꾸는 에이전트</strong>이고, 이 에이전트를 떠받치는 것이 바로 <strong>하네스 엔지니어링(Harness Engineering)</strong>이다.</p>
@@ -148,6 +189,26 @@
     <p><strong>추적(Tracing)으로 하네스를 들여다본다</strong></p>
     <p>AIOps의 Observability는 시스템만이 아니라 <strong>에이전트 자신에게도</strong> 향한다. JuneAI는 분산 추적을 활용해 <strong>하네스가 동작하는 과정 하나하나를 분석</strong>한다. AI가 어떤 맥락을 받아, 어떤 판단을 거쳐, 어떤 조치에 이르렀는지를 추적으로 투명하게 들여다보며 하네스를 계속 개선한다. "블랙박스 AI"가 아니라 <strong>관찰하고 검증할 수 있는 AI</strong>이다.</p>
   </blockquote>
+
+  <figure class="shot">
+    <figcaption>하네스 엔지니어링으로 AI의 모든 처리 과정을 디버깅할 수 있다.</figcaption>
+    <img src="img/ai-harness-debug.png" alt="하네스 처리 과정 디버깅" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>MCP 도구 호출 등 모든 처리 과정을 추적한다.</figcaption>
+    <img src="img/ai-mcp-trace.png" alt="MCP 도구 호출 추적" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>아래처럼 판정문을 작성한다.</figcaption>
+    <img src="img/ai-verdict.png" alt="판정문 작성" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>원인을 분석하고, 런북에 기반해서 조치를 실행한다.</figcaption>
+    <img src="img/ai-runbook.png" alt="런북 기반 조치 실행" loading="lazy">
+  </figure>
 
   <h2>5. 정리 — 하나의 기반 위에, 하네스 에이전트로</h2>
   <ul>

@@ -48,6 +48,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   /* 비교 표 */
   .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
   .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
@@ -138,6 +142,31 @@
   <p>주문 관리와 고장 관리는 각각 <strong>온톨로지로 표현</strong>된다.
      주문·서비스·회선 자원·인시던트가 서로 어떻게 연결되어 있는지가 한 화면에서 드러나므로,
      "이 장애가 어떤 주문과 고객에게 번지는가"를 사람도 에이전트도 같은 그림으로 본다.</p>
+
+  <figure class="shot">
+    <figcaption>과거에는 아래처럼 네트워크 구성을 확인한다.</figcaption>
+    <img src="img/tel-metasolv-network.png" alt="MetaSolv 네트워크 구성" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>주문 및 프로비저닝은 아래처럼 처리된다.</figcaption>
+    <img src="img/tel-metasolv-order.png" alt="MetaSolv 주문·프로비저닝" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>온톨로지 기반의 주문 및 고장 관리는 아래와 같다.</figcaption>
+    <img src="img/tel-ont-manage.png" alt="온톨로지 기반 주문·고장 관리" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>지도에서 특정 고장을 클릭하면, 상세 처리 과정이 출력된다.</figcaption>
+    <img src="img/tel-fault-detail.png" alt="고장 상세 처리 과정" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>지도에서 네트워크 구성을 확인하고, 오른쪽 특정 호출과 매핑된다.</figcaption>
+    <img src="img/tel-map-mapping.png" alt="지도·호출 매핑" loading="lazy">
+  </figure>
 
   <h2>6. 문제 → 원인 분석 → 시뮬레이션 → 의사결정</h2>
   <p>주문과 고장 관리에서는 다양한 문제가 생긴다. 예를 들면 이런 것들이다.</p>

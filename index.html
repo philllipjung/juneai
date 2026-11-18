@@ -63,9 +63,9 @@
   .slide p{font-size:15px;line-height:1.65;color:var(--ink-2);margin:0}
   .slide .more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:600;color:var(--blue);text-decoration:none;transition:gap .15s ease}
   .slide .more:hover{gap:11px}
-  /* 화면 캡처 자리 — 잘라내지 않고(contain) 전체를 보여 준다 */
-  .shot{border-radius:12px;background:#fff;border:1px solid var(--line);aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
-  .shot img{width:100%;height:100%;object-fit:contain;display:block}
+  /* 화면 캡처 자리 — 브라우저 크롬을 걷어낸 캡처를 프레임에 꽉 채운다(cover) */
+  .shot{border-radius:12px;background:#fff;border:1px solid var(--line);aspect-ratio:2/1;display:grid;place-items:center;overflow:hidden}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
   .shot iframe{width:100%;height:100%;border:0;display:block}   /* 유튜브 임베드 — 칸을 꽉 채운다 */
   .shot:empty::after{content:'';display:block}
 
@@ -150,8 +150,8 @@
   <section class="hero wrap">
     <h1>JuneAI는 문제를 해결하고 의사결정을 돕는 AI 플랫폼이다.</h1>
     <p>JuneAI(줄여서 JAI 자이)는 온톨로지로 업무 프로세스의 <strong>병목과 문제점을 식별</strong>하고,
-       <strong>에이전트와 시뮬레이터는 올바른 의사결정을 지원</strong>한다. JuneAI는 <strong>AIOps로부터 시작</strong>해서,
-       다양한 <strong>레거시·플랫폼·서비스</strong>를 계측한다. 이를 토대로 <strong>온톨로지와 에이전트를 구성</strong>한다.</p>
+       <strong>에이전트와 시뮬레이터는 올바른 의사결정을 지원</strong>한다. JuneAI는
+       다양한 <strong>레거시·플랫폼·서비스</strong>를 계측하고, 이를 토대로 <strong>온톨로지와 에이전트를 구성</strong>한다.</p>
   </section>
 
   <section class="carousel wrap" id="features">
@@ -166,7 +166,7 @@
             <p>JuneAI 온톨로지는 <strong>RAG·그래프·파이프라인·레이크·메타데이터·리니지·BI를 필요로 하지 않는다.</strong>
                기존 시스템을 변경하거나 추가 개발이 필요 없고, <strong>재시작도 필요 없다</strong> — 심지어 <strong>직원 교육도 필요 없다.</strong></p>
           </div>
-          <div class="shot"><!-- 이미지 --></div>
+          <div class="shot"><img src="img/cs-ontology-open.png" alt="JuneAI 온톨로지 의사결정 화면" loading="lazy"></div>
         </article>
 
         <!-- 1 -->
@@ -177,7 +177,7 @@
             <p>JuneAI는 <strong>자율 운영과 자가 치유</strong>를 지원하며 다양한 워크플로우를 구성할 수 있다.
                문제가 발생하면 <strong>진단과 조치안이 이미 준비돼 있어</strong> — <strong>운영자는 승인 여부만 결정</strong>하면 된다.</p>
           </div>
-          <div class="shot"><img src="img/slide1.png" alt="자가 치유 워크플로우 화면" loading="lazy"></div>
+          <div class="shot"><img src="img/cs-self-healing.png" alt="자가 치유 워크플로우 화면" loading="lazy"></div>
         </article>
 
         <!-- 2 -->
@@ -188,7 +188,7 @@
             <p>알람이 쏟아지든 하나도 없든, JuneAI는 <strong>이상 탐지에서 출발해 근본 원인을 분석</strong>하고 문제를 해결한다 —
                <strong>무증상·무신호·무알람의 경우에도</strong> JuneAI 자율 운영은 작동한다.</p>
           </div>
-          <div class="shot"><img src="img/slide2.png" alt="이상 탐지 화면" loading="lazy"></div>
+          <div class="shot"><img src="img/cs-anomaly-heal.png" alt="이상 탐지·치유 화면" loading="lazy"></div>
         </article>
 
         <!-- 2b 정확하고 광범위한 이상탐지 (2026-10-23 추가) -->
@@ -199,7 +199,7 @@
             <p>이상탐지를 사용하면, <strong>장애가 되기 이전에 사전 징후를 포착</strong>하고 사전에 대응할 수 있다.
                근본 원인 분석 이전에 <strong>이상 탐지를 먼저 사용</strong>하라.</p>
           </div>
-          <div class="shot"><img src="img/slide2.png" alt="정확하고 광범위한 이상탐지 화면" loading="lazy"></div>
+          <div class="shot"><img src="img/cs-anomaly-wide.png" alt="정확하고 광범위한 이상탐지 화면" loading="lazy"></div>
         </article>
 
         <!-- 2c 점진적으로 개선되는 근본 원인 분석 (2026-10-24 추가) -->
@@ -210,7 +210,7 @@
             <p>선도적인 <strong>JuneAI Observability</strong>를 사용해서 근본 원인 분석을 이해하고 개선할 수 있다.
                우수한 <strong>JuneAI의 하네스 엔지니어링</strong>으로, <strong>AI와 LLM의 정확도를 향상</strong>할 수 있다.</p>
           </div>
-          <div class="shot"><img src="img/slide2.png" alt="AI·LLM 근본 원인 분석 화면" loading="lazy"></div>
+          <div class="shot"><img src="img/cs-rca-progress.png" alt="점진적 근본 원인 분석 화면" loading="lazy"></div>
         </article>
 
         <!-- 3 -->
@@ -222,10 +222,7 @@
                <strong>온톨로지와 에이전트를 손쉽게 구성</strong>할 수 있다. JuneAI로 마이크로서비스에서 시작해
                <strong>레거시 시스템 안에서 끝나는 전 구간 거래를 모니터링</strong>할 수 있다.</p>
           </div>
-          <div class="shot"><iframe src="https://www.youtube.com/embed/jmJYg4PNRlg?si=WCFK_Kx5iU7s2ITV"
-               title="JuneAI — 레거시에서 마이크로서비스까지 전 구간 추적" loading="lazy"
-               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="shot"><img src="img/cs-legacy-easy.png" alt="레거시 전 구간 추적 화면" loading="lazy"></div>
         </article>
 
         <!-- 4 -->
@@ -248,7 +245,7 @@
                IBM CICS·SAP·SIEBEL·Oracle EBS·PeopleSoft·TUXEDO를 비롯한 <strong>수십 종의 레거시 시스템
                내부의 근본 원인을 분석</strong>한다. 이를 <strong>온톨로지로 쉽게 표현</strong>한다.</p>
           </div>
-          <div class="shot"><!-- 이미지 --></div>
+          <div class="shot"><img src="img/cs-legacy-rca.png" alt="레거시 시스템 근본원인 분석 화면" loading="lazy"></div>
         </article>
 
         <!-- 6 -->
@@ -259,7 +256,7 @@
             <p>온톨로지는 <strong>지연·포화·병목·배포·변경·호출 순서 같은 이벤트를 실시간으로 드러낸다.</strong>
                AI는 온톨로지와 상호작용하고, 이러한 방식으로 <strong>산업별 온톨로지를 구성</strong>한다.</p>
           </div>
-          <div class="shot"><!-- 이미지 --></div>
+          <div class="shot"><img src="img/cs-ontology-view.png" alt="서비스·리소스·이벤트 온톨로지 화면" loading="lazy"></div>
         </article>
 
         <!-- 7 -->
@@ -271,7 +268,7 @@
                오픈소스 LLM과 함께 <strong>에이전트를 온프레미스로 구동</strong>한다 — <strong>비용이 낮고,
                보안 정책과도 충돌하지 않는다.</strong></p>
           </div>
-          <div class="shot"><!-- 이미지 --></div>
+          <div class="shot"><img src="img/cs-benchmark.png" alt="공개 벤치마크 최상위 점수 화면" loading="lazy"></div>
         </article>
 
         <!-- 8 -->
@@ -282,7 +279,7 @@
             <p>JuneAI의 근본원인 정확도는 프런티어 모델뿐 아니라 <strong>가벼운 온프레미스 오픈소스 모델에서도
                뛰어나게 유지</strong>된다. 그 정확도를 보장하는 것은 <strong>믿을 수 있는 하네스 기반의 근본원인 분석</strong> 방식이다.</p>
           </div>
-          <div class="shot"><!-- 이미지 --></div>
+          <div class="shot"><img src="img/cs-small-model.png" alt="작은 모델 근본원인 분석 정확도 화면" loading="lazy"></div>
         </article>
 
         <!-- 9 -->
@@ -294,7 +291,7 @@
                <strong>살아 있는 자바 서비스를 멈추지 않고</strong> 메서드 호출을 기록·확인하고,
                <strong>운영에서만 재현되는 버그를 재시작·재배포 없이 그 자리에서 확인</strong>한다.</p>
           </div>
-          <div class="shot"><!-- 이미지 --></div>
+          <div class="shot"><img src="img/cs-zero-code.png" alt="무중단 계측 화면" loading="lazy"></div>
         </article>
 
       </div>

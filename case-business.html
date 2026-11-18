@@ -48,6 +48,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   /* 비교 2열 카드 */
   .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
   .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
@@ -158,6 +162,36 @@
     <div class="step"><span class="n">4</span><h4>의사결정</h4><p>결과(납기준수율·비용)를 비교해 가장 나은 안을 선택</p></div>
   </div>
   <blockquote><p>🔮 이것이 <strong>디지털 트윈</strong>의 아이디어이다. 실제 업무 시스템을 건드리지 않고, 온톨로지 위에 <strong>가상의 쌍둥이</strong>를 만들어 "이렇게 바꾸면 어떻게 될까?"를 안전하게 미리 돌려본다. JuneAI는 <strong>SAP 납품 지연 시뮬레이션</strong>처럼, 구매와 생산을 연계해 결정의 결과를 숫자로 보여준다.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>업무 온톨로지에서 원인을 식별하고, 원인을 분석한다. 기술 온톨로지와 업무 온톨로지 간에 큰 차이점이 없다. 세부적인 구현은 다르지만, 흐름은 유사하다.</figcaption>
+    <img src="img/biz-rca.png" alt="업무 온톨로지 원인 분석" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>조치를 실행하기 전에 아래처럼 시뮬레이터를 실행한다.</figcaption>
+    <img src="img/biz-sim-run.png" alt="시뮬레이터 실행" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>아래는 시뮬레이터의 상세 화면이다. 시뮬레이션 후에 조치를 실행한다.</figcaption>
+    <img src="img/biz-sim-detail.png" alt="시뮬레이터 상세 화면" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>JuneAI 디지털트윈에는 ERP, CRM, SCM 등이 서로 연계되었다. JuneAI는 업무 모듈과 연계 등 모든 처리 흐름이 계측되고, 추적할 수 있다.</figcaption>
+    <img src="img/biz-webmethods.png" alt="ERP·CRM·SCM 연계 계측" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>JuneAI 디지털트윈은 eBPF를 사용해서 계측한다.</figcaption>
+    <img src="img/biz-ebpf.png" alt="eBPF 계측" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>계측을 통해 시스템의 내부 처리 과정을 이해할 수 있다. 코드 변경도 재시작도 필요없다.</figcaption>
+    <img src="img/biz-internal.png" alt="시스템 내부 처리 과정" loading="lazy">
+  </figure>
 
   <h2>6. 정리 — 하나의 뼈대로, 기술에서 업무까지</h2>
   <ul>

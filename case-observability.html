@@ -48,6 +48,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   /* 2열 비교 카드 */
   .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
   .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
@@ -101,6 +105,36 @@
     <li><strong>레거시 계측이 지원되지 않는다</strong> — 전통 시스템(메인프레임·TP 모니터 등)은 표준 계측이 닿지 않는다.</li>
   </ul>
   <blockquote><p>✅ <strong>JuneAI는 이 문제들을 해결했다.</strong> 끊긴 추적 전파를 잇고, 비동기·이벤트 흐름을 따라가며, 레거시 내부까지 계측한다. 그래서 관측가능성만으로도 <strong>전 구간이 이어진 온톨로지</strong>를 세울 수 있다.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>메트릭, 추적, 프로파일 간의 상관관계를 구성한다. 우측에는 메트릭을 출력한다. 엑셈플라를 클릭한다.</figcaption>
+    <img src="img/obs-metric.png" alt="메트릭" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>추적 스팬은 자동적으로 프로파일의 플레임그래프로 라우팅한다.</figcaption>
+    <img src="img/obs-trace.png" alt="추적" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>플레임그래프는 플레임스코프로 자동적으로 라우팅한다.</figcaption>
+    <img src="img/obs-flamegraph.png" alt="플레임그래프" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>프로파일 플레임스코프를 출력한다.</figcaption>
+    <img src="img/obs-flamescope.png" alt="플레임스코프" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>300개 이상의 이상탐지를 지원한다.</figcaption>
+    <img src="img/obs-anomaly.png" alt="이상탐지" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>다수의 알람 문맥을 이해하고 그룹핑해서, 인시던트 관리를 지원한다. 이는 AIOps에서 자동화한다.</figcaption>
+    <img src="img/obs-alert.png" alt="알람·인시던트 관리" loading="lazy">
+  </figure>
 
   <h2>2. 원래 온톨로지는 "데이터 플랫폼"을 전제한다</h2>
   <p>온톨로지는 기본적으로 <strong>데이터 플랫폼을 기반</strong>으로 한다. 즉, 데이터 플랫폼 없이는 온톨로지 구성 자체가 어렵다. 데이터 플랫폼 기반의 온톨로지는 <strong>파이프라인 · 레이크 · 메타데이터 · 리니지</strong>를 두루 필요로 한다.</p>

@@ -48,6 +48,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   /* 레거시 카드 */
   .leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:8px 0 20px}
   .leg-card{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:#fff}
@@ -152,6 +156,40 @@
     </div>
   </div>
   <blockquote><p>📖 <strong>TP 모니터란?</strong> 수많은 거래(Transaction)가 동시에 몰려도 <strong>정확하고 안정적으로</strong> 처리되도록 관리하는 미들웨어이다. 은행 송금, 통신 과금, 카드 승인처럼 "절대 틀리면 안 되는" 업무의 중심에 있다. CICS와 TUXEDO가 대표적이며, 그만큼 <strong>장애 추적과 근본 원인 분석이 가장 중요한</strong> 영역이기도 하다.</p></blockquote>
+
+  <p>아래처럼 <strong>다양한 레거시</strong>를 지원한다.</p>
+
+  <figure class="shot">
+    <figcaption>IBM CICS는 3270 터미널과 CTG를 사용해서 접속할 수 있다.</figcaption>
+    <img src="img/lg-cics.png" alt="IBM CICS 3270 터미널" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>SWIFT 네트워크를 지원하기 위해서 다양한 MT 메시지와 CASmf를 지원한다.</figcaption>
+    <img src="img/lg-swift.png" alt="SWIFT MT 메시지·CASmf" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>피플소프트 HR와 다양한 모듈을 지원한다.</figcaption>
+    <img src="img/lg-peoplesoft.png" alt="PeopleSoft HR" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>다양한 버전의 SAP IDES를 제공한다.</figcaption>
+    <img src="img/lg-sap.png" alt="SAP IDES" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>IBM MQ를 지원한다.</figcaption>
+    <img src="img/lg-mq.png" alt="IBM MQ" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>웹메소드를 지원한다.</figcaption>
+    <img src="img/lg-webmethods.png" alt="webMethods" loading="lazy">
+  </figure>
+
+  <p>이 외에도 <strong>오라클 EBS, SIEBEL CRM</strong> 등 수십 개의 레거시를 지원하며, 이를 통해 <strong>디지털 트윈</strong>을 구성할 수 있다.</p>
 
   <h2>5. 정리 — 레거시를 바꾸지 않고, 보이게 만든다</h2>
   <ul>

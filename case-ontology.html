@@ -53,6 +53,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   .pillfoot{border-top:1px solid var(--line);background:var(--bg-2);padding:32px 0;margin-top:20px}
   .pillfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
   .pillfoot a{color:var(--blue);text-decoration:none;font-weight:600;font-size:15px}
@@ -133,6 +137,36 @@
       <tr><td>레거시 리스크</td><td>높음</td><td><strong>낮음</strong></td></tr>
     </tbody>
   </table>
+
+  <figure class="shot">
+    <figcaption>기술 온톨로지는 AIOps를 구현한다.</figcaption>
+    <img src="img/ont-tech.png" alt="기술 온톨로지" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>서비스로 뿌리와 줄기를 만들고, 리소스로 가지와 잎사귀를 만들었다.</figcaption>
+    <img src="img/ont-tree.png" alt="서비스·리소스 온톨로지 구조" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>온톨로지는 문제를 정확하게 식별하고, 명확하게 출력한다.</figcaption>
+    <img src="img/ont-identify.png" alt="문제 식별" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>복잡한 인과 관계를 구성한다.</figcaption>
+    <img src="img/ont-causal.png" alt="인과 관계 구성" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>클릭만으로 인과 관계를 이해할 수 있다.</figcaption>
+    <img src="img/ont-click.png" alt="클릭으로 인과 관계 탐색" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>업무 온톨로지는 최적의 의사결정을 지원한다. JuneAI는 기술 온톨로지에서 시작해서, 업무 온톨로지를 완성한다.</figcaption>
+    <img src="img/ont-business.png" alt="업무 온톨로지" loading="lazy">
+  </figure>
 
   <h2>5. 온톨로지가 여는 것 — 자율 운영과 자가 치유</h2>
   <p>온톨로지를 갖추면 <strong>업무 프로세스</strong>와 <strong>내부 운영</strong> 양쪽에 <strong>자율 운영(Autonomous Operations)</strong>과 <strong>자가 치유(Self-Healing)</strong>를 도입할 수 있다.</p>

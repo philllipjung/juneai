@@ -48,6 +48,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   /* 비교 표 */
   .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
   .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
@@ -110,6 +114,31 @@
       <tr><td>쿠버네티스</td><td>이 모든 서비스가 올라가 작동하는 실행 기반</td></tr>
     </tbody>
   </table>
+
+  <figure class="shot">
+    <figcaption>다양한 레거시를 사용하고, 금융 AIOps 데모에서 사용되는 레거시는 IBM 메인프레임에서 운영되는 CICS, TUXEDO이다.</figcaption>
+    <img src="img/da-cics.png" alt="IBM 메인프레임 CICS·TUXEDO" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>SAP는 코어 뱅킹이다.</figcaption>
+    <img src="img/da-sap.png" alt="SAP 코어 뱅킹" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>팁코 EAI를 사용해서, SAP와 CICS를 통합한다.</figcaption>
+    <img src="img/da-tibco.png" alt="TIBCO EAI로 SAP·CICS 통합" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>다양한 레거시의 내부 처리 과정을 계측한다.</figcaption>
+    <img src="img/da-instrument.png" alt="레거시 내부 처리 과정 계측" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>계측 후 온톨로지와 AIOps가 자동으로 생성된다.</figcaption>
+    <img src="img/da-ont-auto.png" alt="온톨로지·AIOps 자동 생성" loading="lazy">
+  </figure>
 
   <h2>3. 온톨로지 — 서비스와 리소스를 결합한다</h2>
   <p>온톨로지는 <strong>서비스</strong>(무엇을 하는가)와 <strong>리소스</strong>(어디서 도는가)를 한데 묶는다.

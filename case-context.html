@@ -45,6 +45,10 @@
   blockquote p{margin:0 0 8px;color:#1b3a63}
   blockquote p:last-child{margin:0}
   blockquote strong{color:var(--blue-dark)}
+  /* 본문 화면 캡처 — 브라우저 크롬을 걷어낸 이미지 */
+  figure.shot{margin:18px 0 26px}
+  figure.shot figcaption{font-size:15px;color:var(--ink-2);font-weight:500;margin:0 0 8px}
+  figure.shot img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
   /* 비교 표 */
   .cmp{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:15px}
   .cmp th,.cmp td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
@@ -126,6 +130,40 @@
   </table>
   <p>JuneAI는 팔란티어보다 <strong>훨씬 정교하고 정확하게 문맥, 변경, 상태를 관리하고 추적</strong>한다.
      이벤트와 관계를 정확하게 모니터링하고, <strong>영향 범위와 변경 정도를 정확하게 시뮬레이션</strong>한다.</p>
+
+  <p><strong>요청 아이디 별로</strong> 처리 흐름과 호출의 문맥, 변경, 상태를 관리한다.</p>
+
+  <figure class="shot">
+    <figcaption>다운스트림, 업스트림의 문맥을 전파한다.</figcaption>
+    <img src="img/ctx-updown.png" alt="다운스트림·업스트림 문맥 전파" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>레거시를 포함한 전 구간 처리 흐름과 영향도를 이해한다.</figcaption>
+    <img src="img/ctx-flow.png" alt="전 구간 처리 흐름·영향도" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>업무 어플리케이션의 시간 순서대로 처리 시간을 이해한다. 호출 간 문맥을 전파하고, 변경과 상태를 포함하는 세부 속성을 확인할 수 있다.</figcaption>
+    <img src="img/ctx-timeline.png" alt="시간 순서 처리·세부 속성" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>선후 처리 과정을 이해하고, 스택을 출력한다.</figcaption>
+    <img src="img/ctx-stack.png" alt="선후 처리 과정·스택" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>자율 운영 시 사용되는 AI 처리 과정을 추적한다.</figcaption>
+    <img src="img/ctx-ai-trace.png" alt="AI 처리 과정 추적" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>주문과 고장 아이피가 분리되지 않고, 온톨로지에서 문맥을 전달한다.</figcaption>
+    <img src="img/ctx-order-fault.png" alt="주문·고장 문맥 전달" loading="lazy">
+  </figure>
+
+  <p>JuneAI는 문맥, 변경, 상태를 <strong>항상 관리하고 전파</strong>한다. 중간에 끊어지거나 유실되지 않는다. 이를 통해 더 정확한 원인 분석과 조치가 가능하고, 사용자는 <strong>최적의 의사결정</strong>을 한다.</p>
 
 </article>
 
