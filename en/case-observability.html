@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JuneAI and Observability — No Data Platform, Just Observability</title>
+<title>JuneAI and Observability — Minimize the Data Platform, Observability First</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -88,10 +88,11 @@
 <section class="a-hero">
   <div class="wrap">
     <span class="kicker">Instrumentation & Observability · OpenTelemetry</span>
-    <h1>No Data Platform, Just Observability</h1>
+    <h1>Minimize the Data Platform — Mostly Just Observability</h1>
     <p class="lead"><strong>Ontologies usually presuppose a heavy data platform.</strong><br>
-      JuneAI removes that premise. Instead of a data platform, it builds on <strong>Observability</strong>,
-      standing up an ontology <strong>at the level of a single department, without the help of another organization</strong> — faster, and cheaper.</p>
+      JuneAI lightens that premise. It builds <strong>primarily on Observability</strong> to minimize the data platform,
+      standing up an ontology <strong>at the level of a single department, without the help of another organization</strong> — faster, and cheaper.
+      Where a data platform is needed, JuneAI <strong>complements it appropriately with its own data-platform tooling</strong>.</p>
   </div>
 </section>
 
@@ -164,12 +165,14 @@
   </ul>
   <p>Across the whole problem-solving process, <strong>building the ontology is only one part, while the follow-up work is far greater.</strong> So the question converges to one — <em>"How can we make this complex ontology construction and problem-solving simple?"</em></p>
 
-  <h2>4. JuneAI's Solution Is Quite Simple — Don't Use a Data Platform</h2>
-  <p>JuneAI's answer is surprisingly simple. <strong>It doesn't use a data platform.</strong> Instead, it builds on the <strong>Observability</strong> that systems already emit.</p>
+  <h2>4. JuneAI's Solution Is Quite Simple — Minimize the Data Platform, Use Observability First</h2>
+  <p>JuneAI's answer is surprisingly simple. <strong>It minimizes the data platform.</strong> Because building a new data platform is <strong>costly and takes a long time</strong>, JuneAI prefers to first leverage the <strong>Observability</strong> that systems already emit. It stands up the ontology using observability alone wherever possible, and keeps the data platform only where it is truly necessary.</p>
+  <p>That doesn't mean the data platform is excluded. <strong>JuneAI also provides excellent data-platform tooling</strong> — for areas that observability alone can't reach, it brings in the data platform as a <strong>secondary option</strong>. In the end, what matters is <strong>combining instrumentation (observability) and the data platform appropriately, as the situation demands</strong>.</p>
   <ul>
     <li><strong>No collaboration with the data organization is needed</strong> — a single department can <strong>take the lead</strong> in applying it.</li>
     <li><strong>No separate budget or cross-organizational collaboration is needed</strong> — it reduces <strong>investment cost, development time, and communication overhead</strong> all at once.</li>
-    <li><strong>It builds on Observability</strong> — without heavy pipelines or lakes, it stands up the ontology from the signals that operations already leave behind.</li>
+    <li><strong>It builds on Observability first</strong> — minimizing heavy pipelines or lakes, it stands up the ontology from the signals that operations already leave behind.</li>
+    <li><strong>The data platform complements it as a secondary option</strong> — where truly needed, JuneAI's <strong>excellent data-platform tooling</strong> fills the gap. The key is <strong>combining instrumentation and the data platform appropriately.</strong></li>
     <li><strong>Autonomous Operations is a bonus</strong> — if needed, you can layer on AIOps-based Autonomous Operations too, and focus solely on <strong>agents equipped with per-task ontologies and harnesses.</strong></li>
   </ul>
 
@@ -185,9 +188,33 @@
     </tbody>
   </table>
 
-  <h2>5. In Summary — Lightweight, Department-Led, Right Away</h2>
+  <h2>5. JuneAI's Data-Platform Tooling — Combined When Needed</h2>
+  <p>For areas that observability alone can't reach, JuneAI brings in the <strong>data platform as a secondary option</strong>. It provides <strong>excellent data-platform tooling</strong> for exactly this purpose.</p>
+
+  <figure class="shot">
+    <figcaption>A data platform provides capabilities such as <strong>data quality, data pipelines, metadata, and data lineage</strong> — on top of which an ontology can be built.</figcaption>
+    <img src="../img/dp-features.png" alt="Data-platform capabilities — quality, pipelines, metadata, lineage" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>A pipeline development tool.</figcaption>
+    <img src="../img/dp-pipeline-tool.png" alt="Pipeline development tool" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Pipelines using <strong>Spark, Flink, Kafka, S3</strong> and more can be built by <strong>drag and drop</strong>.</figcaption>
+    <img src="../img/dp-dragdrop.png" alt="Drag-and-drop pipeline development — Spark, Flink, Kafka, S3" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>A data quality screen.</figcaption>
+    <img src="../img/dp-quality.png" alt="Data quality screen" loading="lazy">
+  </figure>
+
+  <h2>6. In Summary — Lightweight, Department-Led, Right Away</h2>
   <ul>
-    <li><strong>Observability is the foundation</strong> — instead of a data platform, it stands up the ontology from the signals operations already leave behind.</li>
+    <li><strong>Observability is the foundation</strong> — it minimizes the data platform and first uses the signals operations already leave behind to stand up the ontology.</li>
+    <li><strong>The data platform can run alongside</strong> — where needed, JuneAI's data-platform tooling complements it, combined appropriately with instrumentation.</li>
     <li><strong>It goes beyond OpenTelemetry's limits</strong> — JuneAI has reinforced broken trace propagation, async, and legacy instrumentation.</li>
     <li><strong>It crosses organizational walls</strong> — a single department leads adoption, with no data-organization collaboration or separate budget.</li>
     <li><strong>It cuts cost and time</strong> — it lowers investment cost, development time, and communication overhead together.</li>
