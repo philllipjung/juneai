@@ -79,8 +79,7 @@
   /* ── 케이스 스터디 3패널 (구글 "고객 혁신" 스타일) ── */
   .cases{padding:28px 0 56px}
   .cases h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;font-weight:700;color:var(--ink);margin:0 0 12px}
-  .cases .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:none;white-space:nowrap;margin:0 auto 36px}
-  @media (max-width:980px){ .cases .cap{white-space:normal;max-width:760px} }
+  .cases .cap{text-align:left;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:1120px;margin:0 auto 36px}
   /* 카드 — 구글 클라우드 "Everything you need to build and scale" 스타일 */
   .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1120px;margin:0 auto}
   .case-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
@@ -102,10 +101,10 @@
   /* 히어로와 같은 틀 — 제목(큰 글씨) + 본문(작은 글씨), 가운데 정렬. 다만 히어로보다 한 단 작게 둔다 */
   .logos h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;
     font-weight:700;color:var(--ink);margin:0 0 12px}
-  .logos .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);
-    max-width:1180px;margin:0 auto 32px}
-  .logo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
-  .logo-grid>.logo-item{flex:0 1 23%;min-width:0}   /* 4열 고정 + 마지막 줄 중앙 정렬 */
+  .logos .cap{text-align:left;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);
+    max-width:1120px;margin:0 auto 32px}
+  .logo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:1120px;margin:0 auto}
+  .logo-grid>.logo-item{flex:0 1 calc((100% - 48px)/4);min-width:0}   /* 4열 정확히 채움 — 캡션 왼쪽 끝과 정렬 */
   /* 회사 로고(위) + 제품 이름(아래) · 카드 전체가 공식 페이지로 가는 링크 */
   .logo-item{
     background:#fff;border:1px solid var(--line);border-radius:var(--radius);
@@ -453,7 +452,7 @@
   <!-- 저렴한 가격·높은 정확도 (2026-11-21 추가) -->
   <section class="cases wrap" id="value" style="padding-top:28px">
     <h2>저렴한 가격, 높은 정확도</h2>
-    <p class="cap" style="white-space:normal;max-width:1120px">토큰 비용은 경쟁사에 비교해서 <strong>최소 10분의 1에서 수십 배 저렴</strong>하고, 추론 정확도는 <strong>프론티어 모델을 사용한 경쟁사보다 높다.</strong></p>
+    <p class="cap">토큰 비용은 경쟁사에 비교해서 <strong>최소 10분의 1에서 수십 배 저렴</strong>하고, 추론 정확도는 <strong>프론티어 모델을 사용한 경쟁사보다 높다.</strong></p>
     <div style="max-width:900px;margin:0 auto">
       <img src="img/value-price-accuracy.png" alt="가격·정확도 비교 — JuneAI는 경쟁사보다 가격이 낮고 정확도가 높다"
            loading="lazy"
@@ -512,7 +511,7 @@
   <!-- 데모 안내 CTA (2026-11-12) — 맨 아래, 홈페이지 섹션 형식(제목 + 캡션) -->
   <section class="cases wrap" id="demo-cta">
     <h2>JuneAI는 통신사 주문 및 고장 관리와 금융사 AIOps 데모를 제공한다.</h2>
-    <p class="cap" style="white-space:normal;max-width:1040px">SAP, CICS 등 다양한 레거시 기반으로 <strong>온톨로지·에이전트·시뮬레이터를 구성</strong>하고,
+    <p class="cap">SAP, CICS 등 다양한 레거시 기반으로 <strong>온톨로지·에이전트·시뮬레이터를 구성</strong>하고,
        <strong>근본 원인 분석과 의사 결정</strong>을 처리하는 데모를 제공한다. 언제든 <strong>데모를 요청</strong>할 수 있다.
        <strong>다른 경쟁사 제품과 무엇이 다른지</strong> 쉽게 이해할 수 있다.</p>
     <div style="max-width:1100px;margin:8px auto 0">

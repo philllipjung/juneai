@@ -80,8 +80,7 @@
   /* ── Case studies (3-panel) ── */
   .cases{padding:28px 0 56px}
   .cases h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;font-weight:700;color:var(--ink);margin:0 0 12px}
-  .cases .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:none;white-space:nowrap;margin:0 auto 36px}
-  @media (max-width:980px){ .cases .cap{white-space:normal;max-width:760px} }
+  .cases .cap{text-align:left;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);max-width:1120px;margin:0 auto 36px}
   .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1120px;margin:0 auto}
   .case-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
   .case-card:hover{box-shadow:0 6px 20px rgba(60,64,67,.14);border-color:var(--blue);transform:translateY(-2px)}
@@ -101,10 +100,10 @@
   .logos{padding:28px 0 56px}
   .logos h2{text-align:center;font-size:clamp(20px,2.6vw,34px);line-height:1.25;letter-spacing:-.8px;
     font-weight:700;color:var(--ink);margin:0 0 12px}
-  .logos .cap{text-align:center;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);
-    max-width:1180px;margin:0 auto 32px}
-  .logo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
-  .logo-grid>.logo-item{flex:0 1 23%;min-width:0}
+  .logos .cap{text-align:left;font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--ink-2);
+    max-width:1120px;margin:0 auto 32px}
+  .logo-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:1120px;margin:0 auto}
+  .logo-grid>.logo-item{flex:0 1 calc((100% - 48px)/4);min-width:0}
   .logo-item{
     background:#fff;border:1px solid var(--line);border-radius:var(--radius);
     min-height:134px;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -443,7 +442,7 @@
   <!-- Low price, high accuracy (added 2026-11-21) -->
   <section class="cases wrap" id="value" style="padding-top:28px">
     <h2>Low price, high accuracy</h2>
-    <p class="cap" style="white-space:normal;max-width:1120px">Token cost is <strong>anywhere from one-tenth to tens of times cheaper than competitors</strong>, and inference accuracy is <strong>higher than competitors using frontier models.</strong></p>
+    <p class="cap">Token cost is <strong>anywhere from one-tenth to tens of times cheaper than competitors</strong>, and inference accuracy is <strong>higher than competitors using frontier models.</strong></p>
     <div style="max-width:900px;margin:0 auto">
       <img src="../img/value-price-accuracy.png" alt="Price vs. accuracy — JuneAI is lower in price and higher in accuracy than competitors"
            loading="lazy"
@@ -499,7 +498,7 @@
   <!-- Demo CTA -->
   <section class="cases wrap" id="demo-cta">
     <h2>JuneAI offers a telecom order & fault management demo and a financial AIOps demo.</h2>
-    <p class="cap" style="white-space:normal;max-width:1040px">On diverse legacy such as SAP and CICS, JuneAI <strong>builds ontologies, agents, and simulators</strong>
+    <p class="cap">On diverse legacy such as SAP and CICS, JuneAI <strong>builds ontologies, agents, and simulators</strong>
        and runs demos that handle <strong>root cause analysis and decision-making</strong>. You can <strong>request a demo</strong> anytime.
        It makes it easy to see <strong>what sets JuneAI apart from competing products</strong>.</p>
     <div style="max-width:1100px;margin:8px auto 0">
