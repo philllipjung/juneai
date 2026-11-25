@@ -165,6 +165,30 @@
   </div>
   <blockquote><p>🔮 이것이 <strong>디지털 트윈</strong>의 아이디어이다. 실제 업무 시스템을 건드리지 않고, 온톨로지 위에 <strong>가상의 쌍둥이</strong>를 만들어 "이렇게 바꾸면 어떻게 될까?"를 안전하게 미리 돌려본다. JuneAI는 <strong>SAP 납품 지연 시뮬레이션</strong>처럼, 구매와 생산을 연계해 결정의 결과를 숫자로 보여준다.</p></blockquote>
 
+  <h3>시뮬레이션이 검증하는 것 — 문제들 사이의 "인과관계"</h3>
+  <p>시뮬레이션의 목적은 단순히 KPI를 예측하는 데 있지 않다. <strong>온톨로지로 연결된 문제들 사이의 인과관계를 검증</strong>하는 것이 핵심이다. 하나의 병목이나 지연은 그 자리에 머물지 않는다. 느슨하게 연결된 시스템과 업무를 타고 <strong>다른 문제로 번진다.</strong></p>
+  <p>그래서 JuneAI는 가능한 한 <strong>넓은 구간의 프로세스를 하나로 구성</strong>하고, 흩어진 문제들을 <strong>서로 연관</strong>시키며, 그 사이에 <strong>인과의 선</strong>을 놓는다. 이렇게 엮고 나면 두 가지를 눈으로 확인할 수 있다 —</p>
+  <ul>
+    <li><strong>전파</strong> — 특정 문제가 <strong>어떤 경로로 다른 문제들로 번지는지.</strong> (예: 한 시스템을 성급히 증설했다가 하류가 포화되는 "풍선 효과")</li>
+    <li><strong>해소</strong> — 어느 지점을 바꾸면 <strong>연결된 문제들이 함께 풀리는지</strong>, 그리고 <strong>부작용은 없는지.</strong></li>
+  </ul>
+  <blockquote><p>🧩 더 나아가, <strong>JuneAI 디지털 트윈은 문제들 사이의 인과관계를 온톨로지로 "출력"하고, 그것을 "시뮬레이션"한다.</strong> 문제를 하나씩 따로 보는 것이 아니라, <strong>서로 어떻게 엮여 있는지를 그림으로 드러내고</strong>, "이 부분을 바꾸면 저기가 어떻게 되는가"를 <strong>미리 돌려본 뒤</strong> 결정한다. 이것이 업무 온톨로지와 기술 온톨로지가 <strong>하나로 통합</strong>되는 지점이다.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>업무 온톨로지와 기술 온톨로지가 통합된 화면은 아래와 같다.</figcaption>
+    <img src="img/biz-unified.png" alt="업무 온톨로지와 기술 온톨로지 통합 화면" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>업무 내 병목, 부족, 지연, 포화 등이 발생한 문제를 클릭한다.</figcaption>
+    <img src="img/biz-problem-click.png" alt="업무 문제(병목·부족·지연·포화) 클릭" loading="lazy">
+  </figure>
+
+  <h3>기술 온톨로지와 업무 온톨로지가 하나로 — 통신사 업무를 예로</h3>
+  <p>앞선 <a href="case-ontology.html">온톨로지 글</a>에서 설명한 <strong>AIOps 기술 온톨로지</strong>와, 위 화면의 <strong>통신사(OSS) 업무 온톨로지</strong>가 <strong>하나로 결합</strong>되어 있다. 장비활성화·공사관리·주문관리·작업관리·장애관리·빌링처럼 통신사 업무 도메인이 허니콤으로 올라가고, <strong>바로 옆의 허니콤에서 기술 온톨로지가 인과 관계로 출력</strong>된다. 개별 문제점은 <strong>추적·이벤트</strong>로 상세하게 분석할 수 있다.</p>
+  <p>이렇게 둘이 맞물리면, 화면은 단순히 "문제 목록"을 보여 주는 데서 그치지 않는다. <strong>업무 사이에서 벌어진 문제점들을 서로의 "인과 관계"로 출력</strong>한다 — 어느 업무의 지연이 어느 업무의 병목을 불렀는지, 한 도메인의 부정합이 어디로 번졌는지를 <strong>선으로 이어</strong> 보여 준다.</p>
+  <p>그래서 원인 분석의 흐름은 기술이든 업무든 <strong>똑같다.</strong> 문제를 고르고, 연결된 노드를 따라가며, 근본 원인에 이른다 — 세부 구현만 다를 뿐이다.</p>
+
   <figure class="shot">
     <figcaption>업무 온톨로지에서 원인을 식별하고, 원인을 분석한다. 기술 온톨로지와 업무 온톨로지 간에 큰 차이점이 없다. 세부적인 구현은 다르지만, 흐름은 유사하다.</figcaption>
     <img src="img/biz-rca.png" alt="업무 온톨로지 원인 분석" loading="lazy">

@@ -165,6 +165,30 @@
   </div>
   <blockquote><p>🔮 This is the idea of the <strong>digital twin</strong>. Without touching the real business systems, it creates a <strong>virtual twin</strong> on top of the ontology and safely runs "what happens if we change it this way?" in advance. JuneAI, as in its <strong>SAP delivery-delay simulation</strong>, links purchasing and production to show the results of a decision in numbers.</p></blockquote>
 
+  <h3>What the Simulation Verifies — the "Causality" Between Problems</h3>
+  <p>The purpose of simulation is not merely to predict KPIs. Its core is to <strong>verify the causal relationships between problems connected through the ontology</strong>. A single bottleneck or delay does not stay put — it <strong>spreads to other problems</strong> along loosely coupled systems and operations.</p>
+  <p>So JuneAI composes <strong>as broad a stretch of the process as possible</strong> into one, <strong>relates</strong> the scattered problems to one another, and draws <strong>lines of causation</strong> between them. Once they are woven together, two things become visible —</p>
+  <ul>
+    <li><strong>Propagation</strong> — <strong>by what path a given problem spreads to others</strong> (e.g., the "balloon effect," where hastily scaling up one system saturates the downstream).</li>
+    <li><strong>Resolution</strong> — which point, when changed, <strong>resolves the connected problems together</strong>, and <strong>whether there are side effects</strong>.</li>
+  </ul>
+  <blockquote><p>🧩 Going further, <strong>the JuneAI digital twin "outputs" the causal relationships between problems as an ontology and "simulates" it.</strong> Rather than viewing problems one at a time, it <strong>reveals how they are interwoven as a picture</strong>, and before deciding, it <strong>runs "what happens over there if I change this part" in advance</strong>. This is the point where the business ontology and the technical ontology become <strong>one</strong>.</p></blockquote>
+
+  <figure class="shot">
+    <figcaption>The screen where the business ontology and the technical ontology are integrated is shown below.</figcaption>
+    <img src="../img/biz-unified.png" alt="Integrated business and technical ontology screen" loading="lazy">
+  </figure>
+
+  <figure class="shot">
+    <figcaption>Click a problem within the business — a bottleneck, shortage, delay, saturation, and the like.</figcaption>
+    <img src="../img/biz-problem-click.png" alt="Clicking a business problem (bottleneck, shortage, delay, saturation)" loading="lazy">
+  </figure>
+
+  <h3>Technical and Business Ontologies Become One — Telecom Operations as an Example</h3>
+  <p>The <strong>AIOps technical ontology</strong> described in the earlier <a href="case-ontology.html">ontology article</a> is <strong>combined into one</strong> with the <strong>telecom (OSS) business ontology</strong> shown above. Telecom operational domains — equipment activation, construction management, order management, work management, fault management, billing — rise as honeycombs, and <strong>in the honeycombs right beside them the technical ontology is output as causal relationships</strong>. Each individual problem can then be analyzed in detail through <strong>traces and events</strong>.</p>
+  <p>Once the two mesh, the screen does more than show a "list of problems." It <strong>outputs the problems arising between operations as their mutual "causal relationships"</strong> — drawing <strong>lines</strong> that show which operation's delay triggered which operation's bottleneck, and where a domain's inconsistency propagated.</p>
+  <p>So the flow of cause analysis is <strong>the same</strong> whether technical or business: pick a problem, follow the connected nodes, and arrive at the root cause — only the detailed implementation differs.</p>
+
   <figure class="shot">
     <figcaption>In the business ontology, it identifies the cause and analyzes it. There is no major difference between the technical ontology and the business ontology. The detailed implementation differs, but the flow is similar.</figcaption>
     <img src="../img/biz-rca.png" alt="Business ontology cause analysis" loading="lazy">
